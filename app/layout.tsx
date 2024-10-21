@@ -3,8 +3,15 @@ import { Inter } from "next/font/google"
 import Navbar from "@/components/nav"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Analytics } from "@vercel/analytics/react"
+import Head from "next/head"
 
 const inter = Inter({ subsets: ["latin"] })
+
+export const metadata = {
+  title: "NASA's APOD",
+  description: "NASA's Astronomy Picture of the Day",
+  keywords: "NASA, APOD, Astronomy, Picture, Day",
+}
 
 export default function RootLayout({
   children,
@@ -13,6 +20,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
+      <Head>
+        <link rel="icon" href="@/public/favicon.ico" />
+      </Head>
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <Navbar />

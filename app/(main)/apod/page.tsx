@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
+import { Spinner } from "@/components/ui/spinner"
 import PlaceholderImage from "@/public/placeholder.jpg"
 
 interface APOD {
@@ -15,17 +16,28 @@ interface APOD {
   title: string
   url: string
 }
+async function getAPOD(): Promise<APOD> {
+  const response = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${process.env.NEXT_PUBLIC_NASA_API_KEY}`)
+  const data = await response.json()
+  return data
+}
 
 export default function APOD() {
-  async function getAPOD(): Promise<APOD> {
-    const response = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${process.env.NEXT_PUBLIC_NASA_API_KEY}`)
-    const data = await response.json()
-    return data
-  }
-
   const [apodImg, setApodImg] = useState<APOD>()
+
   useEffect(() => {
-    getAPOD().then((data) => setApodImg(data))
+    const localData = localStorage.getItem("apod")
+    if (localData) {
+      setApodImg(JSON.parse(localData))
+      console.log("Using local data")
+    }
+    getAPOD().then((data) => {
+      if (!localData || JSON.stringify(data) !== localData) {
+        setApodImg(data)
+        localStorage.setItem("apod", JSON.stringify(data))
+        console.log("Using API data")
+      }
+    })
   }, [])
 
   const formattedDate = new Intl.DateTimeFormat("en-US", {
@@ -56,7 +68,11 @@ export default function APOD() {
         </div>
       ) : (
         <>
-          <p>Carregando</p>
+          <div className="w-full h-screen flex flex-wrap justify-center">
+            <Spinner size="large">
+              <p>Loading...</p>
+            </Spinner>
+          </div>
         </>
       )}
     </>
