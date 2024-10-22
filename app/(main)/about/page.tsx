@@ -22,7 +22,7 @@ const technologies = [
   { name: "v0", icon: "/icons/v0.svg" },
 ]
 
-const FuturePlans = [{ desc: "Implementing a user favorite system to save and categorize favorite images" }, { desc: "Adding a community forum for discussions about astronomy and space exploration" }, { desc: "Developing an educational section with resources for students and teachers" }, { desc: "Creating a mobile app version for on-the-go cosmic exploration" }]
+const FuturePlans = [{ desc: "Implementing a user favorite system to save and categorize favorite images" }, { desc: "Adding a community forum for discussions about astronomy and space exploration" }, { desc: "Developing an educational section with resources for students and teachers" }, { desc: "Creating a mobile app version for on-the-go cosmic exploration" }, { desc: "Adding a Gallery page, where you can search by date and explore the entire APOD archive" }]
 
 const Contributors = [{ name: "Fernando Junior", role: "Project Owner", image: "https://avatars.githubusercontent.com/u/90939363" }]
 
