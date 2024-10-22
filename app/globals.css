@@ -64,3 +64,11 @@
     @apply bg-background text-foreground;
   }
 }
+@layer components {
+  .text-title {
+    @apply text-5xl font-bold tracking-tighter;
+  }
+  .text-subtitle {
+    @apply text-base font-light text-muted-foreground;
+  }
+}

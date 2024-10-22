@@ -11,7 +11,7 @@ const inter = Inter({ subsets: ["latin"] })
 export const metadata = {
   title: "AstroVista: APOD",
   description: "NASA's Astronomy Picture of the Day",
-  keywords: "NASA, APOD, Astronomy, Picture, Day",
+  keywords: "NASA, APOD, Astronomy, Picture, Day, AstroVista, Astro, Vista",
 }
 
 export default function RootLayout({

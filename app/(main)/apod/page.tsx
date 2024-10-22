@@ -6,6 +6,11 @@ import Link from "next/link"
 import { Spinner } from "@/components/ui/spinner"
 import PlaceholderImage from "@/public/placeholder.jpg"
 
+const placeholder_description = ` This is a placeholder description, if you are seeing this is because the api key limit rate exceeded, please wait a few hours and try again, the image above is a pre-rendered image in case when the API key rate limit execeed.`
+const placeholder_title = "Placeholder Title"
+const placeholder_date = "2024-10-20"
+const placeholder_copy = "Tom Abel & Ralf Kaehler (KIPAC, SLAC), AMNH"
+
 interface APOD {
   copyright: string
   date: string
@@ -44,7 +49,7 @@ export default function APOD() {
     year: "numeric",
     month: "short",
     day: "2-digit",
-  }).format(apodImg?.date ? new Date(apodImg.date.replace(/-/g, "/")) : new Date("2024-10-20".replace(/-/g, "/")))
+  }).format(apodImg?.date ? new Date(apodImg.date.replace(/-/g, "/")) : new Date(placeholder_date.replace(/-/g, "/")))
 
   return (
     <>
@@ -52,17 +57,17 @@ export default function APOD() {
         <div className="w-full px-12 py-12 flex-col items-center flex">
           <h1 className="text-4xl font-bold tracking-tighter sm:text-3xl md:text-2xl lg:text-4xl mx-auto mb-4">Astronomy Picture of the Day</h1>
           <div className="w-full rounded-xl flex items-center flex-col">
-            <Link href={apodImg.hdurl ?? "#"} passHref>
+            <Link href={apodImg.hdurl ?? "#"} passHref target="_blank">
               <Image className="rounded-xl" src={apodImg.url ?? PlaceholderImage} alt={apodImg.title} width={900} height={900} />
             </Link>
-            <p className="mb-7 mt-1 text-base font-light text-muted-foreground sm:text-base max-w-[900px]">&#169;{apodImg.copyright ?? "Tom Abel & Ralf Kaehler (KIPAC, SLAC), AMNH"}</p>
+            <p className="mb-7 mt-1 text-base font-light text-muted-foreground sm:text-base max-w-[900px]">&#169;{apodImg.copyright ?? placeholder_copy}</p>
           </div>
           <div className="lg:max-w-[900px]">
-            <h1 className="text-4xl font-bold tracking-tighter sm:text-3xl md:text-2xl lg:text-4xl mr-auto">{apodImg.title ?? "Placeholder Title"}</h1>
-            <h1 className="mb-7 text-base font-light text-muted-foreground sm:text-base max-w-[900px]">{formattedDate ?? "2024-10-20"}</h1>
+            <h1 className="text-4xl font-bold tracking-tighter sm:text-3xl md:text-2xl lg:text-4xl mr-auto">{apodImg.title ?? placeholder_title}</h1>
+            <h1 className="mb-7 text-base font-light text-muted-foreground sm:text-base max-w-[900px]">{formattedDate}</h1>
             <span className="text-xl font-semibold">
               Description:
-              <p className="text-base font-light text-muted-foreground sm:text-base lg:max-w-[900px] text-justify"> {apodImg.explanation ?? " if you are seeing this is because the api key limit rate exceeded, please wait a few hours and try again, the image above is a pre-rendered image in case when the API key rate limit execeed."}</p>
+              <p className="text-base font-light text-muted-foreground sm:text-base lg:max-w-[900px] text-justify"> {apodImg.explanation ?? placeholder_description}</p>
             </span>
           </div>
         </div>

@@ -1,10 +1,10 @@
 import Banner from "../components/banner"
-import { SparklesPreview } from "../components/sparkles-banner"
+import { StarsBanner } from "../components/stars-banner"
 
 export default function Home() {
   return (
-    <div className="z-0">
-      <SparklesPreview />
+    <div className="">
+      <StarsBanner />
       <Banner />
     </div>
   )
