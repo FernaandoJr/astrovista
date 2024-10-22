@@ -103,6 +103,8 @@ We welcome contributions from the open-source community! Here's how you can get 
 - Adding a community forum for discussions about astronomy and space exploration
 - Developing an educational section with resources for students and teachers
 - Creating a mobile app version for on-the-go cosmic exploration
+- Adding a Gallery page, where you can search by date and explore the entire APOD archive
+
 
 ---
 
