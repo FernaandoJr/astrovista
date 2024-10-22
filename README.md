@@ -38,27 +38,30 @@ AstroVista is built using cutting-edge technologies to ensure both performance a
 To run AstroVista locally, follow these steps:
 
 1. Clone the repository:
+   
    ```bash
    git clone https://github.com/FernaandoJr/AstroVista.git
    cd AstroVista
    ```
 
-2. Install the dependencies:
+3. Install the dependencies:
+   
    ```bash
    npm install
    ```
 
-3. Get your NASA API key or using the default public key `DEMO_KEY` by signing up [here](https://api.nasa.gov/), then create a `.env.local` file in the root of your project and add:
+5. Get your NASA API key or using the default public key `DEMO_KEY` by signing up [here](https://api.nasa.gov/), then create a `.env.local` file in the root of your project and add:
+   
    ```bash
    NEXT_PUBLIC_NASA_API_KEY=your_nasa_api_key
    ```
 
-4. Run the building and the development script:
+7. Run the building and the development script:
+   
    ```bash
    npm run bd
    ```
-
-5. Open your browser and navigate to `http://localhost:3000` to explore AstroVista on your machine!
+9. Open your browser and navigate to `http://localhost:3000` to explore AstroVista on your machine!
 
 ---
 
@@ -79,21 +82,27 @@ We welcome contributions from the open-source community! Here's how you can get 
 
 1. **Fork the repository** on GitHub.
 2. **Clone your forked repo** locally:
+   
    ```bash
    git clone https://github.com/your-username/AstroVista.git
    ```
-3. **Create a new branch** for your feature or bug fix:
+   
+4. **Create a new branch** for your feature or bug fix:
+   
    ```bash
    git checkout -b feature/your-feature-name
    ```
-4. **Make your changes**, ensuring your code follows best practices.
-5. **Test your changes** locally to make sure everything works as expected.
-6. **Commit and push** your changes to your forked repository:
+   
+6. **Make your changes**, ensuring your code follows best practices.
+7. **Test your changes** locally to make sure everything works as expected.
+8. **Commit and push** your changes to your forked repository:
+   
    ```bash
    git commit -m "Add feature: your-feature-name"
    git push origin feature/your-feature-name
    ```
-7. Submit a **pull request** to the main repository with a clear description of your changes.
+   
+10. Submit a **pull request** to the main repository with a clear description of your changes.
 
 ---
 
