@@ -153,12 +153,12 @@ export default function AboutUs() {
                 <p>AstroVista is an open-source project, and we welcome contributions from developers of all skill levels. Whether you want to fix a bug, add a feature, or improve our documentation, your help is appreciated!</p>
                 <div className="flex flex-wrap gap-4">
                   <Button asChild>
-                    <Link href="https://github.com/yourusername/apod-explorer" target="_blank" rel="noopener noreferrer">
+                    <Link href="https://github.com/FernaandoJr/AstroVista" target="_blank" rel="noopener noreferrer">
                       <Github className="mr-2 h-4 w-4" /> View on GitHub
                     </Link>
                   </Button>
                   <Button asChild variant="outline">
-                    <Link href="https://github.com/yourusername/apod-explorer/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer">
+                    <Link href="https://github.com/FernaandoJr/AstroVista/blob/main/README.md" target="_blank" rel="noopener noreferrer">
                       How to Contribute <ExternalLink className="ml-2 h-4 w-4" />
                     </Link>
                   </Button>
