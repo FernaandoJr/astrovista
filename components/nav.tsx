@@ -5,9 +5,9 @@ import { ModeToggle } from "./theme-menu"
 
 const Navbar = (): JSX.Element => {
   return (
-    <div className="">
+    <div className="w-full">
       <header className="w-full h-auto p-4 flex flex-row">
-        <Link href={"/"}>
+        <Link href={"/"} className="my-auto">
           <Pyramid className="h-7 w-7" />
           <span className="sr-only">Home Icon</span>
         </Link>
