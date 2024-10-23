@@ -9,15 +9,14 @@ import PlaceholderImage from "@/public/placeholder.jpg"
 const placeholder_description = ` This is a placeholder description, if you are seeing this is because the api key limit rate exceeded, please wait a few hours and try again, the image above is a pre-rendered image in case when the API key rate limit execeed.`
 const placeholder_title = "Placeholder Title"
 const placeholder_date = "2024-10-20"
-const placeholder_copy = "Tom Abel & Ralf Kaehler (KIPAC, SLAC), AMNH"
 
 interface APOD {
-  copyright: string
+  copyright?: string
   date: string
   explanation: string
   hdurl: string
   media_type: string
-  service_version: string
+  service_version?: string
   title: string
   url: string
 }
@@ -33,14 +32,29 @@ export default function APOD() {
   useEffect(() => {
     const localData = localStorage.getItem("apod")
     if (localData) {
-      setApodImg(JSON.parse(localData))
+      const parsedData: APOD = JSON.parse(localData)
+      setApodImg(parsedData)
       console.log("Using local data")
     }
+
     getAPOD().then((data) => {
-      if (!localData || JSON.stringify(data) !== localData) {
+      if (data.media_type === "image") {
+        if (!localData || JSON.stringify(data) !== localData) {
+          setApodImg(data)
+          localStorage.setItem("apod", JSON.stringify(data))
+          console.log("Using API data")
+        }
+      } else {
+        localStorage.clear()
+        console.log("Discarded non-image media type")
+        data.date = "2024-10-22"
+        data.title = "M16: Pillars of Star Creation"
+        data.copyright = ""
+        data.explanation =
+          "These dark pillars may look destructive, but they are creating stars.  This pillar-capturing picture of the Eagle Nebula combines visible light exposures taken with the Hubble Space Telescope with infrared images taken with the James Webb Space Telescope to highlight evaporating gaseous globules (EGGs) emerging from pillars of molecular hydrogen gas and dust.  The giant pillars are light years in length and are so dense that interior gas contracts gravitationally to form stars.  At each pillar's end, the intense radiation of bright young stars causes low density material to boil away, leaving stellar nurseries of dense EGGs exposed. The Eagle Nebula, associated with the open star cluster M16, lies about 7000 light years away. Jigsaw Challenge: Astronomy Puzzle of the Day"
+        data.hdurl = "https://apod.nasa.gov/apod/image/2410/M16_HubbleWebbPisano_6500.jpg"
+        data.url = "https://apod.nasa.gov/apod/image/2410/M16_HubbleWebbPisano_960.jpg"
         setApodImg(data)
-        localStorage.setItem("apod", JSON.stringify(data))
-        console.log("Using API data")
       }
     })
   }, [])
@@ -60,7 +74,7 @@ export default function APOD() {
             <Link href={apodImg.hdurl ?? "#"} passHref target="_blank">
               <Image className="rounded-xl" src={apodImg.url ?? PlaceholderImage} alt={apodImg.title} width={900} height={900} />
             </Link>
-            <p className="mb-7 mt-1 text-base font-light text-muted-foreground sm:text-base max-w-[900px]">&#169;{apodImg.copyright ?? placeholder_copy}</p>
+            <p className="mb-7 mt-1 text-base font-light text-muted-foreground sm:text-base max-w-[900px]">{apodImg.copyright ?? ""}</p>
           </div>
           <div className="lg:max-w-[900px]">
             <h1 className="text-4xl font-bold tracking-tighter sm:text-3xl md:text-2xl lg:text-4xl mr-auto">{apodImg.title ?? placeholder_title}</h1>
