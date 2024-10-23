@@ -4,13 +4,15 @@ import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { motion } from "framer-motion"
-import { Github, ExternalLink } from "lucide-react"
+import { Github, ExternalLink, Linkedin } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
 import { GridBackground } from "../../../components/grid-background"
+import { LinkedinIcon } from "../../../public/icons/Linkedin"
+import { MdiGithub } from "../../../public/icons/Github"
 
 const technologies = [
   { name: "Next.js", icon: "/icons/nextjs-light.svg" },
@@ -24,7 +26,15 @@ const technologies = [
 
 const FuturePlans = [{ desc: "Implementing a user favorite system to save and categorize favorite images" }, { desc: "Adding a community forum for discussions about astronomy and space exploration" }, { desc: "Developing an educational section with resources for students and teachers" }, { desc: "Creating a mobile app version for on-the-go cosmic exploration" }, { desc: "Adding a Gallery page, where you can search by date and explore the entire APOD archive" }]
 
-const Contributors = [{ name: "Fernando Junior", role: "Project Owner", image: "https://avatars.githubusercontent.com/u/90939363" }]
+const Contributors = [
+  {
+    name: "Fernando Junior",
+    role: "Project Owner",
+    image: "https://avatars.githubusercontent.com/u/90939363",
+    linkedin: "https://www.linkedin.com/in/fernaandojr/",
+    github: "https://github.com/FernaandoJr",
+  },
+]
 
 const features = [
   { title: "Daily Space Images", description: "Explore a new astronomical wonder every day." },
@@ -111,6 +121,14 @@ export default function AboutUs() {
                               <Image src={member.image} alt={member.name} width={100} height={100} className="rounded-full mb-4" />
                               <h3 className="font-semibold text-lg">{member.name}</h3>
                               <p className="text-sm text-muted-foreground">{member.role}</p>
+                              <div className=" flex gap-3 mt-4">
+                                <Link href={member.linkedin} target="_blank" rel="noopener noreferrer">
+                                  <LinkedinIcon className="h-9 w-9" />
+                                </Link>
+                                <Link href={member.github} target="_blank" rel="noopener noreferrer">
+                                  <MdiGithub className="h-9 w-9" />
+                                </Link>
+                              </div>
                             </CardContent>
                           </Card>
                         </div>
