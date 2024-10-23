@@ -30,6 +30,7 @@ export default function APOD() {
   const [apodImg, setApodImg] = useState<APOD>()
 
   useEffect(() => {
+    // Check if there is local data
     const localData = localStorage.getItem("apod")
     if (localData) {
       const parsedData: APOD = JSON.parse(localData)
@@ -38,7 +39,9 @@ export default function APOD() {
     }
 
     getAPOD().then((data) => {
+      // Check if the media type is an image
       if (data.media_type === "image") {
+        // Check if the data is different from the local data
         if (!localData || JSON.stringify(data) !== localData) {
           setApodImg(data)
           localStorage.setItem("apod", JSON.stringify(data))
@@ -59,6 +62,7 @@ export default function APOD() {
     })
   }, [])
 
+  // Format the date to a more readable format (Month, Day, Year)
   const formattedDate = new Intl.DateTimeFormat("en-US", {
     year: "numeric",
     month: "short",
