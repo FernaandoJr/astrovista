@@ -13,6 +13,7 @@ const Navbar = (): JSX.Element => {
         </Link>
         <nav className="ml-auto flex items-center">
           <ButtonLink path="/apod" name="APOD" />
+          <ButtonLink path="/gallery" name="Gallery" />
           <ButtonLink path="/about" name="About" />
           <ModeToggle />
         </nav>
