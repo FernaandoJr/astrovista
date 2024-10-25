@@ -1,3 +1,4 @@
+
 ![astrovista-banner](https://github.com/user-attachments/assets/ad5f5d61-066a-45e4-a13d-bdbe17045da0)
 
 [**AstroVista**](https://astrovista.vercel.app/about) is a modern, open-source web app that brings you the wonders of the cosmos! Using NASA's Astronomy Picture of the Day (APOD) API, AstroVista fetches and displays breathtaking astronomical images daily, accompanied by detailed descriptions. Whether you're an amateur stargazer or a seasoned astronomer, this app lets you explore the universe one picture at a time.
@@ -123,10 +124,18 @@ If you have any questions, feel free to reach out via [GitHub Issues](https://gi
 
 ---
 
+## 🌌 Join Our Official Discord Server!
+
+🔗 [Join the AstroVista Discord Server](https://discord.gg/TDYA7StNJ6)
+
+We look forward to seeing you there and exploring the universe together!
+
+---
+
 ## 📄 License
 
 This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for more details.
 
 ---
 
-#### Made with 💫 by FernaandoJr and the AstroVista Contributors
+#### Made with ❤️ by FernaandoJr and the AstroVista Contributors
