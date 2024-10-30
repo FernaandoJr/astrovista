@@ -9,8 +9,8 @@ import Footer from "../components/footer"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata = {
-  title: "AstroVista: APOD",
-  description: "NASA's Astronomy Picture of the Day",
+  title: "AstroVista",
+  description: "AstroVista is open-source web application that provides images from NASA's Astronomy Picture of the Day API.",
   keywords: "NASA, APOD, Astronomy, Picture, Day, AstroVista, Astro, Vista",
 }
 
