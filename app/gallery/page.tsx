@@ -5,6 +5,7 @@ import GalleryCard from "@/components/ui/gallery-card"
 export default function Gallery() {
   const subtitle = "Access all the archive of images from NASA's Astronomy Picture of the Day API"
   const dev_message = "This page is under development. Please check back later."
+
   return (
     <>
       <div className="w-full  mx-auto py-16 px-10">

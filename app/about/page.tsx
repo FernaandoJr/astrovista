@@ -10,9 +10,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
-import { GridBackground } from "../../../components/grid-background"
-import { LinkedinIcon } from "../../../public/icons/Linkedin"
-import { MdiGithub } from "../../../public/icons/Github"
+import { GridBackground } from "@/components/grid-background"
+import { LinkedinIcon } from "@/public/icons/Linkedin"
+import { MdiGithub } from "@/public/icons/Github"
 
 const technologies = [
   { name: "Next.js", icon: "/icons/nextjs-light.svg" },
