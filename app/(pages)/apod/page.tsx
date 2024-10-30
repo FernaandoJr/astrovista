@@ -43,6 +43,9 @@ export default function APOD() {
       if (data.media_type === "image") {
         // Check if the data is different from the local data
         if (!localData || JSON.stringify(data) !== localData) {
+          if (data.copyright) {
+            data.copyright = `© ${data.copyright}`
+          }
           setApodImg(data)
           localStorage.setItem("apod", JSON.stringify(data))
           console.log("Using API data")
