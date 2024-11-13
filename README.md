@@ -20,7 +20,7 @@
 AstroVista is built using cutting-edge technologies to ensure both performance and developer productivity:
 
 <div align="center">
-  <img src="https://skillicons.dev/icons?i=nextjs,tailwind,typescript,react">
+  <img src="https://skillicons.dev/icons?i=nextjs,tailwind,typescript,react,mongodb">
   <br/>
   <br/>
 </div>
