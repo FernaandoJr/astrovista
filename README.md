@@ -20,7 +20,7 @@
 AstroVista is built using cutting-edge technologies to ensure both performance and developer productivity:
 
 <div align="center">
-  <img src="https://skillicons.dev/icons?i=nextjs,tailwind,typescript,react">
+  <img src="https://skillicons.dev/icons?i=nextjs,tailwind,typescript,react,mongodb">
   <br/>
   <br/>
 </div>
@@ -51,10 +51,11 @@ To run AstroVista locally, follow these steps:
    npm install
    ```
 
-3. Get your NASA API key or using the default public key `DEMO_KEY` by signing up [here](https://api.nasa.gov/), then create a `.env.local` file in the root of your project and add:
+3. Get your NASA API key or using the default public key `DEMO_KEY` by signing up [here](https://api.nasa.gov/), then create a `.env.local` file in the root of your project and add the API Key and the Mongodb connection:
 
    ```bash
    NEXT_PUBLIC_NASA_API_KEY=your_nasa_api_key
+   MONGODB_APOD_URI="mongodb+srv://user:1f9xBDol8GP9ipQM@astrovistacluster.jggvb.mongodb.net/Apod?retryWrites=true&w=majority"
    ```
 
 4. Run the building and the development script:
