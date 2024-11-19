@@ -23,9 +23,7 @@ export async function GET(req: NextRequest) {
   console.log("startDate:", startDate)
   console.log("endDate:", endDate)
 
-  const { pictures, error } = await getPictures(startDate, endDate)
-
-  if (error) throw new Error(error)
+  const { pictures } = await getPictures(startDate, endDate)
 
   return NextResponse.json({ pictures })
 }
