@@ -5,11 +5,13 @@ import clientPromise from "./db"
 interface Picture {
   _id: ObjectId
   date: string
-  hdurl: string
-  media_type: string
-  service_version: string
-  title: string
-  url: string
+  explanation: string | undefined
+  hdurl: string | undefined
+  media_type: string | undefined
+  service_version: string | undefined
+  title: string | undefined
+  url: string | undefined
+  copyright: string | undefined
 }
 
 export async function getPictures(start_date: string, end_date: string) {
@@ -26,10 +28,10 @@ export async function getPictures(start_date: string, end_date: string) {
     })
     .toArray()
 
-  return { pictures }
+  return pictures // Return the array directly
 }
 
-export async function getOnePicture(date: string): Promise<{ picture: Picture }> {
+export async function getPicture(date: string): Promise<{ mappedPicture: Picture }> {
   const client = await clientPromise
   const db = client.db("Apod")
   const collection = db.collection("pictures")
@@ -42,7 +44,9 @@ export async function getOnePicture(date: string): Promise<{ picture: Picture }>
 
   const mappedPicture: Picture = {
     _id: picture._id,
+    copyright: picture.copyright,
     date: picture.date,
+    explanation: picture.explanation,
     hdurl: picture.hdurl,
     media_type: picture.media_type,
     service_version: picture.service_version,
@@ -50,5 +54,23 @@ export async function getOnePicture(date: string): Promise<{ picture: Picture }>
     url: picture.url,
   }
 
-  return { picture: mappedPicture }
+  return { mappedPicture }
+}
+
+// Post a picture to the database
+export async function postApod(picture: Picture) {
+  const client = await clientPromise
+  const db = client.db("Apod")
+  const collection = db.collection("pictures")
+
+  const checkExistingPicture = await collection.findOne({ date: picture.date })
+
+  if (checkExistingPicture) {
+    console.log(`Picture with date ${picture.date} already exists in the database.`)
+    return { acknowledged: false, message: "Picture already exists" }
+  }
+
+  const result = await collection.insertOne(picture)
+
+  return result
 }
