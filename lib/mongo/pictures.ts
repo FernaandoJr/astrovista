@@ -2,7 +2,7 @@ import { ObjectId } from "mongodb"
 import clientPromise from "./db"
 
 // eslint-disable-next-line no-unused-vars
-interface Picture {
+export interface Picture {
   _id: ObjectId
   date: string
   explanation: string | undefined
@@ -31,7 +31,7 @@ export async function getPictures(start_date: string, end_date: string) {
   return pictures // Return the array directly
 }
 
-export async function getPicture(date: string): Promise<{ mappedPicture: Picture }> {
+export async function getPicture(date: string): Promise<Picture> {
   const client = await clientPromise
   const db = client.db("Apod")
   const collection = db.collection("pictures")
@@ -54,7 +54,7 @@ export async function getPicture(date: string): Promise<{ mappedPicture: Picture
     url: picture.url,
   }
 
-  return { mappedPicture }
+  return mappedPicture
 }
 
 // Post a picture to the database
