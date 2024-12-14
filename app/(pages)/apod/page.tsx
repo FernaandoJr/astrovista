@@ -1,9 +1,11 @@
 "use client"
 
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
 import React, { useState, useEffect } from "react"
 import { Picture } from "@/lib/mongo/pictures"
+import Image from "next/image"
+import { Spinner } from "@/components/ui/spinner"
+import Link from "next/link"
+import ReactPlayer from "react-player"
 
 function formatDateToString(date: Date): string {
   const year = date.getFullYear()
@@ -13,46 +15,54 @@ function formatDateToString(date: Date): string {
 }
 
 async function getTodayApod(): Promise<Picture> {
-  console.log(formatDateToString(new Date()))
-  const todayApod = await fetch(`https://astrovista.vercel.app/api/apod/picture?date=${formatDateToString(new Date())}`)
-  console.log(todayApod)
+  const todayApod = await fetch(`/api/apod/picture?date=${formatDateToString(new Date())}`)
   return todayApod.json()
 }
 
 export default function APOD() {
   const [todayApod, setTodayApod] = useState<Picture>()
 
+  useEffect(() => {
+    getTodayApod().then((apod) => setTodayApod(apod))
+  }, [])
+
+  if (todayApod && todayApod.copyright != undefined && !todayApod?.copyright.startsWith("©")) {
+    todayApod.copyright = `© ${todayApod.copyright}`
+  }
+
+  const formattedDate = todayApod?.date
+    ? new Intl.DateTimeFormat("en-US", {
+        year: "numeric",
+        month: "short",
+        day: "2-digit",
+      }).format(new Date(todayApod.date.replace(/-/g, "/")))
+    : ""
+
   return (
     <>
-      <div className="">{todayApod?.explanation} !</div>
-    </>
-  )
-}
-
-{
-  /* 
-  <div className="w-full px-12 py-12 flex-col items-center flex">
+      {todayApod ? (
+        <div className="w-full px-12 py-12 flex-col items-center flex">
           <h1 className="text-4xl font-bold tracking-tighter sm:text-3xl md:text-2xl lg:text-4xl mx-auto mb-4">Astronomy Picture of the Day</h1>
           <div className="w-full rounded-xl flex items-center flex-col">
-            <Link href={apodImg.hdurl ?? "#"} passHref target="_blank">
-              <Image className="rounded-xl" src={apodImg.url} alt={apodImg.title} width={900} height={900} />
-            </Link>
-            <p className="mb-7 mt-1 text-base font-light text-muted-foreground sm:text-base max-w-[900px]">{apodImg.copyright ?? ""}</p>
+            {todayApod?.media_type === "image" ? (
+              <Link href={todayApod?.hdurl ?? "#"} passHref target="_blank">
+                <Image className="rounded-xl w-auto" src={todayApod.url ?? "#"} alt={todayApod.title} width={900} height={900} priority={true} />
+              </Link>
+            ) : (
+              <ReactPlayer url={todayApod?.url} controls={true} loop={true} />
+            )}
+            <p className="mb-7 mt-1 text-base font-light text-muted-foreground sm:text-base max-w-[900px]">{todayApod?.copyright}</p>
           </div>
           <div className="lg:max-w-[900px]">
-            <h1 className="text-4xl font-bold tracking-tighter sm:text-3xl md:text-2xl lg:text-4xl mr-auto">{apodImg.title}</h1>
+            <h1 className="text-4xl font-bold tracking-tighter sm:text-3xl md:text-2xl lg:text-4xl mr-auto mb-1">{todayApod?.title}</h1>
             <h1 className="mb-7 text-base font-light text-muted-foreground sm:text-base max-w-[900px]">{formattedDate}</h1>
             <span className="text-xl font-semibold">
               Description:
-              <p className="text-base font-light text-muted-foreground sm:text-base lg:max-w-[900px] text-justify"> {apodImg.explanation ?? }</p>
+              <p className="text-base font-light text-muted-foreground sm:text-base lg:max-w-[900px] text-justify"> {todayApod?.explanation}</p>
             </span>
           </div>
-        </div> 
-        
-        
-        
-        
-        
+        </div>
+      ) : (
         <>
           <div className="w-full h-screen flex flex-wrap justify-center">
             <Spinner size="large">
@@ -60,7 +70,7 @@ export default function APOD() {
             </Spinner>
           </div>
         </>
-        
-        
-*/
+      )}
+    </>
+  )
 }

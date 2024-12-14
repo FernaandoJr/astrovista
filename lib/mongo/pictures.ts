@@ -5,12 +5,12 @@ import clientPromise from "./db"
 export interface Picture {
   _id: ObjectId
   date: string
-  explanation: string | undefined
+  explanation: string
   hdurl: string | undefined
-  media_type: string | undefined
-  service_version: string | undefined
-  title: string | undefined
-  url: string | undefined
+  media_type: string
+  service_version: string
+  title: string
+  url: string
   copyright: string | undefined
 }
 
