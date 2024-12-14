@@ -21,7 +21,8 @@ export default function Page({ params }: { params: Promise<{ date: string }> }) 
     })
   }, [])
 
-  const baseUrl = process.env.VERCEL_URL ? "https://" + process.env.VERCEL_URL : "http://localhost:3000"
+  const baseUrl = process.env.VERCEL_URL ?? "http://localhost:3000"
+
 
   async function getApod(date: string) {
     const apod = await fetch(`${baseUrl}/api/apod/picture?date=${date}`)
