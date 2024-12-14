@@ -18,7 +18,7 @@ interface Picture {
   copyright: string | undefined
 }
 
-export async function POST(req: NextRequest) {
+export async function GET(req: NextRequest) {
   try {
     console.log("Calling API...")
     const response = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${process.env.NEXT_PUBLIC_NASA_API_KEY}`)
