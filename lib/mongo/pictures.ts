@@ -67,7 +67,7 @@ export async function postApod(picture: Picture) {
 
   if (checkExistingPicture) {
     console.log(`Picture with date ${picture.date} already exists in the database.`)
-    return { acknowledged: false, message: "Picture already exists" }
+    throw new Error("Picture already exists")
   }
 
   const result = await collection.insertOne(picture)

@@ -26,10 +26,7 @@ export async function GET(req: NextRequest) {
     console.log("API response:", data)
 
     // Post the picture to the database
-    console.log("Posting data to the database...")
-    data.date = "2025-01-01"
     await postApod(data)
-    console.log("Data posted successfully")
 
     return NextResponse.json({ message: "Cron job executed" })
   } catch (error) {
