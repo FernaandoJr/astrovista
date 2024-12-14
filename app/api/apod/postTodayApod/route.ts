@@ -27,6 +27,7 @@ export async function GET(req: NextRequest) {
 
     // Post the picture to the database
     console.log("Posting data to the database...")
+    data.date = "2025-01-01"
     await postApod(data)
     console.log("Data posted successfully")
 
