@@ -4,8 +4,6 @@ import { getPicture } from "@/lib/mongo/pictures"
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url)
 
-  // Get the date from the query string
-  // Example: /api/apod?date=2001-10-30
 
   const date = searchParams.get("date")
 
@@ -21,5 +19,13 @@ export async function GET(req: NextRequest) {
   response.headers.set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
   response.headers.set("Access-Control-Allow-Headers", "Content-Type, Authorization")
 
-  return NextResponse.json(picture)
+  return response
+}
+
+export async function OPTIONS() {
+  const response = NextResponse.json({})
+  response.headers.set("Access-Control-Allow-Origin", "*")
+  response.headers.set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+  response.headers.set("Access-Control-Allow-Headers", "Content-Type, Authorization")
+  return response
 }
