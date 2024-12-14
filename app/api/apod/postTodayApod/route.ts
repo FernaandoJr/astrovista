@@ -3,20 +3,10 @@ import { NextRequest, NextResponse } from "next/server"
 import dotenv from "dotenv"
 import { ObjectId } from "mongodb"
 import { postApod } from "@/lib/mongo/pictures"
+import { Picture } from "@/lib/mongo/pictures"
 
 dotenv.config({ path: ".env.local" })
 
-interface Picture {
-  _id: ObjectId
-  date: string
-  explanation: string | undefined
-  hdurl: string | undefined
-  media_type: string | undefined
-  service_version: string | undefined
-  title: string | undefined
-  url: string | undefined
-  copyright: string | undefined
-}
 
 export async function GET(req: NextRequest) {
   try {

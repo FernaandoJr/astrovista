@@ -60,21 +60,21 @@ export default function Page({ params }: { params: Promise<{ date: string }> }) 
         <div className="w-full px-12 py-12 flex-col items-center flex">
           <h1 className="text-4xl font-bold tracking-tighter sm:text-3xl md:text-2xl lg:text-4xl mx-auto mb-4">Astronomy Picture of the Day</h1>
           <div className="w-full rounded-xl flex items-center flex-col">
-            {apod?.media_type === "image" ? (
-              <Link href={apod?.hdurl ?? "#"} passHref target="_blank">
+            {apod.media_type === "image" ? (
+              <Link href={apod.hdurl ?? "#"} passHref target="_blank">
                 <Image className="rounded-xl w-auto" src={apod.url ?? "#"} alt={apod.title} width={900} height={900} priority={true} />
               </Link>
             ) : (
-              <ReactPlayer url={apod?.url} controls={true} loop={true} />
+              <ReactPlayer url={apod.url} controls={true} loop={true} />
             )}
-            <p className="mb-7 mt-1 text-base font-light text-muted-foreground sm:text-base max-w-[900px]">{apod?.copyright}</p>
+            <p className="mb-7 mt-1 text-base font-light text-muted-foreground sm:text-base max-w-[900px]">{apod.copyright}</p>
           </div>
           <div className="lg:max-w-[900px]">
-            <h1 className="text-4xl font-bold tracking-tighter sm:text-3xl md:text-2xl lg:text-4xl mr-auto mb-1">{apod?.title}</h1>
+            <h1 className="text-4xl font-bold tracking-tighter sm:text-3xl md:text-2xl lg:text-4xl mr-auto mb-1">{apod.title}</h1>
             <h1 className="mb-7 text-base font-light text-muted-foreground sm:text-base max-w-[900px]">{formattedDate}</h1>
             <span className="text-xl font-semibold">
               Description:
-              <p className="text-base font-light text-muted-foreground sm:text-base lg:max-w-[900px] text-justify"> {apod?.explanation}</p>
+              <p className="text-base font-light text-muted-foreground sm:text-base lg:max-w-[900px] text-justify"> {apod.explanation}</p>
             </span>
             <div className="w-full flex justify-between mt-8">
               <Button
