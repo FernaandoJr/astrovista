@@ -8,6 +8,8 @@ import ReactPlayer from "react-player"
 import { Spinner } from "@/components/ui/spinner"
 import { Button } from "@/components/ui/button"
 import { ChevronRight, ChevronLeft } from "lucide-react"
+import dotenv from "dotenv"
+dotenv.config({ path: ".env.local" })
 
 export default function Page({ params }: { params: Promise<{ date: string }> }) {
   const [apod, setApod] = useState<Picture>()

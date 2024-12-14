@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { NextRequest, NextResponse } from "next/server"
 import dotenv from "dotenv"
-import { ObjectId } from "mongodb"
+dotenv.config({ path: ".env.local" })
 import { postApod } from "@/lib/mongo/pictures"
 import { Picture } from "@/lib/mongo/pictures"
 
-dotenv.config({ path: ".env.local" })
 
 
 export async function GET(req: NextRequest) {
