@@ -1,9 +1,10 @@
-import { VercelRequest, VercelResponse } from "@vercel/node"
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { NextRequest, NextResponse } from "next/server"
 import dotenv from "dotenv"
-dotenv.config()
-
 import { ObjectId } from "mongodb"
 import { postApod } from "@/lib/mongo/pictures"
+
+dotenv.config({ path: ".env.local" })
 
 interface Picture {
   _id: ObjectId
@@ -17,7 +18,7 @@ interface Picture {
   copyright: string | undefined
 }
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+export async function POST(req: NextRequest) {
   try {
     console.log("Calling API...")
     const response = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${process.env.NEXT_PUBLIC_NASA_API_KEY}`)
@@ -29,9 +30,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     await postApod(data)
     console.log("Data posted successfully")
 
-    res.status(200).json({ message: "Data posted successfully" })
+    return NextResponse.json({ message: "Cron job executed" })
   } catch (error) {
-    console.error("Error calling API:", error)
-    res.status(500).json({ error: "Error calling API" })
+    console.error("Error executing cron job", error)
+    return NextResponse.json({ message: "Error executing cron job" }, { status: 500 })
   }
 }
