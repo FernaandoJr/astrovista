@@ -74,3 +74,25 @@ export async function postApod(picture: Picture) {
 
   return result
 }
+
+export async function getGallery(perPage: number, page: number): Promise<{ items: Picture[]; itemCount: number }> {
+  try {
+    const client = await clientPromise
+    const db = client.db("Apod")
+    const collection = db.collection("pictures")
+
+    const items = await collection
+      .find({})
+      .skip(perPage * (page - 1))
+      .limit(perPage)
+      .sort({ date: - 1 })
+      .toArray() as Picture[]
+
+    const itemCount = await collection.countDocuments()
+
+    const response = { items, itemCount }
+    return response
+  } catch (error) {
+    throw new Error(error instanceof Error ? error.message : String(error))
+  }
+}

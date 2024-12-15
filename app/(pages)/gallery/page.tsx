@@ -1,12 +1,31 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-"use client"
 
+"use client"
+import { useSearchParams } from 'next/navigation';
 import GalleryCard from "@/components/ui/gallery-card"
-import GalleryForm from "@/components/gallery-form"
+import { useEffect, useState } from 'react';
+import { Picture } from "@/lib/mongo/pictures";
 
 export default function Gallery() {
   const subtitle = "Access all the archive of images from NASA's Astronomy Picture of the Day API in one place!"
-  const dev_message = "This page is under development. Please check back later."
+  const searchParams = useSearchParams();
+  let page = parseInt(searchParams.get('page') ?? '1', 10);
+
+  const [gallery, setGallery] = useState<{ items: Picture[], itemCount: number }>()
+
+  page = !page || page < 1 ? 1 : page
+  const perPage = 20
+
+  useEffect(() => {
+    const fetchGallery = async () => {
+      const response = await fetch(`https://astrovista.vercel.app/api/apod/gallery?page=${page}&perPage=${perPage}`)
+      const data = await response.json() as { items: Picture[], itemCount: number }
+      return data
+    }
+    fetchGallery().then((data) => setGallery(data))
+  },[])
+
+  console.log(gallery)
 
   return (
     <>
@@ -16,13 +35,18 @@ export default function Gallery() {
           <p className="text-subtitle max-w-[50%] text-center">{subtitle}</p>
         </div>
         {/* <GalleryForm /> */}
+        <p>pagina: {page}</p>
         <div className="justify-center flex gap-x-3 gap-y-3 flex-wrap my-5">
-          <GalleryCard 
-            date="2024-01-02" 
-            explanation="Awkward and angular looking, Apollo 17's lunar module Challenger was designed for flight in the near vacuum of space. looking, Apollo 17's lunar module Challenger was designed for flight in the near vacuum of space." 
-            url="https://apod.nasa.gov/apod/image/2412/AS17-149-22859-2v2SmlWmk1024.jpg" 
-            title="Neptune's Great Dark Spot: Gone But Not Forgotten">
-          </GalleryCard>
+          {gallery?.items.map((item, index) => (
+                        <GalleryCard 
+                        key={index}
+                        date={item.date} 
+                        explanation={item.explanation} 
+                        url={item.url} 
+                        title={item.title}
+                        media_type={item.media_type}>
+                      </GalleryCard>
+          ))}
         </div>
       </div>
     </>
