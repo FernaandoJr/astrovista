@@ -13,20 +13,31 @@ dotenv.config({ path: ".env.local" })
 
 export default function Page({ params }: { params: Promise<{ date: string }> }) {
   const [apod, setApod] = useState<Picture>()
+  const [error, setError] = useState<string | null>(null)
   const router = useRouter()
 
   useEffect(() => {
     params.then((resolvedParams) => {
-      getApod(resolvedParams.date).then((apod) => setApod(apod))
+      getApod(resolvedParams.date).then((apod) => setApod(apod)).catch((err) => setError(err.message))
     })
   }, [])
 
   const baseUrl = process.env.VERCEL_URL ?? "http://localhost:3000"
 
-
   async function getApod(date: string) {
-    const apod = await fetch(`${baseUrl}/api/apod/picture?date=${date}`)
-    return apod.json()
+    try {
+      const response = await fetch(`${baseUrl}/api/apod/picture?date=${date}`)
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
+      return response.json()
+    } catch (error) {
+      if (error instanceof Error) {
+        throw new Error(`Failed to fetch APOD: ${error.message}`)
+      } else {
+        throw new Error("Failed to fetch APOD: Unknown error")
+      }
+    }
   }
 
   const formattedDate = apod?.date
@@ -59,7 +70,9 @@ export default function Page({ params }: { params: Promise<{ date: string }> }) 
 
   return (
     <>
-      {apod ? (
+      {error ? (
+        <p className="text-red-500">Error: {error}</p>
+      ) : apod ? (
         <div className="w-full px-12 py-12 flex-col items-center flex">
           <h1 className="text-4xl font-bold tracking-tighter sm:text-3xl md:text-2xl lg:text-4xl mx-auto mb-4">Astronomy Picture of the Day</h1>
           <div className="w-full rounded-xl flex items-center flex-col">
@@ -94,20 +107,13 @@ export default function Page({ params }: { params: Promise<{ date: string }> }) 
                   nextApod()
                 }}
               >
-                Next
-                <ChevronRight />
+                Next <ChevronRight />
               </Button>
             </div>
           </div>
         </div>
       ) : (
-        <>
-          <div className="w-full h-screen flex flex-wrap justify-center">
-            <Spinner size="large">
-              <p>Loading...</p>
-            </Spinner>
-          </div>
-        </>
+        <Spinner />
       )}
     </>
   )
