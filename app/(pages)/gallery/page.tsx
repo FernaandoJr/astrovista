@@ -17,10 +17,12 @@ export default function Gallery() {
         </div>
         {/* <GalleryForm /> */}
         <div className="justify-center flex gap-x-3 gap-y-3 flex-wrap my-5">
-          <GalleryCard imageUrl="https://apod.nasa.gov/apod/image/2410/NGC7293_preview.png"></GalleryCard>
-          <GalleryCard imageUrl="https://apod.nasa.gov/apod/image/2410/NGC7293_preview.png"></GalleryCard>
-          <GalleryCard imageUrl="https://apod.nasa.gov/apod/image/2410/NGC7293_preview.png"></GalleryCard>
-          <GalleryCard imageUrl="https://apod.nasa.gov/apod/image/2410/NGC7293_preview.png"></GalleryCard>
+          <GalleryCard 
+            date="2024-01-02" 
+            explanation="Awkward and angular looking, Apollo 17's lunar module Challenger was designed for flight in the near vacuum of space. looking, Apollo 17's lunar module Challenger was designed for flight in the near vacuum of space." 
+            url="https://apod.nasa.gov/apod/image/2412/AS17-149-22859-2v2SmlWmk1024.jpg" 
+            title="Neptune's Great Dark Spot: Gone But Not Forgotten">
+          </GalleryCard>
         </div>
       </div>
     </>

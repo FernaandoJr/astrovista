@@ -1,9 +1,9 @@
-import { Facebook, Instagram, Twitter, Pyramid } from "lucide-react"
+import { Github, Pyramid } from "lucide-react"
 import Link from "next/link"
 
 import { Separator } from "@/components/ui/separator"
 
-const description = "AstroVista is open-source web application that provides images from NASA's Astronomy Picture of the Day API."
+const description = "AstroVista is open-source web application that integrates images from NASA's Astronomy Picture of the Day API."
 
 export default function Footer() {
   return (
@@ -17,14 +17,8 @@ export default function Footer() {
             </div>
             <p className="max-w-xs mt-4 text-sm text-muted-foreground">{description}</p>
             <div className="flex mt-8 space-x-6 text-muted-foreground">
-              <Link className="hover:text-primary" href="#" aria-label="Facebook">
-                <Facebook className="w-6 h-6" />
-              </Link>
-              <Link className="hover:text-primary" href="#" aria-label="Instagram">
-                <Instagram className="w-6 h-6" />
-              </Link>
-              <Link className="hover:text-primary" href="#" aria-label="Twitter">
-                <Twitter className="w-6 h-6" />
+              <Link className="hover:text-primary" href="https://github.com/FernaandoJr/AstroVista" aria-label="Github">
+                <Github className="w-6 h-6" />
               </Link>
             </div>
           </div>
@@ -52,13 +46,13 @@ export default function Footer() {
         <div className="flex flex-col items-center justify-between sm:flex-row">
           <p className="text-xs text-muted-foreground">
             &copy; 2024 AstroVista. Licensed under{" "}
-            <Link className="hover:text-primary" href="#">
+            <Link className="hover:text-primary" href="https://github.com/FernaandoJr/AstroVista/blob/main/LICENSE">
               MIT License
             </Link>
             . Feel free to use and contribute!
           </p>
           <div className="flex mt-4 space-x-4 sm:mt-0">
-            <p className="text-xs text-muted-foreground hover:text-primary">Made with ❤️</p>
+            <p className="text-xs text-muted-foreground hover:text-primary cursor-pointer">Made with ❤️</p>
           </div>
         </div>
       </div>
