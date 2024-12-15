@@ -8,8 +8,6 @@ import ReactPlayer from "react-player"
 import { Spinner } from "@/components/ui/spinner"
 import { Button } from "@/components/ui/button"
 import { ChevronRight, ChevronLeft } from "lucide-react"
-import dotenv from "dotenv"
-dotenv.config({ path: ".env.local" })
 
 export default function Page({ params }: { params: Promise<{ date: string }> }) {
   const [apod, setApod] = useState<Picture>()
@@ -22,11 +20,9 @@ export default function Page({ params }: { params: Promise<{ date: string }> }) 
     })
   }, [])
 
-  const baseUrl = process.env.VERCEL_URL ?? "http://localhost:3000"
-
   async function getApod(date: string) {
     try {
-      const response = await fetch(`${baseUrl}/api/apod/picture?date=${date}`)
+      const response = await fetch(`https://astrovista.vercel.app/api/apod/picture?date=${date}`)
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`)
       }
