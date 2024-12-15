@@ -90,6 +90,8 @@ export async function getGallery(perPage: number, page: number): Promise<{ items
 
     const itemCount = await collection.countDocuments()
 
+    console.log("itemCount:", itemCount)
+
     const response = { items, itemCount }
     return response
   } catch (error) {
