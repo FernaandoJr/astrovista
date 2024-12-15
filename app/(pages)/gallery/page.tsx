@@ -6,23 +6,27 @@ import GalleryCard from "@/components/ui/gallery-card"
 import { useEffect, useState } from 'react';
 import { Picture } from "@/lib/mongo/pictures";
 
-export default function Gallery() {
+export default function Gallery({ params }: { params: Promise<{ page: number }> }) {
   const subtitle = "Access all the archive of images from NASA's Astronomy Picture of the Day API in one place!"
-  const searchParams = useSearchParams();
-  let page = parseInt(searchParams.get('page') ?? '1', 10);
+  // const searchParams = useSearchParams();
+  // let page = parseInt(searchParams.get('page') ?? '1', 10);
 
   const [gallery, setGallery] = useState<{ items: Picture[], itemCount: number }>()
 
-  page = !page || page < 1 ? 1 : page
+  // page = !page || page < 1 ? 1 : page
   const perPage = 20
 
+
+
   useEffect(() => {
-    const fetchGallery = async () => {
-      const response = await fetch(`https://astrovista.vercel.app/api/apod/gallery?page=${page}&perPage=${perPage}`)
-      const data = await response.json() as { items: Picture[], itemCount: number }
-      return data
-    }
-    fetchGallery().then((data) => setGallery(data))
+    params.then((resolvedParams)=>{
+      const fetchGallery = async () => {
+        const response = await fetch(`https://astrovista.vercel.app/api/apod/gallery?page=${resolvedParams.page}&perPage=${perPage}`)
+        const data = await response.json() as { items: Picture[], itemCount: number }
+        return data
+      }
+      fetchGallery().then((data) => setGallery(data))
+    })
   },[])
 
   console.log(gallery)
@@ -35,7 +39,7 @@ export default function Gallery() {
           <p className="text-subtitle max-w-[50%] text-center">{subtitle}</p>
         </div>
         {/* <GalleryForm /> */}
-        <p>pagina: {page}</p>
+        <p>pagina: {}</p>
         <div className="justify-center flex gap-x-3 gap-y-3 flex-wrap my-5">
           {gallery?.items.map((item, index) => (
                         <GalleryCard 
