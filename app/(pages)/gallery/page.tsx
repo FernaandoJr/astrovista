@@ -3,33 +3,30 @@
 "use client"
 import { useSearchParams } from 'next/navigation';
 import GalleryCard from "@/components/ui/gallery-card"
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { Picture } from "@/lib/mongo/pictures";
+import { Spinner } from "@/components/ui/spinner"
 
-export default function Gallery({ params }: { params: Promise<{ page: number }> }) {
+
+function GalleryContent() {
   const subtitle = "Access all the archive of images from NASA's Astronomy Picture of the Day API in one place!"
-  // const searchParams = useSearchParams();
-  // let page = parseInt(searchParams.get('page') ?? '1', 10);
+  const searchParams = useSearchParams()
+
+  let page = parseInt(searchParams.get("page") ?? "", 10)
+  page = !page || page < 1 ? 1 : page
 
   const [gallery, setGallery] = useState<{ items: Picture[], itemCount: number }>()
 
-  // page = !page || page < 1 ? 1 : page
   const perPage = 20
 
-
-
   useEffect(() => {
-    params.then((resolvedParams)=>{
-      const fetchGallery = async () => {
-        const response = await fetch(`https://astrovista.vercel.app/api/apod/gallery?page=${resolvedParams.page}&perPage=${perPage}`)
-        const data = await response.json() as { items: Picture[], itemCount: number }
-        return data
-      }
-      fetchGallery().then((data) => setGallery(data))
-    })
+    const fetchGallery = async () => {
+      const response = await fetch(`https://astrovista.vercel.app/api/apod/gallery?page=${page}&perPage=${perPage}`)
+      const data = await response.json() as { items: Picture[], itemCount: number }
+      return data
+    }
+    fetchGallery().then((data) => setGallery(data))
   },[])
-
-  console.log(gallery)
 
   return (
     <>
@@ -38,10 +35,8 @@ export default function Gallery({ params }: { params: Promise<{ page: number }> 
           <h1 className="text-title">Gallery</h1>
           <p className="text-subtitle max-w-[50%] text-center">{subtitle}</p>
         </div>
-        {/* <GalleryForm /> */}
-        <p>pagina: {}</p>
         <div className="justify-center flex gap-x-3 gap-y-3 flex-wrap my-5">
-          {gallery?.items.map((item, index) => (
+          {gallery ? gallery?.items.map((item, index) => (
                         <GalleryCard 
                         key={index}
                         date={item.date} 
@@ -50,9 +45,25 @@ export default function Gallery({ params }: { params: Promise<{ page: number }> 
                         title={item.title}
                         media_type={item.media_type}>
                       </GalleryCard>
-          ))}
+          )): (
+            <>
+                      <div className="w-full h-screen flex flex-wrap justify-center">
+                        <Spinner size="large">
+                          <p>Loading...</p>
+                        </Spinner>
+                      </div>
+                    </>
+          )}
         </div>
       </div>
     </>
+  )
+}
+
+export default function Gallery(){
+  return (
+    <Suspense fallback={<p>Loading...</p>}>
+      <GalleryContent />
+    </Suspense>
   )
 }
