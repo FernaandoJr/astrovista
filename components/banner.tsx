@@ -31,7 +31,7 @@ const Banner = () => {
             <Link href="/apod">Get Started</Link>
           </Button>
           <Button size={"lg"} variant={"outline"}>
-          <Link href="/about" >Learn More</Link>
+          <Link href="/about" >About us</Link>
           </Button>
         </div>
       </div>
@@ -40,7 +40,6 @@ const Banner = () => {
       </div>
       <Separator className="my-8" />
       <section>
-        <p>asdasdasdasdasdsa</p>
       </section>
     </section>
   )
