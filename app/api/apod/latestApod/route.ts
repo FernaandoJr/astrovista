@@ -1,16 +1,7 @@
-import { NextResponse, NextRequest } from "next/server"
+import { NextResponse} from "next/server"
 import { findLatestApod } from "@/lib/mongo/pictures"
 
-export async function GET(req: NextRequest) {
-  const { searchParams } = new URL(req.url)
-
-
-  const date = searchParams.get("date")
-
-  if (!date) {
-    return NextResponse.error()
-  }
-  console.log("date:", date)
+export async function GET() {
 
   const picture = await findLatestApod()
 
