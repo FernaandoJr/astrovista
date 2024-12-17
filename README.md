@@ -1,7 +1,18 @@
 
-![astrovista-banner](https://github.com/user-attachments/assets/ad5f5d61-066a-45e4-a13d-bdbe17045da0)
+# ![AstroVista](https://github.com/user-attachments/assets/9dbe2ae2-3c63-4e42-a342-24e30ad31825)
 
-[**AstroVista**](https://astrovista.vercel.app/about) is a modern, open-source web app that brings you the wonders of the cosmos! Using NASA's Astronomy Picture of the Day (APOD) API, AstroVista fetches and displays breathtaking astronomical images daily, accompanied by detailed descriptions. Whether you're an amateur stargazer or a seasoned astronomer, this app lets you explore the universe one picture at a time.
+
+
+![GitHub License](https://img.shields.io/github/license/fernaandojr/astrovista?style=flat&link=https%3A%2F%2Fgithub.com%2FFernaandoJr%2FAstroVista%2Fblob%2Fmain%2FLICENSE&label=License)
+![GitHub contributors](https://img.shields.io/github/contributors/fernaandojr/astrovista?label=Contributors)
+[![Discord](https://img.shields.io/discord/1299024051510968423?style=flat&logo=discord&logoColor=ffffff&color=%235865F2&label=Discord)](https://discord.gg/kkeKKeASaW)
+![GitHub deployments](https://img.shields.io/github/deployments/fernaandojr/astrovista/production?label=Deploy%20Status)
+![GitHub repo size](https://img.shields.io/github/repo-size/fernaandojr/astrovista?label=Repo%20Size)
+![GitHub forks](https://img.shields.io/github/forks/fernaandojr/astrovista?style=flat&label=Forks&color=%23172B4D)
+![GitHub Repo stars](https://img.shields.io/github/stars/fernaandojr/astrovista?style=flat&label=Repo%20Stars&color=%23FFE200)
+
+
+[**AstroVista**](https://astrovista.vercel.app/about) is a modern, open-source web app built Using NASA's Astronomy Picture of the Day (APOD) API, AstroVista fetches and displays images daily about astronomy.
 
 ---
 
@@ -9,28 +20,17 @@
 
 - 🌠 **Daily Astronomy Pictures**: Fetches the latest astronomy images from NASA's APOD API.
 - 🛰 **NASA API Integration**: Seamlessly pulls data directly from NASA's resources.
-- 🖼 **Beautiful UI**: Crafted with modern design principles to give users a smooth and aesthetic experience.
-- 🎨 **Dark Mode**: Automatically switches to dark mode for stargazing-friendly viewing.
-- 💡 **Interactive Descriptions**: Learn more about each picture with informative and engaging details.
+- 🎨 **Dark Mode**: Automatically switches to dark mode while viewing.
 
 ---
 
 ## 🚀 Technologies Used
-
-AstroVista is built using cutting-edge technologies to ensure both performance and developer productivity:
 
 <div align="center">
   <img src="https://skillicons.dev/icons?i=nextjs,tailwind,typescript,react,mongodb">
   <br/>
   <br/>
 </div>
-
-- **Next.js**: A powerful React framework for server-side rendering, dynamic routing, and API handling.
-- **Tailwind CSS**: For styling with a utility-first CSS approach, ensuring a sleek and responsive design.
-- **TypeScript**: Adds static type-checking to JavaScript for improved developer experience and code reliability.
-- **React**: The core UI library that powers the interactive components of the app.
-- **[shadcn](https://ui.shadcn.com)**: A collection of beautifully designed and accessible UI components, enabling a faster UI development process.
-- **[Acetertinity](https://ui.aceternity.com/)**: Custom UI toolset that provides unique and dynamic widgets, perfect for enhancing user engagement.
 
 ---
 
@@ -51,7 +51,7 @@ To run AstroVista locally, follow these steps:
    npm install
    ```
 
-3. Get your NASA API key or using the default public key `DEMO_KEY` by signing up [here](https://api.nasa.gov/), then create a `.env.local` file in the root of your project and add the API Key and the Mongodb connection:
+3. Get your NASA API key or using the default public key `DEMO_KEY` by signing up [here](https://api.nasa.gov/), then create a `.env.local` file in the root of your project and add the API Key and the MongoDB connection string:
 
    ```bash
    NEXT_PUBLIC_NASA_API_KEY=your_nasa_api_key
@@ -64,18 +64,8 @@ To run AstroVista locally, follow these steps:
    npm run bd
    ```
 
-5. Open your browser and navigate to `http://localhost:3000` to explore AstroVista on your machine!
+5. Open your browser and navigate to `http://localhost:3000` to explore AstroVista locally!
 
----
-
-## 📸 Usage
-
-Once the app is running, you'll be able to:
-
-1. View the Astronomy Picture of the Day on the home screen.
-2. Click on images to learn more about their origin, the celestial bodies they depict, and more!
-3. Use the dark mode toggle for late-night stargazing.
-4. Enjoy the responsive design on both desktop and mobile.
 
 ---
 
@@ -87,7 +77,7 @@ We welcome contributions from the open-source community! Here's how you can get 
 2. **Clone your forked repo** locally:
 
    ```bash
-   git clone https://github.com/your-username/AstroVista.git
+   git clone https://github.com/FernaandoJr/AstroVista.git
    ```
 
 3. **Create a new branch** for your feature or bug fix:
@@ -97,7 +87,7 @@ We welcome contributions from the open-source community! Here's how you can get 
    ```
 
 4. **Make your changes**, ensuring your code follows best practices.
-5. **Test your changes** locally to make sure everything works as expected.
+5. **Test your changes** run `npm run build` locally and make sure everything works as expected.
 6. **Commit and push** your changes to your forked repository:
 
    ```bash
@@ -105,17 +95,16 @@ We welcome contributions from the open-source community! Here's how you can get 
    git push origin feature/your-feature-name
    ```
 
-7. Submit a **pull request** to the main repository with a clear description of your changes.
+8. Submit a **pull request** to the main repository with a clear description of your changes.
 
 ---
 
 ## 🪐 Future Plans
 
-- Implementing a user favorite system to save and categorize favorite images
-- Adding a community forum for discussions about astronomy and space exploration
-- Developing an educational section with resources for students and teachers
-- Creating a mobile app version for on-the-go cosmic exploration
-- Adding a Gallery page, where you can search by date and explore the entire APOD archive
+- Implementing a user favorite system to save and categorize favorite images.
+- Add filters in the gallery section, allowing the user to filter by a specific date or media type.
+- Internalization by changing automatically to the user current device language.
+- Mars Hover Photos NASA API implementation
 
 ---
 
