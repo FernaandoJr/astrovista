@@ -31,30 +31,19 @@ export async function getPictures(start_date: string, end_date: string) {
   return pictures // Return the array directly
 }
 
+// Get a picture from the database
 export async function getPicture(date: string): Promise<Picture> {
   const client = await clientPromise
   const db = client.db("Apod")
   const collection = db.collection("pictures")
 
-  const picture = await collection.findOne({ date })
+  const picture = await collection.findOne({ date }) as Picture
 
   if (!picture) {
     throw new Error("Picture not found")
   }
 
-  const mappedPicture: Picture = {
-    _id: picture._id,
-    copyright: picture.copyright,
-    date: picture.date,
-    explanation: picture.explanation,
-    hdurl: picture.hdurl,
-    media_type: picture.media_type,
-    service_version: picture.service_version,
-    title: picture.title,
-    url: picture.url,
-  }
-
-  return mappedPicture
+  return picture
 }
 
 // Post a picture to the database
@@ -74,6 +63,7 @@ export async function postApod(picture: Picture) {
 
   return result
 }
+
 
 export async function getGallery(perPage: number, page: number): Promise<{ items: Picture[]; itemCount: number }> {
   try {
@@ -97,4 +87,20 @@ export async function getGallery(perPage: number, page: number): Promise<{ items
   } catch (error) {
     throw new Error(error instanceof Error ? error.message : String(error))
   }
+}
+
+
+
+export async function findLatestApod(): Promise<Picture> {
+  const client = await clientPromise
+  const db = client.db("Apod")
+  const collection = db.collection("pictures")
+
+  const picture = await collection.findOne({}, { sort: { date: -1 } }) as Picture;
+
+  if (!picture) {
+    throw new Error("Picture not found")
+  }
+
+  return picture
 }

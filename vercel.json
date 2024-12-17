@@ -2,7 +2,7 @@
   "crons": [
     {
       "path": "/api/apod/postTodayApod",
-      "schedule": "0 6 * * *"
+      "schedule": "0 5 * * *"
     }
   ]
 }
