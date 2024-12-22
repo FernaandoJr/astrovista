@@ -4,30 +4,31 @@ import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { motion } from "framer-motion"
-import { Github, ExternalLink } from "lucide-react"
+import { ExternalLink } from "lucide-react"
+import { SiGithub } from "@icons-pack/react-simple-icons"
+
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
 import { GridBackground } from "@/components/grid-background"
-import { LinkedinIcon } from "@/public/icons/Linkedin"
-import { MdiGithub } from "@/public/icons/Github"
+import { Contributor } from "../../../components/astrovista/contributor"
 
 const technologies = [
-  { name: "Next.js", icon: "/icons/nextjs-light.svg" },
-  { name: "Tailwind CSS", icon: "/icons/tailwindcss-light.svg" },
+  { name: "Next.js", icon: "/icons/svg/nextjs.svg" },
   { name: "TypeScript", icon: "/icons/typescript.svg" },
-  { name: "Vercel", icon: "/icons/vercel-light.svg" },
-  { name: "Shadcn", icon: "/icons/shadcn.png" },
-  { name: "Acetertinity", icon: "/icons/aceternity.png" },
-  { name: "v0", icon: "/icons/v0.svg" },
+  { name: "Tailwind CSS", icon: "/icons/svg/tailwind.svg" },
+  { name: "Vercel", icon: "/icons/svg/vercel.svg" },
+  { name: "Shadcn/ui", icon: "/icons/svg/shadcnui.svg" },
+  { name: "Aceternity", icon: "/icons/svg/aceternity.svg" },
+  { name: "v0", icon: "/icons/svg/v0.svg" },
 ]
 
-const FuturePlans = [{ desc: "Implementing a user favorite system to save and categorize favorite images" }, { desc: "Adding a community forum for discussions about astronomy and space exploration" }, { desc: "Developing an educational section with resources for students and teachers" }, { desc: "Creating a mobile app version for on-the-go cosmic exploration" }, { desc: "Adding a Gallery page, where you can search by date and explore the entire APOD archive" }]
+const FuturePlans = [{ desc: "Implementing a user favorite system to save and categorize favorite images." }, { desc: "Add filters in the gallery section, allowing the user to filter by a specific date or media type." }, { desc: "Internalization by changing automatically to the user current device language." }, { desc: "Mars Hover Photos NASA API implementation" }]
 
 const Contributors = [
   {
+    nickname: "FernaandoJr",
     name: "Fernando Junior",
     role: "Project Owner",
     image: "https://avatars.githubusercontent.com/u/90939363",
@@ -37,13 +38,13 @@ const Contributors = [
 ]
 
 const features = [
-  { title: "Daily Space Images", description: "Explore a new astronomical wonder every day." },
-  { title: "Detailed Explanations", description: "Learn about each image from expert astronomers." },
-  { title: "Search Archive", description: "Dive into past APODs and discover the universe&apos;s history." },
-  { title: "Mobile Responsive", description: "Enjoy the cosmos on any device, anywhere. " },
+  { title: "Daily Space Images", description: "Explore a new astronomical fetched every day." },
+  { title: "Detailed Explanations", description: "Learn about each image from astronomers." },
+  { title: "Gallery Archive", description: "Dive into past APODs and discover the universe&apos;s history." },
+  { title: "Mobile Responsive", description: "Enjoy the cosmos on any device, anywhere." },
 ]
 
-const AditionalInfo = "Our application uses NASA's popular Astronomy Picture of the Day (APOD) API, delivering a new space image daily with a professional astronomer's explanation. The API also provides metadata and keywords, enhancing discoverability and allowing integration into other apps or social media with auto-generated hashtags."
+const AditionalInfo = "Our application uses NASA's popular Astronomy Picture of the Day (APOD) API, delivering a new space image daily with a professional astronomer's explanation. The API provides a wealth of information about the astronomy, including images and videos. By integrating this API into our application, we aim to make space exploration accessible to everyone."
 
 export default function AboutUs() {
   const [activeTab, setActiveTab] = useState("overview")
@@ -51,8 +52,8 @@ export default function AboutUs() {
   return (
     <>
       <GridBackground text="About Us" subtitle="An open-source project bringing the wonders of space to your screen, powered by NASA's Astronomy Picture of the Day API." />
-      <div className="container mx-auto px-4 space-y-10 py-10 ">
-        <motion.section initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="text-center space-y-4"></motion.section>
+      <div className="container mx-auto space-y-10 px-4 py-10">
+        <motion.section initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="space-y-4 text-center"></motion.section>
 
         {/* Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
@@ -86,16 +87,16 @@ export default function AboutUs() {
             <Card>
               <CardHeader>
                 <CardTitle>Technologies Used</CardTitle>
-                <CardDescription>Built with cutting-edge web technologies, modern components libraries and AI tools.</CardDescription>
+                <CardDescription>Built with modern web languages and framework, components libraries and AI tools.</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="flex flex-wrap gap-4 justify-center">
+                <div className="flex flex-wrap justify-center gap-4">
                   {technologies.map((tech) => (
                     <motion.div key={tech.name} className="flex flex-col items-center space-y-2" whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-                      <div className="bg-muted rounded-full p-2">
+                      <div className="p-2">
                         <Image src={tech.icon} alt={tech.name} width={80} height={80} className="" />
                       </div>
-                      <span className="text-base font-medium mx-0">{tech.name}</span>
+                      <span className="mx-0 text-base font-medium">{tech.name}</span>
                     </motion.div>
                   ))}
                 </div>
@@ -111,40 +112,16 @@ export default function AboutUs() {
                 <CardDescription>Meet the contributors who made this project possible.</CardDescription>
               </CardHeader>
               <CardContent>
-                <Carousel className="w-full max-w-xs mx-auto">
-                  <CarouselContent>
-                    {Contributors.map((member, index) => (
-                      <CarouselItem key={index}>
-                        <div className="p-1">
-                          <Card>
-                            <CardContent className="flex flex-col items-center p-6">
-                              <Image src={member.image} alt={member.name} width={100} height={100} className="rounded-full mb-4" />
-                              <h3 className="font-semibold text-lg">{member.name}</h3>
-                              <p className="text-sm text-muted-foreground">{member.role}</p>
-                              <div className=" flex gap-3 mt-4">
-                                <Link href={member.linkedin} target="_blank" rel="noopener noreferrer">
-                                  <LinkedinIcon className="h-9 w-9" />
-                                </Link>
-                                <Link href={member.github} target="_blank" rel="noopener noreferrer">
-                                  <MdiGithub className="h-9 w-9" />
-                                </Link>
-                              </div>
-                            </CardContent>
-                          </Card>
-                        </div>
-                      </CarouselItem>
-                    ))}
-                  </CarouselContent>
-                  <CarouselPrevious />
-                  <CarouselNext />
-                </Carousel>
+                {Contributors.map((contributor, index) => (
+                  <Contributor key={index} nickname={`@${contributor.nickname}`} name={contributor.name} role={contributor.role} img={contributor.image} linkedin={contributor.linkedin} github={contributor.github} />
+                ))}
               </CardContent>
             </Card>
           </TabsContent>
         </Tabs>
 
         {/* Additional Info */}
-        <div className="grid lg:grid-cols-2 gap-8">
+        <div className="grid gap-8 lg:grid-cols-2">
           <Card>
             <CardHeader>
               <CardTitle>NASA APOD API</CardTitle>
@@ -172,7 +149,7 @@ export default function AboutUs() {
                 <div className="flex flex-wrap gap-4">
                   <Button asChild>
                     <Link href="https://github.com/FernaandoJr/AstroVista" target="_blank" rel="noopener noreferrer">
-                      <Github className="mr-2 h-4 w-4" /> View on GitHub
+                      <SiGithub className="mr-2 h-4 w-4" /> View on GitHub
                     </Link>
                   </Button>
                   <Button asChild variant="outline">
@@ -191,16 +168,17 @@ export default function AboutUs() {
           <Card>
             <CardHeader>
               <CardTitle>Future Plans</CardTitle>
-              <CardDescription>Our roadmap for the stars</CardDescription>
+              <CardDescription>Our roadmap features to be implemented</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <p>We&apos;re constantly working to improve AstroVista and expand its features. Some of our future plans include:</p>
-              <ul className="list-disc pl-6 space-y-2">
+              <ul className="list-disc space-y-2 pl-6">
                 {FuturePlans.map((plan, index) => (
-                  <li key={index}>{plan.desc}</li>
+                  <li className="duration-50 transition-all ease-linear hover:text-muted-foreground" key={index}>
+                    {plan.desc}
+                  </li>
                 ))}
               </ul>
-              <p>We&apos;re excited about the future of AstroVista and invite you to join us on this cosmic journey!</p>
             </CardContent>
           </Card>
         </motion.div>

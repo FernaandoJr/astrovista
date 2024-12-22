@@ -2,11 +2,11 @@
 
 "use client"
 import { useSearchParams } from "next/navigation"
-import GalleryCard from "@/components/ui/gallery-card"
+import GalleryCard from "@/components/astrovista/gallery-card"
 import { Suspense, useEffect, useState } from "react"
 import { Picture } from "@/lib/mongo/pictures"
 import { Spinner } from "@/components/ui/spinner"
-import { PaginationGallery } from "@/components/pagination-gallery"
+import { PaginationGallery } from "@/components/astrovista/pagination-gallery"
 
 function GalleryContent() {
   const subtitle = "Access all the archive of images from NASA's Astronomy Picture of the Day API in one place!"
@@ -46,27 +46,27 @@ function GalleryContent() {
 
   return (
     <>
-      <div className="w-full mx-auto py-16 px-12">
+      <div className="mx-auto w-full px-12 py-16">
         <div className="flex flex-col place-items-center space-y-2">
           <h1 className="text-title">Gallery</h1>
           <p className="text-subtitle max-w-[50%] text-center">{subtitle}</p>
         </div>
         <div className="my-5">
-          <PaginationGallery gallery={gallery} page={page} totalPages={totalPages} pageNumbers={pageNumbers} prevPage={prevPage} nextPage={nextPage}/>
+          <PaginationGallery gallery={gallery} page={page} totalPages={totalPages} pageNumbers={pageNumbers} prevPage={prevPage} nextPage={nextPage} />
         </div>
-        <div className="justify-center flex gap-x-3 gap-y-3 flex-wrap">
+        <div className="flex flex-wrap justify-center gap-x-3 gap-y-3">
           {gallery ? (
             gallery?.items.map((item, index) => <GalleryCard key={index} date={item.date} explanation={item.explanation} url={item.url} title={item.title} media_type={item.media_type}></GalleryCard>)
           ) : (
             <>
-              <div className="w-full h-screen flex flex-wrap justify-center">
+              <div className="flex h-screen w-full flex-wrap justify-center">
                 <Spinner size="large">
                   <p>Loading...</p>
                 </Spinner>
               </div>
             </>
           )}
-          <PaginationGallery gallery={gallery} page={page} totalPages={totalPages} pageNumbers={pageNumbers} prevPage={prevPage} nextPage={nextPage}/>
+          <PaginationGallery gallery={gallery} page={page} totalPages={totalPages} pageNumbers={pageNumbers} prevPage={prevPage} nextPage={nextPage} />
         </div>
       </div>
     </>

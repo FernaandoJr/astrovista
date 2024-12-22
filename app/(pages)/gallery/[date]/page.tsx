@@ -16,9 +16,11 @@ export default function Page({ params }: { params: Promise<{ date: string }> }) 
 
   useEffect(() => {
     params.then((resolvedParams) => {
-      getApod(resolvedParams.date).then((apod) => setApod(apod)).catch((err) => setError(err.message))
+      getApod(resolvedParams.date)
+        .then((apod) => setApod(apod))
+        .catch((err) => setError(err.message))
     })
-  }, [])
+  }, [params])
 
   async function getApod(date: string) {
     try {
@@ -53,6 +55,9 @@ export default function Page({ params }: { params: Promise<{ date: string }> }) 
     const nextDate = new Date(apod.date)
     nextDate.setDate(nextDate.getDate() + 1)
     const nextDateString = nextDate.toISOString().split("T")[0]
+    if (nextDateString === new Date().toISOString().split("T")[0]) return
+    // Handle api picture gap from 1995-06-16 to 1995-06-19
+    if (nextDateString === "1995-06-17") return router.push(`/gallery/1995-06-20`)
     router.push(`/gallery/${nextDateString}`)
   }
 
@@ -61,6 +66,8 @@ export default function Page({ params }: { params: Promise<{ date: string }> }) 
     const previousDate = new Date(apod.date)
     previousDate.setDate(previousDate.getDate() - 1)
     const previousDateString = previousDate.toISOString().split("T")[0]
+    // Handle api picture gap from 1995-06-20 to 1995-06-17
+    if (previousDateString === "1995-06-19") return router.push(`/gallery/1995-06-16`)
     router.push(`/gallery/${previousDateString}`)
   }
 
@@ -69,42 +76,46 @@ export default function Page({ params }: { params: Promise<{ date: string }> }) 
       {error ? (
         <p className="text-red-500">Error: {error}</p>
       ) : apod ? (
-        <div className="w-full px-12 py-12 flex-col items-center flex">
-          <h1 className="text-4xl font-bold tracking-tighter sm:text-3xl md:text-2xl lg:text-4xl mx-auto mb-4">Astronomy Picture of the Day</h1>
-          <div className="w-full rounded-xl flex items-center flex-col">
+        <div className="flex w-full flex-col items-center px-12 py-12">
+          <h1 className="mx-auto mb-4 text-4xl font-bold tracking-tighter sm:text-3xl md:text-2xl lg:text-4xl">Astronomy Picture of the Day</h1>
+          <div className="flex w-full flex-col items-center rounded-xl">
             {apod.media_type === "image" ? (
               <Link href={apod.hdurl ?? "#"} passHref target="_blank">
-                <Image className="rounded-xl w-auto" src={apod.url ?? "#"} alt={apod.title} width={900} height={900} priority={true} />
+                <Image className="w-auto rounded-xl" src={apod.url ?? "#"} alt={apod.title} width={900} height={900} priority={true} />
               </Link>
             ) : (
               <ReactPlayer url={apod.url} controls={true} loop={true} />
             )}
-            <p className="mb-7 mt-1 text-base font-light text-muted-foreground sm:text-base max-w-[900px]">{apod.copyright}</p>
+            <p className="mb-7 mt-1 max-w-[900px] text-base font-light text-muted-foreground sm:text-base">{apod.copyright}</p>
           </div>
           <div className="lg:max-w-[900px]">
-            <h1 className="text-4xl font-bold tracking-tighter sm:text-3xl md:text-2xl lg:text-4xl mr-auto mb-1">{apod.title}</h1>
-            <h1 className="mb-7 text-base font-light text-muted-foreground sm:text-base max-w-[900px]">{formattedDate}</h1>
+            <h1 className="mb-1 mr-auto text-4xl font-bold tracking-tighter sm:text-3xl md:text-2xl lg:text-4xl">{apod.title}</h1>
+            <h1 className="mb-7 max-w-[900px] text-base font-light text-muted-foreground sm:text-base">{formattedDate}</h1>
             <span className="text-xl font-semibold">
               Description:
-              <p className="text-base font-light text-muted-foreground sm:text-base lg:max-w-[900px] text-justify"> {apod.explanation}</p>
+              <p className="text-justify text-base font-light text-muted-foreground sm:text-base lg:max-w-[900px]"> {apod.explanation}</p>
             </span>
-            <div className="w-full flex justify-between mt-8">
-              <Button
-                variant={"outline"}
-                onClick={() => {
-                  previousApod()
-                }}
-              >
-                <ChevronLeft /> Previous
-              </Button>
-              <Button
-                variant={"outline"}
-                onClick={() => {
-                  nextApod()
-                }}
-              >
-                Next <ChevronRight />
-              </Button>
+            <div aria-disabled={apod.date === "1995-06-16"} className="mt-8 flex w-full justify-between aria-disabled:justify-end">
+              {apod.date !== "1995-06-16" && (
+                <Button
+                  variant={"outline"}
+                  onClick={() => {
+                    previousApod()
+                  }}
+                >
+                  <ChevronLeft /> Previous
+                </Button>
+              )}
+              {apod.date !== new Date().toISOString().split("T")[0] && (
+                <Button
+                  variant={"outline"}
+                  onClick={() => {
+                    nextApod()
+                  }}
+                >
+                  Next <ChevronRight />
+                </Button>
+              )}
             </div>
           </div>
         </div>

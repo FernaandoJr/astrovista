@@ -1,10 +1,10 @@
 import "./globals.css"
 import { Inter } from "next/font/google"
-import Navbar from "@/components/nav"
+import Navbar from "@/components/astrovista/navbar"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Analytics } from "@vercel/analytics/react"
 import Head from "next/head"
-import Footer from "../components/footer"
+import Footer from "../components/astrovista/footer"
 
 const inter = Inter({ subsets: ["latin"] })
 

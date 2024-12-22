@@ -71,6 +71,10 @@
   .text-subtitle {
     @apply text-base font-light text-muted-foreground;
   }
+
+  .home-section {
+    @apply;
+  }
 }
 
 .rdp-vhidden {

@@ -1,5 +1,6 @@
-import { Github, Pyramid } from "lucide-react"
+import { Pyramid } from "lucide-react"
 import Link from "next/link"
+import { SiGithub } from "@icons-pack/react-simple-icons"
 
 import { Separator } from "@/components/ui/separator"
 
@@ -8,24 +9,24 @@ const description = "AstroVista is open-source web application that integrates i
 export default function Footer() {
   return (
     <footer className="bg-background">
-      <div className="container px-4 py-16 mx-auto sm:px-6 lg:px-8">
+      <div className="container mx-auto px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           <div>
             <div className="flex items-center">
               <Pyramid />
               <span className="ml-2 text-xl font-bold">AstroVista</span>
             </div>
-            <p className="max-w-xs mt-4 text-sm text-muted-foreground">{description}</p>
-            <div className="flex mt-8 space-x-6 text-muted-foreground">
+            <p className="mt-4 max-w-xs text-sm text-muted-foreground">{description}</p>
+            <div className="mt-8 flex space-x-6 text-muted-foreground">
               <Link className="hover:text-primary" href="https://github.com/FernaandoJr/AstroVista" aria-label="Github">
-                <Github className="w-6 h-6" />
+                <SiGithub className="h-6 w-6" />
               </Link>
             </div>
           </div>
-          <div className="grid grid-cols-1 gap-8 lg:col-span-2 sm:grid-cols-2 lg:grid-cols-2">
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:col-span-2 lg:grid-cols-2">
             <div>
               <p className="font-medium">Navigation</p>
-              <nav className="flex flex-col mt-4 space-y-2 text-sm text-muted-foreground">
+              <nav className="mt-4 flex flex-col space-y-2 text-sm text-muted-foreground">
                 <Link className="hover:text-primary" href="#">
                   APOD
                 </Link>
@@ -51,8 +52,8 @@ export default function Footer() {
             </Link>
             . Feel free to use and contribute!
           </p>
-          <div className="flex mt-4 space-x-4 sm:mt-0">
-            <p className="text-xs text-muted-foreground hover:text-primary cursor-pointer">Made with ❤️</p>
+          <div className="mt-4 flex space-x-4 sm:mt-0">
+            <p className="cursor-pointer text-xs text-muted-foreground hover:text-primary">Made with ❤️</p>
           </div>
         </div>
       </div>
