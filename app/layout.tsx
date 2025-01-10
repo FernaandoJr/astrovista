@@ -5,10 +5,11 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { Analytics } from "@vercel/analytics/react"
 import Head from "next/head"
 import Footer from "../components/astrovista/footer"
+import type { Metadata } from "next"
 
 const inter = Inter({ subsets: ["latin"] })
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "AstroVista",
   description: "AstroVista is open-source web application that provides images from NASA's Astronomy Picture of the Day API.",
   keywords: "NASA, APOD, Astronomy, Picture, Day, AstroVista, Astro, Vista",
