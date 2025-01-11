@@ -30,6 +30,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" suppressHydrationWarning>
       <Head>
+        <meta name="google-site-verification" content="w9DnYHJVVt0qvUnPgDJ9HWrXy-Xk8CMPp2b_Nwk_mNI" />
         <link rel="icon" href="@/public/favicon.ico" />
         <link rel="icon" href="/icon?<generated>" type="image/<generated>" sizes="<generated>" />
         <link rel="apple-touch-icon" href="/apple-icon?<generated>" type="image/<generated>" sizes="<generated>" />
