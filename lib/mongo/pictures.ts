@@ -37,7 +37,7 @@ export async function getPicture(date: string): Promise<Picture> {
   const db = client.db("Apod")
   const collection = db.collection("pictures")
 
-  const picture = await collection.findOne({ date }) as Picture
+  const picture = (await collection.findOne({ date })) as Picture
 
   if (!picture) {
     throw new Error("Picture not found")
@@ -64,19 +64,18 @@ export async function postApod(picture: Picture) {
   return result
 }
 
-
 export async function getGallery(perPage: number, page: number): Promise<{ items: Picture[]; itemCount: number }> {
   try {
     const client = await clientPromise
     const db = client.db("Apod")
     const collection = db.collection("pictures")
 
-    const items = await collection
+    const items = (await collection
       .find({})
       .skip(perPage * (page - 1))
       .limit(perPage)
-      .sort({ date: - 1 })
-      .toArray() as Picture[]
+      .sort({ date: -1 })
+      .toArray()) as Picture[]
 
     const itemCount = await collection.countDocuments()
 
@@ -89,18 +88,27 @@ export async function getGallery(perPage: number, page: number): Promise<{ items
   }
 }
 
-
-
 export async function findLatestApod(): Promise<Picture> {
   const client = await clientPromise
   const db = client.db("Apod")
   const collection = db.collection("pictures")
 
-  const picture = await collection.findOne({}, { sort: { date: -1 } }) as Picture;
+  const picture = (await collection.findOne({}, { sort: { date: -1 } })) as Picture
 
   if (!picture) {
     throw new Error("Picture not found")
   }
 
   return picture
+}
+
+export async function getAllPictures(): Promise<Picture[]> {
+  const client = await clientPromise
+  const db = client.db("Apod")
+  const collection = db.collection("pictures")
+
+  console.log("Getting all pictures")
+  const pictures = (await collection.find({}).toArray()).slice(0, 100) as Picture[]
+
+  return pictures
 }

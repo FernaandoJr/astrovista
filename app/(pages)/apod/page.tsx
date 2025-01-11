@@ -34,30 +34,30 @@ export default function APOD() {
   return (
     <>
       {todayApod ? (
-        <div className="w-full px-12 py-12 flex-col items-center flex">
-          <h1 className="text-4xl font-bold tracking-tighter sm:text-3xl md:text-2xl lg:text-4xl mx-auto mb-4">Astronomy Picture of the Day</h1>
-          <div className="w-full rounded-xl flex items-center flex-col">
+        <div className="flex w-full flex-col items-center px-12 py-12">
+          <h1 className="mx-auto mb-4 text-4xl font-bold tracking-tighter sm:text-3xl md:text-2xl lg:text-4xl">Astronomy Picture of the Day</h1>
+          <div className="flex w-full flex-col items-center rounded-xl">
             {todayApod.media_type === "image" ? (
               <Link href={todayApod.hdurl ?? "#"} passHref target="_blank">
-                <Image className="rounded-xl w-auto" src={todayApod.url ?? "#"} alt={todayApod.title} width={900} height={900} priority={true} />
+                <Image className="w-auto rounded-xl" src={todayApod.url ?? "#"} alt={todayApod.title} width={900} height={900} priority={true} />
               </Link>
             ) : (
               <ReactPlayer url={todayApod.url} controls={true} loop={true} />
             )}
-            <p className="mb-7 mt-1 text-base font-light text-muted-foreground sm:text-base max-w-[900px]">{todayApod.copyright}</p>
+            <p className="mb-7 mt-1 max-w-[900px] text-base font-light text-muted-foreground sm:text-base">{todayApod.copyright}</p>
           </div>
           <div className="lg:max-w-[900px]">
-            <h1 className="text-4xl font-bold tracking-tighter sm:text-3xl md:text-2xl lg:text-4xl mr-auto mb-1">{todayApod.title}</h1>
-            <h1 className="mb-7 text-base font-light text-muted-foreground sm:text-base max-w-[900px]">{formattedDate}</h1>
+            <h1 className="mb-1 mr-auto text-4xl font-bold tracking-tighter sm:text-3xl md:text-2xl lg:text-4xl">{todayApod.title}</h1>
+            <h1 className="mb-7 max-w-[900px] text-base font-light text-muted-foreground sm:text-base">{formattedDate}</h1>
             <span className="text-xl font-semibold">
               Description:
-              <p className="text-base font-light text-muted-foreground sm:text-base lg:max-w-[900px] text-justify"> {todayApod.explanation}</p>
+              <p className="text-justify text-base font-light text-muted-foreground sm:text-base lg:max-w-[900px]"> {todayApod.explanation}</p>
             </span>
           </div>
         </div>
       ) : (
         <>
-          <div className="w-full h-screen flex flex-wrap justify-center">
+          <div className="flex h-screen w-full flex-wrap justify-center">
             <Spinner size="large">
               <p>Loading...</p>
             </Spinner>

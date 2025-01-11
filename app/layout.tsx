@@ -10,9 +10,16 @@ import type { Metadata } from "next"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "AstroVista",
+  title: {
+    default: "AstroVista",
+    template: "%s | AstroVista",
+  },
   description: "AstroVista is open-source web application that provides images from NASA's Astronomy Picture of the Day API.",
   keywords: "NASA, APOD, Astronomy, Picture, Day, AstroVista, Astro, Vista",
+  twitter: {
+    card: "summary_large_image",
+    site: "@astrovista",
+  },
 }
 
 export default function RootLayout({
