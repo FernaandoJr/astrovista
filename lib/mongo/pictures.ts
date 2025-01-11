@@ -108,7 +108,7 @@ export async function getAllPictures(): Promise<Picture[]> {
   const collection = db.collection("pictures")
 
   console.log("Getting all pictures")
-  const pictures = (await collection.find({}).toArray()).slice(0, 100) as Picture[]
+  const pictures = (await collection.find({}).limit(100).toArray()) as Picture[]
 
   return pictures
 }
