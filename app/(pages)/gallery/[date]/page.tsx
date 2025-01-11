@@ -13,8 +13,11 @@ export async function generateMetadata({ params }: { params: Promise<{ date: str
   const { date } = await params
 
   const apod = await getApod(date)
+
   return {
-    title: apod.title,
+    title: {
+      absolute: apod.title,
+    },
     description: apod.explanation,
     openGraph: {
       images: [

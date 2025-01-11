@@ -55,7 +55,7 @@ export default function PictureComponent({ params }: { params: Promise<{ date: s
     const nextDate = new Date(apod.date)
     nextDate.setDate(nextDate.getDate() + 1)
     const nextDateString = nextDate.toISOString().split("T")[0]
-    if (nextDateString === new Date().toISOString().split("T")[0]) return
+
     // Handle api picture gap from 1995-06-16 to 1995-06-19
     if (nextDateString === "1995-06-17") return router.push(`/gallery/1995-06-20`)
     router.push(`/gallery/${nextDateString}`)
@@ -66,6 +66,7 @@ export default function PictureComponent({ params }: { params: Promise<{ date: s
     const previousDate = new Date(apod.date)
     previousDate.setDate(previousDate.getDate() - 1)
     const previousDateString = previousDate.toISOString().split("T")[0]
+
     // Handle api picture gap from 1995-06-20 to 1995-06-17
     if (previousDateString === "1995-06-19") return router.push(`/gallery/1995-06-16`)
     router.push(`/gallery/${previousDateString}`)
