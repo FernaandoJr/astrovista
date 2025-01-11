@@ -1,12 +1,13 @@
 import PictureComponent from "./picture-component"
 import type { Metadata } from "next"
+import { Picture } from "@/lib/mongo/pictures"
 
-// export async function generateStaticParams() {
-//   const response = await fetch("https://astrovista.vercel.app/api/apod/allPictures")
-//   const { posts }: { posts: { date: string }[] } = await response.json()
+export async function generateStaticParams() {
+  const response = await fetch("https://astrovista.vercel.app/api/apod/allPictures")
+  const data = (await response.json()) as Picture[]
 
-//   return posts.map(({ date }: { date: string }) => date)
-// }
+  return data.map((picture) => picture.date).map((date) => ({ params: { date } }))
+}
 
 export async function generateMetadata({ params }: { params: Promise<{ date: string }> }): Promise<Metadata> {
   const { date } = await params

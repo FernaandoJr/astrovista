@@ -46,27 +46,31 @@ function GalleryContent() {
 
   return (
     <>
-      <div className="mx-auto w-full px-12 py-16">
+      <div className="mx-auto w-full px-12 py-16 sx:px-3 sm:px-4">
         <div className="flex flex-col place-items-center space-y-2">
           <h1 className="text-title">Gallery</h1>
-          <p className="text-subtitle max-w-[50%] text-center">{subtitle}</p>
+          <p className="text-subtitle max-w-[80%] text-center md:max-w-[50%]">{subtitle}</p>
         </div>
         <div className="my-5">
           <PaginationGallery gallery={gallery} page={page} totalPages={totalPages} pageNumbers={pageNumbers} prevPage={prevPage} nextPage={nextPage} />
         </div>
-        <div className="flex flex-wrap justify-center gap-x-3 gap-y-3">
-          {gallery ? (
-            gallery?.items.map((item, index) => <GalleryCard key={index} date={item.date} explanation={item.explanation} url={item.url} title={item.title} media_type={item.media_type}></GalleryCard>)
-          ) : (
-            <>
-              <div className="flex h-screen w-full flex-wrap justify-center">
-                <Spinner size="large">
-                  <p>Loading...</p>
-                </Spinner>
-              </div>
-            </>
-          )}
-          <PaginationGallery gallery={gallery} page={page} totalPages={totalPages} pageNumbers={pageNumbers} prevPage={prevPage} nextPage={nextPage} />
+        <div className="flex flex-col">
+          <div className="flex flex-wrap justify-center gap-x-3 gap-y-3">
+            {gallery ? (
+              gallery?.items.map((item, index) => <GalleryCard key={index} date={item.date} explanation={item.explanation} url={item.url} title={item.title} media_type={item.media_type}></GalleryCard>)
+            ) : (
+              <>
+                <div className="flex h-screen w-full flex-wrap justify-center">
+                  <Spinner size="large">
+                    <p>Loading...</p>
+                  </Spinner>
+                </div>
+              </>
+            )}
+          </div>
+          <div className="">
+            <PaginationGallery gallery={gallery} page={page} totalPages={totalPages} pageNumbers={pageNumbers} prevPage={prevPage} nextPage={nextPage} />
+          </div>
         </div>
       </div>
     </>

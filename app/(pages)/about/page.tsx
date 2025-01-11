@@ -52,11 +52,11 @@ export default function AboutUs() {
   return (
     <>
       <GridBackground text="About Us" subtitle="An open-source project bringing the wonders of space to your screen, powered by NASA's Astronomy Picture of the Day API." />
-      <div className="container mx-auto space-y-10 px-4 py-10">
+      <div className="mx-auto space-y-10 px-4 py-10 sx:mx-3 sx:px-2 sx:py-2">
         <motion.section initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="space-y-4 text-center"></motion.section>
 
         {/* Tabs */}
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full py-0">
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="overview">Overview</TabsTrigger>
             <TabsTrigger value="tech">Technologies</TabsTrigger>
@@ -174,9 +174,7 @@ export default function AboutUs() {
               <p>We&apos;re constantly working to improve AstroVista and expand its features. Some of our future plans include:</p>
               <ul className="list-disc space-y-2 pl-6">
                 {FuturePlans.map((plan, index) => (
-                  <li className="duration-50 transition-all ease-linear hover:text-muted-foreground" key={index}>
-                    {plan.desc}
-                  </li>
+                  <li key={index}>{plan.desc}</li>
                 ))}
               </ul>
             </CardContent>

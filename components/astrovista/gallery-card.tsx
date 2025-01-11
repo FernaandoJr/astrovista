@@ -26,8 +26,8 @@ export default function GalleryCard({ date, explanation, url, title, media_type 
     : ""
 
   return (
-    <Card className="w-full max-w-[18rem] min-w-[15rem] overflow-hidden flex flex-col">
-      <CardContent className="p-0 flex-grow">
+    <Card className="flex w-full min-w-[15rem] max-w-[18rem] flex-col overflow-hidden">
+      <CardContent className="flex-grow p-0">
         <div className="relative aspect-video">
           {media_type === "image" ? (
             <Image src={url} alt={title} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" style={{ objectFit: "cover" }} priority={true} />
@@ -37,16 +37,16 @@ export default function GalleryCard({ date, explanation, url, title, media_type 
             </div>
           )}
         </div>
-        <div className="p-4 flex flex-col ">
+        <div className="flex flex-col p-4">
           {/* 56.25% is the aspect ratio of 16:9 */}
           <div className="text-pretty">
-            <h2 className="text-2xl font-semibold mb-2">{truncatedTitle}</h2>
-            <p className="text-sm text-muted-foreground flex-grow">{formattedDate}</p>
-            <p className="text-sm text-muted-foreground flex-grow">{truncatedExplanation}</p>
+            <h2 className="mb-2 text-2xl font-semibold">{truncatedTitle}</h2>
+            <p className="flex-grow text-sm text-muted-foreground">{formattedDate}</p>
+            <p className="flex-grow text-sm text-muted-foreground">{truncatedExplanation}</p>
           </div>
         </div>
       </CardContent>
-      <CardFooter className="w-full flex justify-between p-4">
+      <CardFooter className="flex w-full justify-between p-4">
         <Button className="" variant="secondary">
           <Link href={`/gallery/${date}`} passHref>
             View Details
