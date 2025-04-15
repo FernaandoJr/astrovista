@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     template: "%s | AstroVista",
   },
   description: "AstroVista is open-source web application that provides images from NASA's Astronomy Picture of the Day API.",
-  keywords: "NASA, APOD, Astronomy, Picture, Day, AstroVista, Astro, Vista",
+  keywords: "NASA, APOD, Astronomy, Picture, Day, AstroVista, Astro, Vista, Astro Vista, Space, Universe, Cosmos",
   twitter: {
     card: "summary_large_image",
     site: "@astrovista",
