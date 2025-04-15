@@ -1,8 +1,8 @@
-import { Pyramid } from "lucide-react"
 import Link from "next/link"
 import { SiGithub } from "@icons-pack/react-simple-icons"
 
 import { Separator } from "@/components/ui/separator"
+import PlanetLogo from "./planet-logo"
 
 const description = "AstroVista is open-source web application that integrates images from NASA's Astronomy Picture of the Day API."
 
@@ -13,7 +13,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           <div>
             <div className="flex items-center">
-              <Pyramid />
+              <PlanetLogo size={28} />
               <span className="ml-2 text-xl font-bold">AstroVista</span>
             </div>
             <p className="mt-4 max-w-xs text-sm text-muted-foreground">{description}</p>

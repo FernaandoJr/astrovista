@@ -112,3 +112,13 @@ export async function getAllPictures(): Promise<Picture[]> {
 
   return pictures
 }
+
+export async function picturesCount(): Promise<number> {
+  const client = await clientPromise
+  const db = client.db("Apod")
+  const collection = db.collection("pictures")
+
+  const count = await collection.countDocuments()
+
+  return count
+}

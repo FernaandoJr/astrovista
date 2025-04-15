@@ -1,14 +1,15 @@
 import Link from "next/link"
-import { Pyramid } from "lucide-react"
 import ButtonLink from "@/components/ui/buttonlink"
 import { ModeToggle } from "@/components/theme-menu"
+import PlanetLogo from "./planet-logo"
 
 const Navbar = (): JSX.Element => {
   return (
     <div className="w-full">
       <header className="flex h-auto w-full flex-row p-4">
-        <Link href={"/"} className="my-auto">
-          <Pyramid className="h-7 w-7" />
+        <Link href={"/"} className="my-auto flex items-center justify-center gap-2">
+          <PlanetLogo size={28} />
+          <p className="text-xl font-bold">AstroVista</p>
           <span className="sr-only">Home Icon</span>
         </Link>
         <nav className="ml-auto flex items-center">
