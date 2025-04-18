@@ -1,4 +1,5 @@
-# ![AstroVista](https://github.com/user-attachments/assets/9dbe2ae2-3c63-4e42-a342-24e30ad31825)
+![AstroVista](https://github.com/user-attachments/assets/74564f36-a574-4f84-91d0-a7c98a29a14f)
+
 
 ![GitHub License](https://img.shields.io/github/license/fernaandojr/astrovista?style=flat&link=https%3A%2F%2Fgithub.com%2FFernaandoJr%2FAstroVista%2Fblob%2Fmain%2FLICENSE&label=License)
 ![GitHub contributors](https://img.shields.io/github/contributors/fernaandojr/astrovista?label=Contributors)
