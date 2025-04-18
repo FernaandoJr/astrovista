@@ -64,20 +64,36 @@ export async function postApod(picture: Picture) {
   return result
 }
 
-export async function getGallery(perPage: number, page: number): Promise<{ items: Picture[]; itemCount: number }> {
+interface GalleryParams {
+  perPage: number
+  page: number
+  title: string | null
+  mediaType: string | null
+  sort: 1 | -1
+}
+
+export async function getGallery({ perPage, page, title, mediaType, sort }: GalleryParams): Promise<{ items: Picture[]; itemCount: number }> {
   try {
     const client = await clientPromise
     const db = client.db("Apod")
     const collection = db.collection("pictures")
 
+    const filters: Record<string, unknown> = {}
+
+    if (title) {
+      filters.title = { $regex: title, $options: "i" }
+    }
+    if (mediaType && mediaType !== "any") {
+      filters.media_type = mediaType
+    }
     const items = (await collection
-      .find({})
+      .find(filters)
       .skip(perPage * (page - 1))
       .limit(perPage)
-      .sort({ date: -1 })
+      .sort({ date: sort })
       .toArray()) as Picture[]
 
-    const itemCount = await collection.countDocuments()
+    const itemCount = await collection.countDocuments(filters)
 
     console.log("itemCount:", itemCount)
 

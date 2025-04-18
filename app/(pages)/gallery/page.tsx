@@ -3,7 +3,7 @@ import GalleryContent from "./gallery-component"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Apod Gallery",
+  title: "Gallery",
   description: "Access all the archive of images from NASA's Astronomy Picture of the Day API in one place!",
 }
 

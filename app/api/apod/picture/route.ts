@@ -4,7 +4,6 @@ import { getPicture } from "@/lib/mongo/pictures"
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url)
 
-
   const date = searchParams.get("date")
 
   if (!date) {

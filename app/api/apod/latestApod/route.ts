@@ -1,8 +1,7 @@
-import { NextResponse} from "next/server"
+import { NextResponse } from "next/server"
 import { findLatestApod } from "@/lib/mongo/pictures"
 
 export async function GET() {
-
   const picture = await findLatestApod()
 
   const response = NextResponse.json(picture)

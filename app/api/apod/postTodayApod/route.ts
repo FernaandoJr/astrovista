@@ -5,8 +5,6 @@ dotenv.config({ path: ".env.local" })
 import { postApod } from "@/lib/mongo/pictures"
 import { Picture } from "@/lib/mongo/pictures"
 
-
-
 export async function GET(req: NextRequest) {
   try {
     console.log("Calling API...")
