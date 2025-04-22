@@ -9,12 +9,11 @@ import { Spinner } from "@/components/ui/spinner"
 import { PaginationGallery } from "@/components/astrovista/pagination-gallery"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { ArrowDownNarrowWide, ArrowUpWideNarrow, Search } from "lucide-react"
 import PlanetLogo from "@/components/astrovista/planet-logo"
 
-type PerPage = 10 | 20 | 30 | 40 | 50 | 60
+type PerPage = 10 | 20 | 30 | 40 | 50 | 100
 type MediaType = "image" | "video" | "any"
 type Sort = "asc" | "desc"
 const subtitle = "Access all the archive of images from NASA's Astronomy Picture of the Day API in one place!"
@@ -111,7 +110,7 @@ export default function GalleryContent() {
           <h1 className="text-title">Gallery</h1>
           <p className="text-subtitle max-w-[80%] text-center md:max-w-[50%]">{subtitle}</p>
         </div>
-        <form className="flex flex-wrap justify-center gap-2" onSubmit={handleSubmitSearch}>
+        <form className="flex justify-center gap-2 pt-4" onSubmit={handleSubmitSearch}>
           <Input
             className="w-fit"
             type="text"
@@ -123,7 +122,7 @@ export default function GalleryContent() {
           />
           {/* SELECT MEDIATYPE */}
           <Select
-            defaultValue="any"
+            defaultValue={mediaType}
             onValueChange={(value) => {
               setMediaType(value as MediaType)
               const searchParams = new URLSearchParams(window.location.search)
@@ -179,7 +178,7 @@ export default function GalleryContent() {
           >
             {sort === "asc" ? <ArrowDownNarrowWide /> : <ArrowUpWideNarrow />}
           </Button>
-          <div className="flex w-full justify-center gap-2">
+          <div className="flex justify-center gap-2">
             <Button type="submit">
               <Search />
               Search
@@ -194,7 +193,7 @@ export default function GalleryContent() {
         )}
         {gallery?.itemCount !== 0 && (
           <div className="flex flex-col">
-            <div className="my-5 w-full">
+            <div className="mb-2 mt-5 w-full">
               <PaginationGallery gallery={gallery} perPage={perPage} page={page} totalPages={totalPages} pageNumbers={pageNumbers} prevPage={prevPage} nextPage={nextPage} />
             </div>
             <div className="flex flex-wrap justify-center gap-x-3 gap-y-3">
@@ -210,7 +209,7 @@ export default function GalleryContent() {
                 </>
               )}
             </div>
-            <div className="w-full">
+            <div className="mb-5 mt-2 w-full">
               <PaginationGallery gallery={gallery} perPage={perPage} page={page} totalPages={totalPages} pageNumbers={pageNumbers} prevPage={prevPage} nextPage={nextPage} />
             </div>
           </div>

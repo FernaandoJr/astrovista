@@ -6,7 +6,7 @@ import { Separator } from "@/components/ui/separator"
 import { Spinner } from "../ui/spinner"
 
 const numbers = await picturesCount().then((count) => count - 1)
-const years = new Date().getFullYear() - 1995
+const years = new Date().getFullYear() - 1995 - 1
 
 export default async function StatsSection() {
   return (
