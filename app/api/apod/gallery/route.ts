@@ -7,7 +7,7 @@ export async function GET(req: NextRequest) {
   const page = parseInt(searchParams.get("page") ?? "", 10)
   const perPage = parseInt(searchParams.get("perPage") ?? "", 10)
   const title = searchParams.get("search") || ""
-  const sort = parseInt(searchParams.get("sort") ?? "-1", 10) as 1 | -1
+  const sort = (searchParams.get("sort") as "desc" | "asc") ?? ("desc" as "desc" | "asc")
   const mediaType = searchParams.get("mediaType") || "any"
 
   console.log("Params:", { page, perPage, title, mediaType, sort })

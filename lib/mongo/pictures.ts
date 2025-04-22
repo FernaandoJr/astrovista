@@ -69,7 +69,7 @@ interface GalleryParams {
   page: number
   title: string | null
   mediaType: string | null
-  sort: 1 | -1
+  sort: "desc" | "asc"
 }
 
 export async function getGallery({ perPage, page, title, mediaType, sort }: GalleryParams): Promise<{ items: Picture[]; itemCount: number }> {
@@ -79,6 +79,8 @@ export async function getGallery({ perPage, page, title, mediaType, sort }: Gall
     const collection = db.collection("pictures")
 
     const filters: Record<string, unknown> = {}
+
+    const newSort = sort === "desc" ? -1 : 1
 
     if (title) {
       filters.title = { $regex: title, $options: "i" }
@@ -90,7 +92,7 @@ export async function getGallery({ perPage, page, title, mediaType, sort }: Gall
       .find(filters)
       .skip(perPage * (page - 1))
       .limit(perPage)
-      .sort({ date: sort })
+      .sort({ date: newSort })
       .toArray()) as Picture[]
 
     const itemCount = await collection.countDocuments(filters)

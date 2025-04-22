@@ -16,6 +16,7 @@ import PlanetLogo from "@/components/astrovista/planet-logo"
 
 type PerPage = 10 | 20 | 30 | 40 | 50 | 60
 type MediaType = "image" | "video" | "any"
+type Sort = "asc" | "desc"
 const subtitle = "Access all the archive of images from NASA's Astronomy Picture of the Day API in one place!"
 
 export default function GalleryContent() {
@@ -25,11 +26,11 @@ export default function GalleryContent() {
   const [pageNumbers, setPageNumbers] = useState<number[]>([])
 
   // SEARCH
-  const [sort, setSort] = useState<1 | -1>(searchParams.get("sort") ? (parseInt(searchParams.get("sort") ?? "-1", 10) as 1 | -1) : -1)
+  const [sort, setSort] = useState<Sort>((searchParams.get("sort") as Sort) ?? ("desc" as Sort))
   const [search, setSearch] = useState<string>(searchParams.get("search") ?? "")
   const [mediaType, setMediaType] = useState<MediaType>(searchParams.get("mediaType") ? (searchParams.get("mediaType") as MediaType) : "any")
 
-  const [perPage, setPerPage] = useState<PerPage>(searchParams.get("perPage") ? (parseInt(searchParams.get("perPage") ?? "20", 10) as PerPage) : 10)
+  const [perPage, setPerPage] = useState<PerPage>(searchParams.get("perPage") ? (parseInt(searchParams.get("perPage") ?? "20", 10) as PerPage) : 20)
 
   let page = parseInt(searchParams.get("page") ?? "", 10)
   page = !page || page < 1 ? 1 : page
@@ -41,7 +42,7 @@ export default function GalleryContent() {
     searchParams.set("page", String(1))
     searchParams.set("perPage", String(perPage))
     searchParams.set("search", search ?? "")
-    searchParams.set("sort", String(sort))
+    searchParams.set("sort", sort)
     searchParams.set("mediaType", mediaType)
     window.history.pushState({}, "", `?${searchParams.toString()}`)
 
@@ -98,7 +99,7 @@ export default function GalleryContent() {
       }
       setPageNumbers(newPageNumbers)
     })
-  }, [page, perPage])
+  }, [page, perPage, mediaType, search, sort])
 
   const prevPage = page - 1 > 0 ? page - 1 : 1
   const nextPage = page + 1
@@ -120,8 +121,17 @@ export default function GalleryContent() {
               setSearch(event.target.value)
             }}
           />
-
-          <Select defaultValue="any" onValueChange={(value) => setMediaType(value as MediaType)}>
+          {/* SELECT MEDIATYPE */}
+          <Select
+            defaultValue="any"
+            onValueChange={(value) => {
+              setMediaType(value as MediaType)
+              const searchParams = new URLSearchParams(window.location.search)
+              searchParams.set("mediaType", value)
+              console.log("mediaType", value)
+              window.history.pushState({}, "", `?${searchParams.toString()}`)
+            }}
+          >
             <SelectTrigger className="w-min gap-2">
               <SelectValue placeholder="Media Type" />
             </SelectTrigger>
@@ -135,6 +145,7 @@ export default function GalleryContent() {
             </SelectContent>
           </Select>
 
+          {/* SELECT SORT */}
           <Select
             defaultValue={String(perPage)}
             onValueChange={(value) => {
@@ -162,11 +173,11 @@ export default function GalleryContent() {
           <Button
             variant={"outline"}
             onClick={() => {
-              setSort(sort === 1 ? -1 : 1)
+              setSort(sort === "asc" ? "desc" : "asc")
               console.log("sort", sort)
             }}
           >
-            {sort === 1 ? <ArrowDownNarrowWide /> : <ArrowUpWideNarrow />}
+            {sort === "asc" ? <ArrowDownNarrowWide /> : <ArrowUpWideNarrow />}
           </Button>
           <div className="flex w-full justify-center gap-2">
             <Button type="submit">
