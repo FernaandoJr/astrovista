@@ -10,7 +10,7 @@ import { PaginationGallery } from "@/components/astrovista/pagination-gallery"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { ArrowDownNarrowWide, ArrowUpWideNarrow, Search } from "lucide-react"
+import { ArrowDownNarrowWide, ArrowUpWideNarrow, Search, XIcon } from "lucide-react"
 import PlanetLogo from "@/components/astrovista/planet-logo"
 
 type PerPage = 10 | 20 | 30 | 40 | 50 | 100
@@ -98,7 +98,7 @@ export default function GalleryContent() {
       }
       setPageNumbers(newPageNumbers)
     })
-  }, [page, perPage, mediaType, search, sort])
+  }, [page, perPage, mediaType, sort])
 
   const prevPage = page - 1 > 0 ? page - 1 : 1
   const nextPage = page + 1
@@ -110,16 +110,37 @@ export default function GalleryContent() {
           <h1 className="text-title">Gallery</h1>
           <p className="text-subtitle max-w-[80%] text-center md:max-w-[50%]">{subtitle}</p>
         </div>
-        <form className="flex select-none flex-wrap justify-center gap-2 px-4 pt-10 sm:pt-8" onSubmit={handleSubmitSearch}>
-          <Input
-            className="w-full md:w-fit"
-            type="text"
-            defaultValue={search}
-            placeholder="Search"
-            onChange={(event) => {
-              setSearch(event.target.value)
-            }}
-          />
+        <form className="flex select-none flex-wrap items-center justify-center gap-2 px-4 pt-10 sm:pt-8" onSubmit={handleSubmitSearch}>
+          <div className="relative">
+            <Input
+              className="w-full md:w-fit"
+              type="text"
+              value={search ?? ""}
+              placeholder="Search"
+              onChange={(event) => {
+                setSearch(event.target.value)
+              }}
+            />
+            {search.length > 0 && (
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon"
+                className="absolute right-1 top-1/2 h-7 w-7 -translate-y-1/2 text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
+                onClick={() => {
+                  setSearch("")
+                  const searchParams = new URLSearchParams(window.location.search)
+                  searchParams.delete("search")
+                  window.history.pushState({}, "", `?${searchParams.toString()}`)
+                  console.log("search", search)
+                  setSearch("")
+                }}
+              >
+                <XIcon className="h-4 w-4" />
+                <span className="sr-only">Clear</span>
+              </Button>
+            )}
+          </div>
           {/* SELECT MEDIATYPE */}
           <Select
             defaultValue={mediaType}
@@ -131,7 +152,7 @@ export default function GalleryContent() {
               window.history.pushState({}, "", `?${searchParams.toString()}`)
             }}
           >
-            <SelectTrigger className="w-min gap-2">
+            <SelectTrigger className="h-max w-min gap-2">
               <SelectValue placeholder="Media Type" />
             </SelectTrigger>
             <SelectContent>
@@ -154,7 +175,7 @@ export default function GalleryContent() {
               window.history.pushState({}, "", `?${searchParams.toString()}`)
             }}
           >
-            <SelectTrigger className="w-min gap-2">
+            <SelectTrigger className="h-max w-min gap-2">
               <SelectValue placeholder="Per page" />
             </SelectTrigger>
             <SelectContent>
@@ -171,16 +192,17 @@ export default function GalleryContent() {
           </Select>
           <Button
             variant={"outline"}
+            className="flex flex-grow select-none shadow-sm sm:w-fit sm:flex-none"
             onClick={() => {
               setSort(sort === "asc" ? "desc" : "asc")
               console.log("sort", sort)
             }}
           >
-            {sort === "asc" ? <ArrowDownNarrowWide /> : <ArrowUpWideNarrow />}
+            {sort === "asc" ? <ArrowDownNarrowWide className="h-4" /> : <ArrowUpWideNarrow className="h-4" />}
             {/* BUTTON SEARCH */}
           </Button>
-          <Button type="submit" className="flex flex-grow select-none sm:w-fit sm:flex-none">
-            <Search />
+          <Button type="submit" className="flex flex-grow select-none gap-2 shadow-sm sm:w-fit sm:flex-none">
+            <Search className="h-5" />
             Search
           </Button>
         </form>
