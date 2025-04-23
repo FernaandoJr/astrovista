@@ -14,7 +14,7 @@ interface PaginationGalleryProps {
 
 export function PaginationGallery({ gallery, page, totalPages, pageNumbers, prevPage, nextPage, perPage }: PaginationGalleryProps) {
   return (
-    <div className="my-5">
+    <div className="my-5 select-none">
       {gallery ? (
         <Pagination>
           <PaginationContent>

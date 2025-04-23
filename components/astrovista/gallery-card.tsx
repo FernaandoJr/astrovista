@@ -30,7 +30,7 @@ export default function GalleryCard({ date, explanation, url, title, media_type 
       <CardContent className="flex-grow p-0">
         <div className="relative aspect-video">
           {media_type === "image" ? (
-            <Image src={url} alt={title} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" style={{ objectFit: "cover" }} priority={true} />
+            <Image src={url} alt={title} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" style={{ objectFit: "cover" }} priority={true} className="select-none" />
           ) : (
             <div className="">
               <ReactPlayer url={url} controls={false} loop={false} playing={false} height={"170px"} width={"100%"} />
@@ -48,7 +48,7 @@ export default function GalleryCard({ date, explanation, url, title, media_type 
       </CardContent>
       <CardFooter className="flex w-full justify-between p-4">
         <Button className="" variant="secondary">
-          <Link href={`/gallery/${date}`} passHref>
+          <Link href={`/gallery/${date}`} passHref className="select-none">
             View Details
           </Link>
         </Button>

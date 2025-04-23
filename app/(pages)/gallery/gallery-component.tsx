@@ -110,9 +110,9 @@ export default function GalleryContent() {
           <h1 className="text-title">Gallery</h1>
           <p className="text-subtitle max-w-[80%] text-center md:max-w-[50%]">{subtitle}</p>
         </div>
-        <form className="flex justify-center gap-2 pt-4" onSubmit={handleSubmitSearch}>
+        <form className="flex select-none flex-wrap justify-center gap-2 px-4 pt-10 sm:pt-8" onSubmit={handleSubmitSearch}>
           <Input
-            className="w-fit"
+            className="w-full md:w-fit"
             type="text"
             defaultValue={search}
             placeholder="Search"
@@ -177,13 +177,12 @@ export default function GalleryContent() {
             }}
           >
             {sort === "asc" ? <ArrowDownNarrowWide /> : <ArrowUpWideNarrow />}
+            {/* BUTTON SEARCH */}
           </Button>
-          <div className="flex justify-center gap-2">
-            <Button type="submit">
-              <Search />
-              Search
-            </Button>
-          </div>
+          <Button type="submit" className="flex flex-grow select-none sm:w-fit sm:flex-none">
+            <Search />
+            Search
+          </Button>
         </form>
         {gallery?.itemCount === 0 && (
           <div className="flex h-[50vh] w-full flex-col flex-wrap items-center justify-center gap-2">

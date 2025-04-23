@@ -5,7 +5,7 @@ import PlanetLogo from "./planet-logo"
 
 const Navbar = (): JSX.Element => {
   return (
-    <div className="w-full">
+    <div className="w-full select-none">
       <header className="flex h-auto w-full flex-row p-4">
         <Link href={"/"} className="my-auto flex items-center justify-center gap-2">
           <PlanetLogo size={28} />
