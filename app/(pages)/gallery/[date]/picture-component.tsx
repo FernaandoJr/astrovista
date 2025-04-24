@@ -12,6 +12,7 @@ import { ChevronRight, ChevronLeft } from "lucide-react"
 export default function PictureComponent({ params }: { params: Promise<{ date: string }> }) {
   const [apod, setApod] = useState<Picture>()
   const [error, setError] = useState<string | null>(null)
+  const [imageLoaded, setImageLoaded] = useState(false)
   const router = useRouter()
 
   useEffect(() => {
@@ -81,9 +82,16 @@ export default function PictureComponent({ params }: { params: Promise<{ date: s
           <h1 className="mx-auto mb-4 text-4xl font-bold tracking-tighter sm:text-3xl md:text-2xl lg:text-4xl">Astronomy Picture of the Day</h1>
           <div className="flex w-full flex-col items-center rounded-xl">
             {apod.media_type === "image" ? (
-              <Link href={apod.hdurl ?? "#"} passHref target="_blank">
-                <Image className="w-auto rounded-xl" src={apod.url ?? "#"} alt={apod.title} width={900} height={900} priority={true} />
-              </Link>
+              <>
+                {!imageLoaded && (
+                  <div className="flex h-[400px] w-full items-center justify-center">
+                    <Spinner size="large" />
+                  </div>
+                )}
+                <Link href={apod.hdurl ?? "#"} passHref target="_blank">
+                  <Image className={`w-auto rounded-xl ${!imageLoaded ? "hidden" : ""}`} src={apod.url ?? "#"} alt={apod.title} width={900} height={900} priority={true} onLoad={() => setImageLoaded(true)} />
+                </Link>
+              </>
             ) : (
               <ReactPlayer url={apod.url} controls={true} loop={true} />
             )}

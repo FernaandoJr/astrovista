@@ -70,11 +70,12 @@ export default function BirthdaySection() {
           <DatePicker startYear={1995} onChange={handleDateChange} />
           <Link className="max-w-fit" href={redirectToGallery(date)}>
             <Button
+              className="gap-1"
               onClick={() => {
                 console.log(date)
               }}
             >
-              <Rocket size={24} />
+              <Rocket className="h-4 w-4" />
               Explore!
             </Button>
           </Link>

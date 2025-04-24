@@ -14,6 +14,7 @@ async function getTodayApod(): Promise<Picture> {
 
 export default function APOD() {
   const [todayApod, setTodayApod] = useState<Picture>()
+  const [imageLoaded, setImageLoaded] = useState(false)
 
   useEffect(() => {
     getTodayApod().then((apod) => setTodayApod(apod))
@@ -38,9 +39,16 @@ export default function APOD() {
           <h1 className="mx-auto mb-4 text-4xl font-bold tracking-tighter sm:text-3xl md:text-2xl lg:text-4xl">Astronomy Picture of the Day</h1>
           <div className="flex w-full flex-col items-center rounded-xl">
             {todayApod.media_type === "image" ? (
-              <Link href={todayApod.hdurl ?? "#"} passHref target="_blank">
-                <Image className="w-auto rounded-xl" src={todayApod.url ?? "#"} alt={todayApod.title} width={900} height={900} priority={true} />
-              </Link>
+              <>
+                {!imageLoaded && (
+                  <div className="flex h-[400px] w-full items-center justify-center">
+                    <Spinner size="large" />
+                  </div>
+                )}
+                <Link href={todayApod.hdurl ?? "#"} passHref target="_blank">
+                  <Image className={`w-auto rounded-xl ${!imageLoaded ? "hidden" : ""}`} src={todayApod.url ?? "#"} alt={todayApod.title} width={900} height={900} priority={true} onLoad={() => setImageLoaded(true)} />
+                </Link>
+              </>
             ) : (
               <ReactPlayer url={todayApod.url} controls={true} loop={true} />
             )}
@@ -56,13 +64,11 @@ export default function APOD() {
           </div>
         </div>
       ) : (
-        <>
-          <div className="flex h-screen w-full flex-wrap justify-center">
-            <Spinner size="large">
-              <p>Loading...</p>
-            </Spinner>
-          </div>
-        </>
+        <div className="flex h-screen w-full flex-wrap justify-center">
+          <Spinner size="large">
+            <p>Loading...</p>
+          </Spinner>
+        </div>
       )}
     </>
   )
