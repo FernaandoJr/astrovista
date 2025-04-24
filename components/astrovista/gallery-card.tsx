@@ -5,6 +5,8 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import ReactPlayer from "react-player"
 import Link from "next/link"
+import { motion } from "framer-motion"
+import { useEffect, useState } from "react"
 
 // Helper function to truncate text
 const truncateText = (explanation: string, maxLength: number): string => {
@@ -12,8 +14,9 @@ const truncateText = (explanation: string, maxLength: number): string => {
   return explanation.slice(0, maxLength) + "..."
 }
 
-export default function GalleryCard({ date, explanation, url, title, media_type }: { date: string; explanation: string; url: string; title: string; media_type: string }) {
+export default function GalleryCard({ date, explanation, url, title, media_type, toggleFavorite }: { date: string; explanation: string; url: string; title: string; media_type: string; toggleFavorite: (date: string) => Promise<boolean> }) {
   const truncatedExplanation = truncateText(explanation, 150)
+  const [isFavorite, setIsFavorite] = useState(false)
 
   const truncatedTitle = truncateText(title, 50)
 
@@ -24,6 +27,11 @@ export default function GalleryCard({ date, explanation, url, title, media_type 
         day: "2-digit",
       }).format(new Date(date.replace(/-/g, "/")))
     : ""
+
+  useEffect(() => {
+    const existingFavorites = JSON.parse(localStorage.getItem("favorites") ?? "[]") as string[]
+    setIsFavorite(existingFavorites.includes(date))
+  }, [])
 
   return (
     <Card className="flex w-full min-w-[15rem] max-w-[18rem] flex-col overflow-hidden">
@@ -52,8 +60,27 @@ export default function GalleryCard({ date, explanation, url, title, media_type 
             View Details
           </Link>
         </Button>
-        <Button variant="ghost" size="icon" aria-label="Save to favorites">
-          <Heart className="h-5 w-5" />
+        <Button
+          variant="ghost"
+          size="icon"
+          aria-label="Save to favorites"
+          onClick={() => {
+            toggleFavorite(date)
+            setIsFavorite(!isFavorite)
+            console.log("Clicked", isFavorite)
+          }}
+        >
+          <motion.div
+            whileHover={{
+              scale: 1.05,
+              zIndex: 1,
+            }}
+            whileTap={{
+              scale: 0.9,
+            }}
+          >
+            {isFavorite ? <Heart className="h-5 w-5 fill-current text-red-500" /> : <Heart className="h-5 w-5" />}
+          </motion.div>
         </Button>
       </CardFooter>
     </Card>

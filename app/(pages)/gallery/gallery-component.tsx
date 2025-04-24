@@ -103,6 +103,34 @@ export default function GalleryContent() {
   const prevPage = page - 1 > 0 ? page - 1 : 1
   const nextPage = page + 1
 
+  const fetchApod = async (date: string) => {
+    const response = await fetch(`https://astrovista.vercel.app/api/apod/picture?date=${date}`)
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`)
+    }
+    return response.json()
+  }
+
+  const toggleFavorite = async (date: string): Promise<boolean> => {
+    const data = await fetchApod(date)
+
+    const existingFavorites = JSON.parse(localStorage.getItem("favorites") ?? "[]") as string[]
+    console.log("existingFavorites", existingFavorites)
+    if (!existingFavorites.includes(data.date)) {
+      const updatedFavorites = [...existingFavorites, data.date]
+      localStorage.setItem("favorites", JSON.stringify(updatedFavorites))
+      return true
+    }
+
+    if (existingFavorites.includes(data.date)) {
+      const updatedFavorites = existingFavorites.filter((favorite: string) => favorite !== data.date)
+      localStorage.setItem("favorites", JSON.stringify(updatedFavorites))
+      return false
+    }
+
+    return false // Default return to ensure all code paths return a boolean
+  }
+
   return (
     <>
       <div className="mx-auto w-full px-12 py-16 sx:px-3 sm:px-4">
@@ -195,6 +223,9 @@ export default function GalleryContent() {
             className="flex flex-grow select-none shadow-sm sm:w-fit sm:flex-none"
             onClick={() => {
               setSort(sort === "asc" ? "desc" : "asc")
+              const searchParams = new URLSearchParams(window.location.search)
+              searchParams.set("sort", sort === "asc" ? "desc" : "asc")
+              window.history.pushState({}, "", `?${searchParams.toString()}`)
               console.log("sort", sort)
             }}
           >
@@ -219,7 +250,7 @@ export default function GalleryContent() {
             </div>
             <div className="flex flex-wrap justify-center gap-x-3 gap-y-3">
               {gallery ? (
-                gallery?.items.map((item, index) => <GalleryCard key={index} date={item.date} explanation={item.explanation} url={item.url} title={item.title} media_type={item.media_type}></GalleryCard>)
+                gallery?.items.map((item, index) => <GalleryCard key={index} date={item.date} explanation={item.explanation} url={item.url} title={item.title} media_type={item.media_type} toggleFavorite={async () => await toggleFavorite(item.date)} />)
               ) : (
                 <>
                   <div className="flex h-[50vh] w-full flex-wrap justify-center">

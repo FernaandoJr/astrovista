@@ -43,7 +43,7 @@ export default function Navbar() {
 
   return (
     <header className="sticky left-0 top-0 z-40 w-full select-none bg-background">
-      <div className="container relative mx-auto flex min-h-20 flex-row items-center gap-4 lg:grid lg:grid-cols-3">
+      <div className="container relative mx-auto flex flex-row items-center gap-4 py-6 lg:grid lg:grid-cols-3">
         <div className="hidden flex-row items-center justify-start gap-4 lg:flex">
           <NavigationMenu className="flex items-start justify-start">
             <NavigationMenuList className="flex flex-row justify-start gap-4">
