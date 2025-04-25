@@ -27,6 +27,10 @@ export default function Navbar() {
           title: "Gallery",
           href: "/gallery",
         },
+        {
+          title: "Favorites",
+          href: "/favorites",
+        },
       ],
     },
     {
@@ -105,14 +109,8 @@ export default function Navbar() {
                           <span className="text-lg">{item.title}</span>
                         </Link>
                       ) : (
-                        <motion.div
-                          whileHover={{
-                            scale: 1.05,
-                            zIndex: 1,
-                          }}
-                          className="w-fit cursor-default select-none"
-                        >
-                          <p className="text-lg">{item.title}</p>
+                        <motion.div className="w-fit cursor-default select-none">
+                          <p className="border-b-[1px] border-transparent text-lg transition-all duration-100 ease-in-out hover:border-b-[1px] hover:border-muted-foreground">{item.title}</p>
                         </motion.div>
                       )}
                       {item.items &&

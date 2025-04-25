@@ -7,6 +7,7 @@ import ReactPlayer from "react-player"
 import Link from "next/link"
 import { motion } from "framer-motion"
 import { useEffect, useState } from "react"
+import { Spinner } from "../ui/spinner"
 
 // Helper function to truncate text
 const truncateText = (explanation: string, maxLength: number): string => {
@@ -14,9 +15,18 @@ const truncateText = (explanation: string, maxLength: number): string => {
   return explanation.slice(0, maxLength) + "..."
 }
 
-export default function GalleryCard({ date, explanation, url, title, media_type, toggleFavorite }: { date: string; explanation: string; url: string; title: string; media_type: string; toggleFavorite: (date: string) => Promise<boolean> }) {
+export default function GalleryCard({ date, explanation, url, title, media_type, toggleFavorite }: { date: string; explanation: string; url: string; title: string; media_type: string; toggleFavorite?: (date: string) => Promise<boolean> }) {
   const truncatedExplanation = truncateText(explanation, 150)
   const [isFavorite, setIsFavorite] = useState(false)
+  const [imageLoaded, setImageLoaded] = useState(false)
+
+  const handleImageLoad = () => {
+    setImageLoaded(true)
+  }
+
+  useEffect(() => {
+    setImageLoaded(false)
+  }, [url])
 
   const truncatedTitle = truncateText(title, 50)
 
@@ -38,7 +48,14 @@ export default function GalleryCard({ date, explanation, url, title, media_type,
       <CardContent className="flex-grow p-0">
         <div className="relative aspect-video">
           {media_type === "image" ? (
-            <Image src={url} alt={title} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" style={{ objectFit: "cover" }} priority={true} className="select-none" />
+            <>
+              {!imageLoaded && (
+                <div className="flex h-full w-full place-content-center items-center justify-center">
+                  <Spinner />
+                </div>
+              )}
+              <Image src={url} alt={title} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" style={{ objectFit: "cover" }} priority={true} className="select-none" onLoad={handleImageLoad} />
+            </>
           ) : (
             <div className="">
               <ReactPlayer url={url} controls={false} loop={false} playing={false} height={"170px"} width={"100%"} />
@@ -65,7 +82,7 @@ export default function GalleryCard({ date, explanation, url, title, media_type,
           size="icon"
           aria-label="Save to favorites"
           onClick={() => {
-            toggleFavorite(date)
+            toggleFavorite?.(date)
             setIsFavorite(!isFavorite)
             console.log("Clicked", isFavorite)
           }}

@@ -18,6 +18,34 @@ type MediaType = "image" | "video" | "any"
 type Sort = "asc" | "desc"
 const subtitle = "Access all the archive of images from NASA's Astronomy Picture of the Day API in one place!"
 
+const fetchApod = async (date: string) => {
+  const response = await fetch(`https://astrovista.vercel.app/api/apod/picture?date=${date}`)
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`)
+  }
+  return response.json()
+}
+
+export const toggleFavorite = async (date: string): Promise<boolean> => {
+  const data = await fetchApod(date)
+
+  const existingFavorites = JSON.parse(localStorage.getItem("favorites") ?? "[]") as string[]
+  console.log("existingFavorites", existingFavorites)
+  if (!existingFavorites.includes(data.date)) {
+    const updatedFavorites = [...existingFavorites, data.date]
+    localStorage.setItem("favorites", JSON.stringify(updatedFavorites))
+    return true
+  }
+
+  if (existingFavorites.includes(data.date)) {
+    const updatedFavorites = existingFavorites.filter((favorite: string) => favorite !== data.date)
+    localStorage.setItem("favorites", JSON.stringify(updatedFavorites))
+    return false
+  }
+
+  return false // Default return to ensure all code paths return a boolean
+}
+
 export default function GalleryContent() {
   const searchParams = useSearchParams()
   const [gallery, setGallery] = useState<{ items: Picture[]; itemCount: number }>()
@@ -103,34 +131,6 @@ export default function GalleryContent() {
 
   const prevPage = page - 1 > 0 ? page - 1 : 1
   const nextPage = page + 1
-
-  const fetchApod = async (date: string) => {
-    const response = await fetch(`https://astrovista.vercel.app/api/apod/picture?date=${date}`)
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`)
-    }
-    return response.json()
-  }
-
-  const toggleFavorite = async (date: string): Promise<boolean> => {
-    const data = await fetchApod(date)
-
-    const existingFavorites = JSON.parse(localStorage.getItem("favorites") ?? "[]") as string[]
-    console.log("existingFavorites", existingFavorites)
-    if (!existingFavorites.includes(data.date)) {
-      const updatedFavorites = [...existingFavorites, data.date]
-      localStorage.setItem("favorites", JSON.stringify(updatedFavorites))
-      return true
-    }
-
-    if (existingFavorites.includes(data.date)) {
-      const updatedFavorites = existingFavorites.filter((favorite: string) => favorite !== data.date)
-      localStorage.setItem("favorites", JSON.stringify(updatedFavorites))
-      return false
-    }
-
-    return false // Default return to ensure all code paths return a boolean
-  }
 
   return (
     <>
