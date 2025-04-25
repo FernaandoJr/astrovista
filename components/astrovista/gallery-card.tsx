@@ -31,7 +31,7 @@ export default function GalleryCard({ date, explanation, url, title, media_type,
   useEffect(() => {
     const existingFavorites = JSON.parse(localStorage.getItem("favorites") ?? "[]") as string[]
     setIsFavorite(existingFavorites.includes(date))
-  }, [])
+  }, [date])
 
   return (
     <Card className="flex w-full min-w-[15rem] max-w-[18rem] flex-col overflow-hidden">

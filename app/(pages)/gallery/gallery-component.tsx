@@ -65,6 +65,7 @@ export default function GalleryContent() {
         }
       }
       setPageNumbers(newPageNumbers)
+      window.history.pushState({}, "", `?${searchParams.toString()}`)
     })
   }
 
