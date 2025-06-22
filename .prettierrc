@@ -1,6 +1,6 @@
 {
     "semi": false,
     "tabWidth": 2,
-    "printWidth": 600,
+    "printWidth": 90,
     "plugins": ["prettier-plugin-tailwindcss"]
 }
