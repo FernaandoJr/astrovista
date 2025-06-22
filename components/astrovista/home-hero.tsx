@@ -50,7 +50,7 @@ export default function HomeHeroSection() {
                   className="hover:bg-background dark:hover:border-t-border bg-muted group mx-auto flex w-fit items-center gap-4 rounded-full border p-1 pl-4 shadow-md shadow-black/5 transition-all duration-300 dark:border-t-white/5 dark:shadow-zinc-950"
                 >
                   <span className="text-foreground text-sm">
-                    Discover Today's Astronomy Picture
+                    {"Discover Today's Astronomy Picture"}
                   </span>
                   <span className="dark:border-background block h-4 w-0.5 border-l bg-white dark:bg-zinc-700"></span>
 
@@ -70,8 +70,9 @@ export default function HomeHeroSection() {
                   The Beauty of Space, Simplified.
                 </h1>
                 <p className="mx-auto mt-8 max-w-2xl text-lg text-balance">
-                  A modern and fast interface to explore NASA's Astronomy Picture of the
-                  Day. Built for space enthusiasts and the curious.
+                  {
+                    "A modern and fast interface to explore NASA's Astronomy Picture of the Day. Built for space enthusiasts and the curious."
+                  }
                 </p>
               </AnimatedGroup>
 
