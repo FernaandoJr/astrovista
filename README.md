@@ -1,11 +1,3 @@
-# ⚠️ REPOSITORY ARCHIVED ⚠️
-
-> **IMPORTANT NOTICE:** This repository has been archived and moved to the official AstroVista organization on GitHub.
->
-> **New Organization:** [https://github.com/AstroVista](https://github.com/AstroVista)
->
-> Please go to the new repository for the latest version, to submit issues, or to contribute to the project.
-
 ![AstroVista](https://github.com/user-attachments/assets/74564f36-a574-4f84-91d0-a7c98a29a14f)
 
 
