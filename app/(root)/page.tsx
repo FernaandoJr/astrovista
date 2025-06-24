@@ -1,6 +1,6 @@
 import HomeHeroSection from "@/components/astrovista/home-hero"
 import { HeroHeader } from "@/components/ui/navbar"
-import StatisticsSections from "../../components/astrovista/statistics-sections"
+import FeaturesSection from "../../components/astrovista/features-sections"
 
 export default function Home() {
   return (
@@ -8,7 +8,7 @@ export default function Home() {
       <HeroHeader />
       <HomeHeroSection />
 
-      <StatisticsSections />
+      <FeaturesSection />
     </div>
   )
 }
