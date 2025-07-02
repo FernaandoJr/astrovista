@@ -15,7 +15,6 @@ const fetchApod = async (date: string) => {
     console.error("Error fetching APOD:", response?.statusText || "No response")
     return null
   }
-
   return response.json()
 }
 
