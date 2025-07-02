@@ -7,7 +7,7 @@ import { Spinner } from "../ui/spinner"
 
 const fetchApod = async (date: string) => {
   const response = await fetch(`https://astrovista.vercel.app/api/apod/picture?date=${date}`).catch((error) => {
-    console.error("Error fetching APOD:", error)
+    console.error("Error fetching APOD: ", error)
     return null
   })
 
