@@ -23,7 +23,7 @@ export default function FeaturesSection() {
       rowSpan: 2,
     },
     {
-      title: "Advanced Searching and Filtering Tools",
+      title: "Advanced Searching and Filtering Tools ",
       description:
         "Utilize our powerful search and filtering tools to explore the archive by date, tags, image type, and more. Find specific images or discover new favorites with ease.",
       icon: <BarChart2 className="h-6 w-6 text-purple-500" />,
