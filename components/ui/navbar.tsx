@@ -6,6 +6,7 @@ import { useEffect, useState } from "react"
 import { Button } from "./button"
 import { cn } from "@/lib/utils"
 import PlanetLogo from "./planet-logo"
+import { ModeToggle } from "./theme-menu"
 
 export const HeroHeader = () => {
   const [menuState, setMenuState] = useState(false)
@@ -82,7 +83,7 @@ export const HeroHeader = () => {
                   ))}
                 </ul>
               </div>
-              <div className="flex w-full flex-col space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 md:w-fit">
+              <div className="flex w-full flex-col items-center space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 md:w-fit">
                 <Button asChild variant="outline" size="sm">
                   <Link href="#">
                     <span>Login</span>
@@ -93,6 +94,7 @@ export const HeroHeader = () => {
                     <span>Sign Up</span>
                   </Link>
                 </Button>
+                <ModeToggle />
               </div>
             </div>
           </div>
