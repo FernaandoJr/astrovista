@@ -63,7 +63,7 @@ export default function FeaturesSection() {
   }
 
   return (
-    <section className="container mx-auto flex max-w-7xl py-4">
+    <section className="container mx-auto flex max-w-7xl py-4 select-none">
       <AnimatedGroup variants={transitionVariants} className="flex flex-col items-center">
         <h1 className="mx-auto p-4 text-4xl font-bold">Key Features</h1>
         <BentoGrid items={itemsSample} />

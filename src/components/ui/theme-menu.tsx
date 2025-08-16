@@ -3,38 +3,60 @@
 import * as React from 'react'
 import { Moon, Sun } from 'lucide-react'
 import { useTheme } from 'next-themes'
+import { motion } from 'framer-motion'
 
 import { Button } from '@/components/ui/button'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
+import { cn } from '@/lib/utils/cn'
 
-export function ModeToggle() {
-  const { setTheme } = useTheme()
+interface DarkModeProps {
+  readonly rounded?: boolean
+}
+
+export function ModeToggle({ rounded = false }: DarkModeProps) {
+  const { theme, setTheme } = useTheme()
+  const [mounted, setMounted] = React.useState(false)
+
+  React.useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  React.useEffect(() => {
+    const userTheme = localStorage.getItem('theme') || 'dark'
+    setTheme(userTheme)
+  }, [setTheme])
+
+  // Prevent hydration mismatch by not rendering until mounted
+  if (!mounted) {
+    return (
+      <Button variant="outline" size="icon" className="cursor-pointer">
+        <Moon className="h-[1.2rem] w-[1.2rem]" />
+        <span className="sr-only">Toggle theme</span>
+      </Button>
+    )
+  }
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild className="cursor-pointer">
-        <Button variant="outline" size="icon">
-          <Sun className="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
-          <Moon className="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
-          <span className="sr-only">Toggle theme</span>
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme('light')} className="cursor-pointer">
-          Light
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('dark')} className="cursor-pointer">
-          Dark
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('system')} className="cursor-pointer">
-          System
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <Button
+      variant="outline"
+      size="icon"
+      className={cn('cursor-pointer', { 'rounded-full': rounded })}
+      onClick={() => {
+        setTheme(theme === 'dark' ? 'light' : 'dark')
+      }}>
+      <motion.div
+        className="flex items-center justify-center"
+        initial={false}
+        animate={{ rotate: theme === 'dark' ? 0 : 180 }}
+        transition={{
+          duration: 0.5,
+          ease: 'easeOut',
+          type: 'spring',
+          bounce: 0.1,
+        }}>
+        <Sun className="h-[1.2rem] w-[1.2rem] dark:hidden" />
+        <Moon className="hidden h-[1.2rem] w-[1.2rem] dark:block" />
+      </motion.div>
+      <span className="sr-only">Toggle theme</span>
+    </Button>
   )
 }

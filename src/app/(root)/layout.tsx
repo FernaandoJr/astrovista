@@ -13,7 +13,7 @@ const outfitSans = Outfit({
 const merriweather = Merriweather({
   variable: '--font-merriweather',
   subsets: ['latin'],
-  weight: ['400'], // Add the required font weight(s)
+  weight: ['400'],
 })
 
 export const metadata: Metadata = {

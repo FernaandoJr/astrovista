@@ -1,8 +1,7 @@
 'use client'
-import { useScroll } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Button } from '../ui/button'
 import { cn } from '@/lib/utils/cn'
 import PlanetLogo from '../ui/planet-logo'
@@ -10,8 +9,6 @@ import { ModeToggle } from '../ui/theme-menu'
 
 export const HeroHeader = () => {
   const [menuState, setMenuState] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
-  const { scrollYProgress } = useScroll()
 
   const menuItems = [
     { name: 'Apod', href: '/apod' },
@@ -20,20 +17,12 @@ export const HeroHeader = () => {
     { name: 'About', href: '/about' },
   ]
 
-  useEffect(() => {
-    const unsubscribe = scrollYProgress.on('change', (latest) => {
-      setScrolled(latest > 0.05)
-    })
-    return () => unsubscribe()
-  }, [scrollYProgress])
-
   return (
     <header>
       <nav
         data-state={menuState && 'active'}
         className={cn(
-          'group fixed z-20 w-full border-b transition-colors duration-150',
-          scrolled && 'bg-background/50 backdrop-blur-3xl',
+          'group bg-background/50 fixed z-20 w-full border-b backdrop-blur-3xl transition-colors duration-150 select-none',
         )}>
         <div className="mx-auto max-w-5xl px-6 transition-all duration-300">
           <div className="relative flex flex-wrap items-center justify-between gap-6 py-3 md:gap-0 md:py-4">

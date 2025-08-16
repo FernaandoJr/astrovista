@@ -127,15 +127,8 @@ export default function HomeHeroSection() {
               />
               <div className="ring-background bg-background relative mx-auto max-w-6xl overflow-hidden rounded-2xl border p-4 shadow-lg ring-1 inset-shadow-2xs shadow-zinc-950/15 dark:inset-shadow-white/20">
                 <Image
-                  className="bg-background relative hidden aspect-15/8 rounded-2xl dark:block"
+                  className="bg-background relative aspect-15/8 rounded-2xl"
                   src="https://www.nasa.gov/wp-content/uploads/2023/03/main_image_star-forming_region_carina_nircam_final-5mb.jpg"
-                  alt="app screen"
-                  width="2700"
-                  height="1440"
-                />
-                <Image
-                  className="border-border/25 relative z-2 aspect-15/8 rounded-2xl border dark:hidden"
-                  src="https://tailark.com/_next/image?url=%2Fmail2-light.png&w=3840&q=75"
                   alt="app screen"
                   width="2700"
                   height="1440"

@@ -49,7 +49,7 @@ export default function GalleryInputs() {
             variant="default"
             size="icon"
             onClick={() => setQuery(null)}
-            className="bg-background hover:bg-background/95 absolute top-1/2 right-1 h-7 w-7 -translate-y-1/2 text-gray-500 hover:!text-red-500 dark:text-gray-400">
+            className="bg-background hover:bg-background/95 absolute top-1/2 right-1 h-7 w-7 -translate-y-1/2 cursor-pointer text-gray-500 hover:!text-red-500 dark:text-gray-400">
             <XIcon className="h-4 w-4" />
             <span className="sr-only">Clear</span>
           </Button>
