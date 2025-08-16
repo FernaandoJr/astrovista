@@ -16,38 +16,52 @@ import { ArrowDownNarrowWide, ArrowUpWideNarrow, Search, XIcon } from 'lucide-re
 import { nuqsHandler } from '@/lib/utils/queryInputHandler'
 
 export default function GalleryInputs() {
-  const sort = 'asc'
-  const [query, setQuery] = useQueryState('q', {})
-  const [mediaType, setMediaType] = useQueryState('mediaType')
+  const [query, setQuery] = useQueryState('q', {
+    defaultValue: '',
+    clearOnDefault: true,
+  })
+  const [mediaType, setMediaType] = useQueryState('mediaType', {
+    defaultValue: 'any',
+    clearOnDefault: true,
+  })
+  const [perPage, setPerPage] = useQueryState('perPage', {
+    defaultValue: '20',
+    clearOnDefault: true,
+  })
+  const [sort, setSort] = useQueryState('sort', {
+    defaultValue: 'desc',
+    clearOnDefault: true,
+  })
 
   return (
     <div className="flex flex-wrap items-center justify-center gap-2 px-4 pt-10 select-none sm:pt-8">
       <div className="relative">
         <Input
+          placeholder="Search..."
           className="w-full md:w-fit"
           type="text"
           value={query}
-          onChange={(e) => nuqsHandler(e, setQuery)}
+          onChange={(e) => setQuery(e.target.value)}
         />
         {query && query.length > 0 && (
           <Button
             type="button"
-            variant="ghost"
+            variant="default"
             size="icon"
             onClick={() => setQuery(null)}
-            className="absolute top-1/2 right-1 h-7 w-7 -translate-y-1/2 text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100">
+            className="bg-background hover:bg-background/95 absolute top-1/2 right-1 h-7 w-7 -translate-y-1/2 text-gray-500 hover:!text-red-500 dark:text-gray-400">
             <XIcon className="h-4 w-4" />
             <span className="sr-only">Clear</span>
           </Button>
         )}
       </div>
       {/* SELECT MEDIATYPE */}
-      <Select>
-        <SelectTrigger className="h-max w-min gap-2">
+      <Select defaultValue={mediaType} onValueChange={(e) => nuqsHandler(e, setMediaType)}>
+        <SelectTrigger className="h-max w-min cursor-pointer gap-2">
           <SelectValue placeholder="Media Type" />
         </SelectTrigger>
         <SelectContent>
-          <SelectGroup>
+          <SelectGroup className="[&>*:first-child]:cursor-default [&>*:not(:first-child)]:cursor-pointer">
             <SelectLabel>Media Type</SelectLabel>
             <SelectItem value="image">Image</SelectItem>
             <SelectItem value="video">Video</SelectItem>
@@ -56,13 +70,13 @@ export default function GalleryInputs() {
         </SelectContent>
       </Select>
 
-      {/* SELECT SORT */}
-      <Select onValueChange={() => {}}>
-        <SelectTrigger className="h-max w-min gap-2">
+      {/* PER PAGE */}
+      <Select defaultValue={perPage} onValueChange={(e) => nuqsHandler(e, setPerPage)}>
+        <SelectTrigger className="h-max w-min cursor-pointer gap-2">
           <SelectValue placeholder="Per page" />
         </SelectTrigger>
         <SelectContent>
-          <SelectGroup>
+          <SelectGroup className="[&>*:first-child]:cursor-default [&>*:not(:first-child)]:cursor-pointer">
             <SelectLabel>Per page</SelectLabel>
             <SelectItem value="10">10</SelectItem>
             <SelectItem value="20">20</SelectItem>
@@ -74,8 +88,9 @@ export default function GalleryInputs() {
         </SelectContent>
       </Select>
       <Button
+        onClick={() => setSort(sort === 'asc' ? 'desc' : 'asc')}
         variant={'outline'}
-        className="flex flex-grow shadow-sm select-none sm:w-fit sm:flex-none">
+        className="flex flex-grow cursor-pointer shadow-sm select-none sm:w-fit sm:flex-none">
         {sort === 'asc' ? (
           <ArrowDownNarrowWide className="h-4" />
         ) : (
@@ -85,7 +100,7 @@ export default function GalleryInputs() {
       </Button>
       <Button
         type="submit"
-        className="flex flex-grow gap-2 shadow-sm select-none sm:w-fit sm:flex-none">
+        className="flex flex-grow cursor-pointer gap-2 shadow-sm select-none sm:w-fit sm:flex-none">
         <Search className="h-5" />
         Search
       </Button>

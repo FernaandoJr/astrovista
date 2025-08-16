@@ -1,4 +1,4 @@
-import { MediaType } from '../enums/mediaType'
+import { MediaType } from './mediaType'
 
 export interface Apod {
   _id: string
