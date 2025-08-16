@@ -1,23 +1,23 @@
-import { ArrowRight } from "lucide-react"
-import Link from "next/link"
-import { Button } from "../ui/button"
-import { AnimatedGroup } from "../ui/animated-group"
-import Image from "next/image"
+import { ArrowRight } from 'lucide-react'
+import Link from 'next/link'
+import { Button } from '../ui/button'
+import { AnimatedGroup } from '../ui/animated-group'
+import Image from 'next/image'
 
 export default function HomeHeroSection() {
   const transitionVariants = {
     item: {
       hidden: {
         opacity: 0,
-        filter: "blur(12px)",
+        filter: 'blur(12px)',
         y: 12,
       },
       visible: {
         opacity: 1,
-        filter: "blur(0px)",
+        filter: 'blur(0px)',
         y: 0,
         transition: {
-          type: "spring" as const,
+          type: 'spring' as const,
           bounce: 0.3,
           duration: 1.5,
         },
@@ -29,8 +29,7 @@ export default function HomeHeroSection() {
     <div className="relative">
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 isolate z-[2] hidden opacity-50 contain-strict md:block"
-      >
+        className="pointer-events-none absolute inset-0 isolate z-[2] hidden opacity-50 contain-strict md:block">
         <div className="absolute top-0 left-0 h-[80rem] w-[35rem] -translate-y-[350px] -rotate-45 rounded-full bg-[radial-gradient(68.54%_68.72%_at_55.02%_31.46%,hsla(0,0%,85%,.08)_0,hsla(0,0%,55%,.02)_50%,hsla(0,0%,45%,0)_80%)]" />
         <div className="absolute top-0 left-0 h-[80rem] w-56 [translate:5%_-50%] -rotate-45 rounded-full bg-[radial-gradient(50%_50%_at_50%_50%,hsla(0,0%,85%,.06)_0,hsla(0,0%,45%,.02)_80%,transparent_100%)]" />
         <div className="absolute top-0 left-0 h-[80rem] w-56 -translate-y-[350px] -rotate-45 bg-[radial-gradient(50%_50%_at_50%_50%,hsla(0,0%,85%,.04)_0,hsla(0,0%,45%,.02)_80%,transparent_100%)]" />
@@ -47,8 +46,7 @@ export default function HomeHeroSection() {
               <AnimatedGroup variants={transitionVariants}>
                 <Link
                   href="/apod"
-                  className="hover:bg-background dark:hover:border-t-border bg-muted group mx-auto flex w-fit items-center gap-4 rounded-full border p-1 pl-4 shadow-md shadow-black/5 transition-all duration-300 dark:border-t-white/5 dark:shadow-zinc-950"
-                >
+                  className="hover:bg-background dark:hover:border-t-border bg-muted group mx-auto flex w-fit items-center gap-4 rounded-full border p-1 pl-4 shadow-md shadow-black/5 transition-all duration-300 dark:border-t-white/5 dark:shadow-zinc-950">
                   <span className="text-foreground text-sm">
                     {"Discover Today's Astronomy Picture"}
                   </span>
@@ -88,8 +86,7 @@ export default function HomeHeroSection() {
                   },
                   ...transitionVariants,
                 }}
-                className="mt-12 flex flex-col items-center justify-center gap-2 md:flex-row"
-              >
+                className="mt-12 flex flex-col items-center justify-center gap-2 md:flex-row">
                 <div key={1} className="bg-foreground/10 rounded-[14px] border p-0.5">
                   <Button asChild size="lg" className="rounded-xl px-5 text-base">
                     <Link href="/gallery">
@@ -102,8 +99,7 @@ export default function HomeHeroSection() {
                   asChild
                   size="lg"
                   variant="ghost"
-                  className="h-10.5 rounded-xl px-5"
-                >
+                  className="h-10.5 rounded-xl px-5">
                   <Link href="/about">
                     <span className="text-nowrap">About the Project</span>
                   </Link>
@@ -123,8 +119,7 @@ export default function HomeHeroSection() {
                 },
               },
               ...transitionVariants,
-            }}
-          >
+            }}>
             <div className="relative mt-8 -mr-56 overflow-hidden px-2 sm:mt-12 sm:mr-0 md:mt-20">
               <div
                 aria-hidden

@@ -1,12 +1,12 @@
-"use client"
-import { useScroll } from "framer-motion"
-import { Menu, X } from "lucide-react"
-import Link from "next/link"
-import { useEffect, useState } from "react"
-import { Button } from "./button"
-import { cn } from "@/lib/utils"
-import PlanetLogo from "./planet-logo"
-import { ModeToggle } from "./theme-menu"
+'use client'
+import { useScroll } from 'framer-motion'
+import { Menu, X } from 'lucide-react'
+import Link from 'next/link'
+import { useEffect, useState } from 'react'
+import { Button } from '../ui/button'
+import { cn } from '@/lib/utils/cn'
+import PlanetLogo from '../ui/planet-logo'
+import { ModeToggle } from '../ui/theme-menu'
 
 export const HeroHeader = () => {
   const [menuState, setMenuState] = useState(false)
@@ -14,14 +14,14 @@ export const HeroHeader = () => {
   const { scrollYProgress } = useScroll()
 
   const menuItems = [
-    { name: "Apod", href: "/apod" },
-    { name: "Gallery", href: "/gallery" },
-    { name: "Favorites", href: "/favorites" },
-    { name: "About", href: "/about" },
+    { name: 'Apod', href: '/apod' },
+    { name: 'Gallery', href: '/gallery' },
+    { name: 'Favorites', href: '/favorites' },
+    { name: 'About', href: '/about' },
   ]
 
   useEffect(() => {
-    const unsubscribe = scrollYProgress.on("change", (latest) => {
+    const unsubscribe = scrollYProgress.on('change', (latest) => {
       setScrolled(latest > 0.05)
     })
     return () => unsubscribe()
@@ -30,12 +30,11 @@ export const HeroHeader = () => {
   return (
     <header>
       <nav
-        data-state={menuState && "active"}
+        data-state={menuState && 'active'}
         className={cn(
-          "group fixed z-20 w-full border-b transition-colors duration-150",
-          scrolled && "bg-background/50 backdrop-blur-3xl",
-        )}
-      >
+          'group fixed z-20 w-full border-b transition-colors duration-150',
+          scrolled && 'bg-background/50 backdrop-blur-3xl',
+        )}>
         <div className="mx-auto max-w-5xl px-6 transition-all duration-300">
           <div className="relative flex flex-wrap items-center justify-between gap-6 py-3 md:gap-0 md:py-4">
             <div className="flex w-full items-center justify-between gap-12 md:w-auto">
@@ -45,9 +44,8 @@ export const HeroHeader = () => {
 
               <button
                 onClick={() => setMenuState(!menuState)}
-                aria-label={menuState ? "Close Menu" : "Open Menu"}
-                className="relative z-20 -m-2.5 -mr-4 block cursor-pointer p-2.5 md:hidden"
-              >
+                aria-label={menuState ? 'Close Menu' : 'Open Menu'}
+                className="relative z-20 -m-2.5 -mr-4 block cursor-pointer p-2.5 md:hidden">
                 <Menu className="m-auto size-6 duration-200 group-data-[state=active]:scale-0 group-data-[state=active]:rotate-180 group-data-[state=active]:opacity-0" />
                 <X className="absolute inset-0 m-auto size-6 scale-0 -rotate-180 opacity-0 duration-200 group-data-[state=active]:scale-100 group-data-[state=active]:rotate-0 group-data-[state=active]:opacity-100" />
               </button>
@@ -58,8 +56,7 @@ export const HeroHeader = () => {
                     <li key={index}>
                       <Link
                         href={item.href}
-                        className="text-foreground hover:text-accent-foreground block duration-150"
-                      >
+                        className="text-foreground hover:text-accent-foreground block duration-150">
                         <span>{item.name}</span>
                       </Link>
                     </li>
@@ -75,8 +72,7 @@ export const HeroHeader = () => {
                     <li key={index}>
                       <Link
                         href={item.href}
-                        className="text-muted-foreground hover:text-accent-foreground block duration-150"
-                      >
+                        className="text-muted-foreground hover:text-accent-foreground block duration-150">
                         <span>{item.name}</span>
                       </Link>
                     </li>
