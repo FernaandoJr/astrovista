@@ -4,6 +4,7 @@ import './globals.css'
 import { ThemeProvider } from '@/components/ui/theme-provider'
 import { HeroHeader } from '@/components/blocks/navbar'
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
+import { Footer } from '@/components/templates/footer-section'
 
 const outfitSans = Outfit({
   variable: '--font-outfit-sans',
@@ -37,6 +38,7 @@ export default function RootLayout({
             disableTransitionOnChange>
             <HeroHeader />
             {children}
+            <Footer />
           </ThemeProvider>
         </NuqsAdapter>
       </body>

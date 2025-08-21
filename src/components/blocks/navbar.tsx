@@ -1,11 +1,12 @@
 'use client'
-import { Menu, X } from 'lucide-react'
+import { CircleUserRound, Menu, X } from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'
 import { Button } from '../ui/button'
 import { cn } from '@/lib/utils/cn'
 import PlanetLogo from '../ui/planet-logo'
 import { ModeToggle } from '../ui/theme-menu'
+import LoginButton from '../ui/login-button'
 
 export const HeroHeader = () => {
   const [menuState, setMenuState] = useState(false)
@@ -69,17 +70,7 @@ export const HeroHeader = () => {
                 </ul>
               </div>
               <div className="flex w-full flex-col items-center space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 md:w-fit">
-                <Button asChild variant="outline" size="sm">
-                  <Link href="#">
-                    <span>Login</span>
-                  </Link>
-                </Button>
-                <Button asChild size="sm">
-                  <Link href="#">
-                    <span>Sign Up</span>
-                  </Link>
-                </Button>
-                <ModeToggle />
+                <LoginButton />
               </div>
             </div>
           </div>

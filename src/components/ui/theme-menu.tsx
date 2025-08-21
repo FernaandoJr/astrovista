@@ -29,7 +29,7 @@ export function ModeToggle({ rounded = false }: DarkModeProps) {
   if (!mounted) {
     return (
       <Button variant="outline" size="icon" className="cursor-pointer">
-        <Moon className="h-[1.2rem] w-[1.2rem]" />
+        <Moon className="h-[1rem] w-[1rem]" />
         <span className="sr-only">Toggle theme</span>
       </Button>
     )
@@ -39,7 +39,7 @@ export function ModeToggle({ rounded = false }: DarkModeProps) {
     <Button
       variant="outline"
       size="icon"
-      className={cn('cursor-pointer', { 'rounded-full': rounded })}
+      className={cn('w-full cursor-pointer', { 'rounded-full': rounded })}
       onClick={() => {
         setTheme(theme === 'dark' ? 'light' : 'dark')
       }}>
@@ -53,8 +53,8 @@ export function ModeToggle({ rounded = false }: DarkModeProps) {
           type: 'spring',
           bounce: 0.1,
         }}>
-        <Sun className="h-[1.2rem] w-[1.2rem] dark:hidden" />
-        <Moon className="hidden h-[1.2rem] w-[1.2rem] dark:block" />
+        <Sun className="h-[1rem] w-[1rem] dark:hidden" />
+        <Moon className="hidden h-[1rem] w-[1rem] dark:block" />
       </motion.div>
       <span className="sr-only">Toggle theme</span>
     </Button>
