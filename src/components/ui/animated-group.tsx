@@ -1,7 +1,7 @@
 'use client'
 import { ReactNode } from 'react'
 import { motion, Variants } from 'framer-motion'
-import { cn } from '@/lib/utils/cn'
+import { cn } from '@/utils/cn'
 import React from 'react'
 
 type PresetType =

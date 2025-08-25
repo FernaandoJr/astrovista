@@ -13,11 +13,11 @@ import { ModeToggle } from './theme-menu'
 
 export default function LoginButton() {
   return (
-    <DropdownMenu>
+    <DropdownMenu modal={false}>
       <DropdownMenuTrigger>
-        <Button variant="outline" size="icon">
+        <div className="cursor-pointer">
           <CircleUserRound className="h-[1.2rem] w-[1.2rem]" />
-        </Button>
+        </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="">
         <DropdownMenuLabel>Account</DropdownMenuLabel>

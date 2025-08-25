@@ -13,7 +13,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { ArrowDownNarrowWide, ArrowUpWideNarrow, Search, XIcon } from 'lucide-react'
-import { nuqsHandler } from '@/lib/utils/queryInputHandler'
+import { nuqsHandler } from '@/utils/queryInputHandler'
 
 export default function GalleryInputs() {
   const [query, setQuery] = useQueryState('q', {

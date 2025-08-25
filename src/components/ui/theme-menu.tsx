@@ -6,7 +6,7 @@ import { useTheme } from 'next-themes'
 import { motion } from 'framer-motion'
 
 import { Button } from '@/components/ui/button'
-import { cn } from '@/lib/utils/cn'
+import { cn } from '@/utils/cn'
 
 interface DarkModeProps {
   readonly rounded?: boolean

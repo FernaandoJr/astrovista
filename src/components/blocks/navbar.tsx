@@ -3,10 +3,10 @@ import { CircleUserRound, Menu, X } from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'
 import { Button } from '../ui/button'
-import { cn } from '@/lib/utils/cn'
 import PlanetLogo from '../ui/planet-logo'
 import { ModeToggle } from '../ui/theme-menu'
 import LoginButton from '../ui/login-button'
+import { cn } from '@/utils/cn'
 
 export const HeroHeader = () => {
   const [menuState, setMenuState] = useState(false)
