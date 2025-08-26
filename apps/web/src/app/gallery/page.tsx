@@ -1,5 +1,5 @@
 import { Suspense } from 'react'
-import GalleryInputs from '../../../components/blocks/gallery-inputs'
+import GalleryInputs from '@/components/blocks/gallery-inputs'
 
 export default function GalleryPage() {
   return (
