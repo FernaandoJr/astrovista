@@ -2,7 +2,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card'
 import { SiGithub } from '@icons-pack/react-simple-icons'
-import { SiLinkedin } from '@icons-pack/react-simple-icons'
+import { Linkedin } from 'lucide-react'
 
 import Link from 'next/link'
 
@@ -35,7 +35,7 @@ export function Contributor({ nickname, name, role, img, linkedin, github }: Con
                 <SiGithub className="hover:text-muted-foreground h-6 w-6 transition-all duration-50 ease-linear" />
               </Link>
               <Link href={linkedin} target="_blank" rel="noopener noreferrer">
-                <SiLinkedin className="hover:text-muted-foreground h-6 w-6 transition-all duration-50 ease-linear" />
+                <Linkedin className="hover:text-muted-foreground h-6 w-6 transition-all duration-50 ease-linear" />
               </Link>
             </div>
           </div>

@@ -2,7 +2,6 @@
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { useQueryState } from 'nuqs'
 import {
   Select,
   SelectContent,
@@ -12,8 +11,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { ArrowDownNarrowWide, ArrowUpWideNarrow, Search, XIcon } from 'lucide-react'
 import { nuqsHandler } from '@/utils/queryInputHandler'
+import { ArrowDownNarrowWide, ArrowUpWideNarrow, Search, XIcon } from 'lucide-react'
+import { useQueryState } from 'nuqs'
 
 export default function GalleryInputs() {
   const [query, setQuery] = useQueryState('q', {

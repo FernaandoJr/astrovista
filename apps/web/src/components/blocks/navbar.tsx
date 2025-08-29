@@ -1,12 +1,10 @@
 'use client'
-import { CircleUserRound, Menu, X } from 'lucide-react'
+import { cn } from '@/utils/cn'
+import { Menu, X } from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'
-import { Button } from '../ui/button'
-import PlanetLogo from '../ui/planet-logo'
-import { ModeToggle } from '../ui/theme-menu'
 import LoginButton from '../ui/login-button'
-import { cn } from '@/utils/cn'
+import PlanetLogo from '../ui/planet-logo'
 
 export const HeroHeader = () => {
   const [menuState, setMenuState] = useState(false)

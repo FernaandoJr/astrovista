@@ -1,7 +1,7 @@
 'use client'
 
-import * as React from 'react'
 import { cn } from '@/utils/cn'
+import * as React from 'react'
 import { AnimatedGroup } from '../ui/animated-group'
 
 export interface BentoItem {
