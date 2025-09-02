@@ -29,6 +29,10 @@ export const useApodAll = () => {
     data: all,
     isLoading,
     error,
+    refetch,
+    isRefetching,
+    isFetching,
+    isFetched,
   } = useQuery({
     queryKey: ['apod', 'all'],
     queryFn: () => apodService.getAll(),
@@ -38,5 +42,9 @@ export const useApodAll = () => {
     all,
     isLoading,
     error,
+    refetch,
+    isRefetching,
+    isFetching,
+    isFetched,
   }
 }
