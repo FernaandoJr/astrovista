@@ -22,11 +22,11 @@ export const useApod = () => {
   }
 }
 
-export const useApodAll = () => {
+export const useApodSearch = (query?: string) => {
   const apodService = new ApodService(apiUrl as string)
 
   const {
-    data: all,
+    data: search,
     isLoading,
     error,
     refetch,
@@ -34,12 +34,12 @@ export const useApodAll = () => {
     isFetching,
     isFetched,
   } = useQuery({
-    queryKey: ['apod', 'all'],
-    queryFn: () => apodService.getAll(),
+    queryKey: ['apod', 'search'],
+    queryFn: () => apodService.search(query ?? ''),
   })
 
   return {
-    all,
+    search,
     isLoading,
     error,
     refetch,

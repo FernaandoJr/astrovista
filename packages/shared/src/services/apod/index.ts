@@ -1,5 +1,5 @@
-import { ApiClient } from '../apiClient'
 import type { APOD } from '../../types'
+import { ApiClient } from '../apiClient'
 
 export class ApodService {
   private client: ApiClient
@@ -17,7 +17,7 @@ export class ApodService {
   }
 
   async search(query: string): Promise<APOD[]> {
-    return this.client.get<APOD[]>(`/apods/search?q=${query}`)
+    return this.client.get<APOD[]>(`/apods/search?${query}`)
   }
 
   async getRandom(): Promise<APOD> {

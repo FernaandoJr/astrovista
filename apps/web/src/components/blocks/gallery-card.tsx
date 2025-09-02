@@ -6,6 +6,7 @@ import { Heart } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import ReactPlayer from 'react-player'
 import { Spinner } from '../ui/spinner'
 
 // Helper function to truncate text
@@ -81,14 +82,14 @@ export default function GalleryCard({
             </>
           ) : (
             <div className="">
-              {/* <ReactPlayer
-                url={url}
+              <ReactPlayer
+                src={url}
                 controls={false}
                 loop={false}
                 playing={false}
                 height={'170px'}
                 width={'100%'}
-              /> */}
+              />
             </div>
           )}
         </div>

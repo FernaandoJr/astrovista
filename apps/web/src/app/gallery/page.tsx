@@ -1,8 +1,10 @@
 import GalleryInputs from '@/components/blocks/gallery-inputs'
 import ApodGallery from '@/components/templates/apod-gallery'
+import { useApodSearch } from '@/hooks/useApod'
 import { Suspense } from 'react'
 
-export default async function GalleryPage() {
+export default function GalleryPage() {
+  const { search } = useApodSearch()
   return (
     <Suspense>
       <div className="container mx-auto flex flex-col items-center py-24">
@@ -10,7 +12,7 @@ export default async function GalleryPage() {
         <GalleryInputs />
       </div>
       <div className="container mx-auto flex flex-wrap gap-3">
-        <ApodGallery />
+        <ApodGallery data={search ?? []} />
       </div>
     </Suspense>
   )
