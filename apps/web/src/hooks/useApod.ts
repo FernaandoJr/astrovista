@@ -3,7 +3,7 @@ import { apiUrl } from '@/constants/api'
 import { ApodService, GalleryQueryParams } from '@repo/shared'
 import { useQuery } from '@tanstack/react-query'
 
-export const useApod = () => {
+export const useApodLatest = () => {
   const apodService = new ApodService(apiUrl as string)
 
   const {
@@ -57,5 +57,35 @@ export const useApodSearch = ({
     isRefetching,
     isFetching,
     isFetched,
+  }
+}
+
+export const useApodByDate = (date: string) => {
+  const apodService = new ApodService(apiUrl as string)
+
+  const { data, isLoading, error } = useQuery({
+    queryKey: ['apod', 'byDate', date],
+    queryFn: () => apodService.getByDate(date),
+  })
+
+  return {
+    data,
+    isLoading,
+    error,
+  }
+}
+
+export const useApodAll = () => {
+  const apodService = new ApodService(apiUrl as string)
+
+  const { data, isLoading, error } = useQuery({
+    queryKey: ['apod', 'all'],
+    queryFn: () => apodService.getAll(),
+  })
+
+  return {
+    data,
+    isLoading,
+    error,
   }
 }

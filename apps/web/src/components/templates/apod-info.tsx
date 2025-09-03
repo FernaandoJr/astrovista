@@ -5,6 +5,7 @@ import Image from 'next/image'
 interface APodInfoProps {
   data: APOD | undefined
   hasController?: boolean
+  date?: string
 }
 
 export default function ApodInfo({ data, hasController = false }: Readonly<APodInfoProps>) {
