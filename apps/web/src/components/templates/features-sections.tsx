@@ -1,4 +1,4 @@
-import { Database, BarChart2, Library, Star } from 'lucide-react'
+import { BarChart2, Database, Library, Star } from 'lucide-react'
 import { BentoGrid, BentoItem } from '../blocks/bento-grid'
 import { AnimatedGroup } from '../ui/animated-group'
 

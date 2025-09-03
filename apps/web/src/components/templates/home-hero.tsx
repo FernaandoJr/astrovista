@@ -1,8 +1,8 @@
 import { ArrowRight } from 'lucide-react'
-import Link from 'next/link'
-import { Button } from '../ui/button'
-import { AnimatedGroup } from '../ui/animated-group'
 import Image from 'next/image'
+import Link from 'next/link'
+import { AnimatedGroup } from '../ui/animated-group'
+import { Button } from '../ui/button'
 
 export default function HomeHeroSection() {
   const transitionVariants = {

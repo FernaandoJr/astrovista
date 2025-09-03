@@ -1,8 +1,7 @@
 'use client'
-import { ReactNode } from 'react'
-import { motion, Variants } from 'framer-motion'
 import { cn } from '@/utils/cn'
-import React from 'react'
+import { motion, Variants } from 'framer-motion'
+import React, { ReactNode } from 'react'
 
 type PresetType =
   | 'fade'
