@@ -1,11 +1,11 @@
+import { errorResponse } from '@/utils/errorResponse'
+import { handlerLinks } from '@/utils/handlerLinks'
+import { searchResponse } from '@/utils/searchResponse'
+import { validateSearchParams } from '@/utils/validateSearchParams'
+import axios from 'axios'
 import { Hono } from 'hono'
 import { rateLimiter } from 'hono-rate-limiter'
 import { PrismaClient, type Pictures } from 'prisma/generated/client'
-import { errorResponse } from '@/utils/errorResponse'
-import { handlerLinks } from '@/utils/handlerLinks'
-import { isValidDateFormat } from '@/utils/isValidDate'
-import { searchResponse } from '@/utils/searchResponse'
-import axios from 'axios'
 
 const prisma = new PrismaClient()
 const apods = new Hono()
@@ -89,64 +89,45 @@ apods.post(
 )
 
 apods.get('/search', async (c) => {
+  // Pega os parâmetros da URL
   const query = c.req.query('q')
-  const today = new Date()
-  const formattedToday = today.toISOString().split('T')[0] // YYYY-MM-DD
-  let startDate = c.req.query('startDate') || formattedToday
-  let endDate = c.req.query('endDate') || formattedToday
+  const startDate = c.req.query('startDate')
+  const endDate = c.req.query('endDate')
   const mediaType = c.req.query('mediaType')
   const perPage = c.req.query('perPage') ? Number(c.req.query('perPage')) : 10
   const page = c.req.query('page') ? Number(c.req.query('page')) : 1
   const sort = c.req.query('sort') || 'desc'
 
-  // Start date is after end date
-  if (new Date(startDate) > new Date(endDate)) {
-    return c.json(errorResponse('Invalid date range', 'startDate cannot be after endDate', 400), 400)
+  // Valida todos os parâmetros
+  const validationError = validateSearchParams({ startDate, endDate, mediaType, perPage, page, sort })
+  if (validationError) {
+    return c.json(validationError, 400)
   }
 
-  if (isValidDateFormat(startDate) === false || isValidDateFormat(endDate) === false) {
-    return c.json(errorResponse('Invalid date format', 'Date must be in YYYY-MM-DD format', 400), 400)
+  // Monta os filtros de busca
+  const filters: any = {}
+
+  if (query) {
+    filters.title = {
+      contains: query,
+      mode: 'insensitive',
+    }
   }
 
-  if (startDate === endDate) {
-    startDate = ''
-    endDate = ''
+  if (startDate || endDate) {
+    filters.date = {}
+    if (startDate) filters.date.gte = startDate
+    if (endDate) filters.date.lte = endDate
   }
 
-  if (mediaType && !['image', 'video'].includes(mediaType)) {
-    return c.json(errorResponse('Invalid media type', "Media type must be 'image' or 'video'", 400), 400)
+  if (mediaType) {
+    filters.media_type = mediaType
   }
 
-  if (perPage >= 200 || perPage < 1 || isNaN(perPage)) {
-    return c.json(
-      errorResponse('Invalid perPage value', 'perPage must be a number less than 200 and greater than 0', 400),
-      400,
-    )
-  }
-  if (page < 1) {
-    return c.json(errorResponse('Invalid page number', 'Page must be greater than 0', 400), 400)
-  }
-
-  if (sort && !['asc', 'desc'].includes(sort)) {
-    return c.json(errorResponse('Invalid sort value', "sort must be 'asc' or 'desc'", 400), 400)
-  }
-
-  const skip = page && perPage ? (page - 1) * perPage : undefined
-
+  // Busca os APODs
+  const skip = (page - 1) * perPage
   const apods = await prisma.pictures.findMany({
-    where: {
-      title: {
-        contains: query || '',
-        mode: 'insensitive',
-      },
-      date: {
-        gte: startDate || '',
-        lte: endDate || '',
-      },
-      media_type: {
-        equals: mediaType || undefined,
-      },
-    },
+    where: filters,
     orderBy: {
       date: sort === 'asc' ? 'asc' : 'desc',
     },
@@ -154,24 +135,9 @@ apods.get('/search', async (c) => {
     skip: skip,
   })
 
-  // count total records for pagination
+  // Conta o total para paginação
   const totalRecords = await prisma.pictures.count({
-    where: {
-      title: {
-        contains: query || '',
-        mode: 'insensitive',
-      },
-      date: {
-        gte: startDate,
-        lte: endDate,
-      },
-      media_type: {
-        equals: mediaType || undefined,
-      },
-    },
-    orderBy: {
-      date: sort === 'asc' ? 'asc' : 'desc',
-    },
+    where: filters,
   })
 
   const hasNextPage = !!(page && perPage && apods.length === perPage)
