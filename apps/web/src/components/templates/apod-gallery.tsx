@@ -1,13 +1,13 @@
-import { APOD } from '@repo/shared'
+import { PaginatedAPODResponse } from '@repo/shared'
 import GalleryCard from '../blocks/gallery-card'
 import { PaginationGallery } from '../blocks/pagination-gallery'
 
-export default function ApodGallery({ data }: { data: APOD[] }) {
+export default function ApodGallery({ data }: { data: PaginatedAPODResponse }) {
   return (
-    <>
-      <PaginationGallery />
-      <>
-        {data.slice(0, 10).map((item) => (
+    <div className="flex flex-col gap-4">
+      <PaginationGallery gallery={data} />
+      <div className="container flex flex-wrap justify-center gap-4">
+        {data.apods.map((item) => (
           <GalleryCard
             key={item.id}
             date={item.date}
@@ -17,7 +17,8 @@ export default function ApodGallery({ data }: { data: APOD[] }) {
             media_type={item.media_type}
           />
         ))}
-      </>
-    </>
+      </div>
+      <PaginationGallery gallery={data} />
+    </div>
   )
 }

@@ -80,7 +80,7 @@ export default function GalleryCard({
                 onLoad={handleImageLoad}
               />
             </>
-          ) : (
+          ) : url ? (
             <div className="">
               <ReactPlayer
                 src={url}
@@ -90,6 +90,10 @@ export default function GalleryCard({
                 height={'170px'}
                 width={'100%'}
               />
+            </div>
+          ) : (
+            <div className="bg-muted flex h-full w-full place-content-center items-center justify-center">
+              <p className="text-muted-foreground text-sm">No media available</p>
             </div>
           )}
         </div>

@@ -7,74 +7,72 @@ import {
   PaginationNextMobile,
   PaginationPreviousMobile,
 } from '@/components/blocks/pagination'
-import { APOD } from '@repo/shared'
+import { useGalleryParams } from '@/contexts'
+import { galeryParamsBuilder } from '@/utils/galeryParamsBuilder'
+import { getPaginationRange } from '@/utils/paginationHelper'
+import { PaginatedAPODResponse } from '@repo/shared'
 
 interface PaginationGalleryProps {
-  gallery: { items: APOD[]; itemCount: number } | undefined
-  page: number
-  totalPages: number
-  pageNumbers: number[]
-  prevPage: number
-  nextPage: number
-  perPage: number
+  gallery: PaginatedAPODResponse
 }
 
-export function PaginationGallery({
-  gallery,
-  page,
-  totalPages,
-  pageNumbers,
-  prevPage,
-  nextPage,
-  perPage,
-}: PaginationGalleryProps) {
+export function PaginationGallery({ gallery }: PaginationGalleryProps) {
+  const { query, mediaType, perPage, sort, startDate, endDate } = useGalleryParams()
+
   return (
     <div className="my-5 select-none">
       {gallery ? (
         <Pagination>
           <PaginationContent>
             <PaginationItem>
-              {page === 1 ? (
+              {gallery.page === 1 ? (
                 <div className=""></div>
               ) : (
                 <PaginationPreviousMobile
-                  href={`/gallery?${new URLSearchParams({
-                    ...Object.fromEntries(new URLSearchParams(window.location.search)),
-                    page: prevPage.toString(),
-                    perPage: perPage.toString(),
-                  }).toString()}`}
-                  className={page === 1 ? 'cursor-not-allowed' : ''}
+                  href={gallery.links.previous ?? ''}
+                  className={gallery.page === 1 ? 'cursor-not-allowed' : ''}
                 />
               )}
             </PaginationItem>
-            {pageNumbers.map((pageNumber, index) => {
-              return (
-                <PaginationItem key={index}>
+            {getPaginationRange(gallery.page, gallery.totalPages).map((item) =>
+              item.isEllipsis ? (
+                <PaginationItem key={item.key}>
+                  <PaginationEllipsis />
+                </PaginationItem>
+              ) : (
+                <PaginationItem key={item.key}>
                   <PaginationLink
-                    isActive={pageNumber === page}
-                    href={`/gallery?${new URLSearchParams({
-                      ...Object.fromEntries(new URLSearchParams(window.location.search)),
-                      page: pageNumber.toString(),
-                      perPage: perPage.toString(),
-                    }).toString()}`}
-                    className={pageNumber === page ? 'bg' : ''}>
-                    {pageNumber}
+                    isActive={item.page === gallery.page}
+                    href={`/gallery?${galeryParamsBuilder({
+                      query,
+                      mediaType,
+                      perPage: parseInt(perPage),
+                      sort,
+                      startDate,
+                      endDate,
+                      page: item.page,
+                    })}`}
+                    className={item.page === gallery.page ? 'bg' : ''}>
+                    {item.page}
                   </PaginationLink>
                 </PaginationItem>
-              )
-            })}
-            <PaginationItem>{page === totalPages ? '' : <PaginationEllipsis />}</PaginationItem>
+              ),
+            )}
             <PaginationItem>
-              {page === totalPages ? (
+              {gallery.page === gallery.totalPages ? (
                 <div className="cursor-not-allowed"></div>
               ) : (
                 <PaginationNextMobile
-                  href={`/gallery?${new URLSearchParams({
-                    ...Object.fromEntries(new URLSearchParams(window.location.search)),
-                    page: nextPage.toString(),
-                    perPage: perPage.toString(),
-                  }).toString()}`}
-                  className={page === totalPages ? 'cursor-not-allowed' : ''}
+                  href={`/gallery?${galeryParamsBuilder({
+                    query,
+                    mediaType,
+                    perPage: parseInt(perPage),
+                    sort,
+                    startDate,
+                    endDate,
+                    page: gallery.page + 1,
+                  })}`}
+                  className={gallery.page === gallery.totalPages ? 'cursor-not-allowed' : ''}
                 />
               )}
             </PaginationItem>

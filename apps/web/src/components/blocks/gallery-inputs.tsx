@@ -11,30 +11,56 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { nuqsHandler } from '@/utils/queryInputHandler'
+import { useGalleryParams } from '@/contexts'
+import { useApodSearch } from '@/hooks'
 import { ArrowDownNarrowWide, ArrowUpWideNarrow, Search, XIcon } from 'lucide-react'
-import { useQueryState } from 'nuqs'
+import { useEffect, useState } from 'react'
 
 export default function GalleryInputs() {
-  const [query, setQuery] = useQueryState('q', {
-    defaultValue: '',
-    clearOnDefault: true,
-  })
-  const [mediaType, setMediaType] = useQueryState('mediaType', {
-    defaultValue: 'any',
-    clearOnDefault: true,
-  })
-  const [perPage, setPerPage] = useQueryState('perPage', {
-    defaultValue: '20',
-    clearOnDefault: true,
-  })
-  const [sort, setSort] = useQueryState('sort', {
-    defaultValue: 'desc',
-    clearOnDefault: true,
+  const {
+    query,
+    mediaType,
+    perPage,
+    sort,
+    startDate,
+    endDate,
+    page,
+    setQuery,
+    setMediaType,
+    setPerPage,
+    setSort,
+    setPage,
+  } = useGalleryParams()
+
+  const [mounted, setMounted] = useState(false)
+
+  const { refetch, isLoading } = useApodSearch({
+    query,
+    mediaType,
+    perPage: parseInt(perPage),
+    sort,
+    startDate,
+    endDate,
+    page: parseInt(page),
   })
 
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  const handleSearch = (e?: React.FormEvent) => {
+    e?.preventDefault()
+    setPage('1')
+    refetch()
+  }
+
+  // Previne problemas de hidratação
+  const safeIsLoading = mounted ? isLoading : false
+
   return (
-    <div className="flex flex-wrap items-center justify-center gap-2 px-4 pt-10 select-none sm:pt-8">
+    <form
+      onSubmit={handleSearch}
+      className="flex flex-wrap items-center justify-center gap-2 px-4 pt-10 select-none sm:pt-8">
       <div className="relative">
         <Input
           placeholder="Search..."
@@ -48,7 +74,9 @@ export default function GalleryInputs() {
             type="button"
             variant="default"
             size="icon"
-            onClick={() => setQuery(null)}
+            onClick={() => {
+              setQuery('')
+            }}
             className="bg-background hover:bg-background/95 absolute top-1/2 right-1 h-7 w-7 -translate-y-1/2 cursor-pointer text-gray-500 hover:!text-red-500 dark:text-gray-400">
             <XIcon className="h-4 w-4" />
             <span className="sr-only">Clear</span>
@@ -56,7 +84,7 @@ export default function GalleryInputs() {
         )}
       </div>
       {/* SELECT MEDIATYPE */}
-      <Select defaultValue={mediaType} onValueChange={(e) => nuqsHandler(e, setMediaType)}>
+      <Select defaultValue={mediaType} onValueChange={(e) => setMediaType(e)}>
         <SelectTrigger className="h-max w-min cursor-pointer gap-2">
           <SelectValue placeholder="Media Type" />
         </SelectTrigger>
@@ -71,7 +99,7 @@ export default function GalleryInputs() {
       </Select>
 
       {/* PER PAGE */}
-      <Select defaultValue={perPage} onValueChange={(e) => nuqsHandler(e, setPerPage)}>
+      <Select defaultValue={perPage} onValueChange={(e) => setPerPage(e)}>
         <SelectTrigger className="h-max w-min cursor-pointer gap-2">
           <SelectValue placeholder="Per page" />
         </SelectTrigger>
@@ -100,10 +128,11 @@ export default function GalleryInputs() {
       </Button>
       <Button
         type="submit"
+        disabled={safeIsLoading}
         className="flex flex-grow cursor-pointer gap-2 shadow-sm select-none sm:w-fit sm:flex-none">
         <Search className="h-5" />
-        Search
+        {safeIsLoading ? 'Searching...' : 'Search'}
       </Button>
-    </div>
+    </form>
   )
 }

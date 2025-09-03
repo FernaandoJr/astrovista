@@ -1,6 +1,6 @@
 'use client'
 import { apiUrl } from '@/constants/api'
-import { ApodService } from '@repo/shared'
+import { ApodService, GalleryQueryParams } from '@repo/shared'
 import { useQuery } from '@tanstack/react-query'
 
 export const useApod = () => {
@@ -22,8 +22,18 @@ export const useApod = () => {
   }
 }
 
-export const useApodSearch = (query?: string) => {
+export const useApodSearch = ({
+  query,
+  mediaType,
+  perPage,
+  sort,
+  startDate,
+  endDate,
+  page,
+}: GalleryQueryParams) => {
   const apodService = new ApodService(apiUrl as string)
+
+  if (mediaType !== 'image' && mediaType !== 'video') mediaType = ''
 
   const {
     data: search,
@@ -35,7 +45,8 @@ export const useApodSearch = (query?: string) => {
     isFetched,
   } = useQuery({
     queryKey: ['apod', 'search'],
-    queryFn: () => apodService.search(query ?? ''),
+    queryFn: () => apodService.search(query, mediaType, perPage, sort, startDate, endDate, page),
+    enabled: false, // Só executa quando chamado manualmente
   })
 
   return {

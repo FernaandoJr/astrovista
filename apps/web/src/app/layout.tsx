@@ -1,11 +1,12 @@
-import type { Metadata } from 'next'
-import { Outfit, Merriweather } from 'next/font/google'
-import './globals.css'
-import { ThemeProvider } from '@/components/ui/theme-provider'
 import { HeroHeader } from '@/components/blocks/navbar'
-import { NuqsAdapter } from 'nuqs/adapters/next/app'
 import { Footer } from '@/components/templates/footer-section'
+import { ThemeProvider } from '@/components/ui/theme-provider'
+import { GalleryParamsProvider } from '@/contexts'
 import { QueryProvider } from '@/providers/query-provider'
+import type { Metadata } from 'next'
+import { Merriweather, Outfit } from 'next/font/google'
+import { NuqsAdapter } from 'nuqs/adapters/next/app'
+import './globals.css'
 
 const outfitSans = Outfit({
   variable: '--font-outfit-sans',
@@ -38,8 +39,10 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange>
             <QueryProvider>
-              <HeroHeader />
-              {children}
+              <GalleryParamsProvider>
+                <HeroHeader />
+                {children}
+              </GalleryParamsProvider>
               <Footer />
             </QueryProvider>
           </ThemeProvider>
