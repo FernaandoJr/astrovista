@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'About Us',
+  title: 'Gallery',
   description:
-    "Learn about AstroVista's mission to bring NASA's Astronomy Picture of the Day archive to space enthusiasts through modern technology and beautiful design.",
+    'Explore the entire NASA Astronomy Picture of the Day archive with our curated gallery. Discover thousands of stunning cosmic images from our universe.',
 }
 
 export default function GalleryLayout({ children }: { children: React.ReactNode }) {
