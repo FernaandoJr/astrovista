@@ -1,0 +1,13 @@
+{
+  "functions": {
+    "src/index.ts": {
+      "runtime": "nodejs20.x"
+    }
+  },
+  "crons": [
+    {
+      "path": "/apods/cron",
+      "schedule": "* * * * *"
+    }
+  ]
+}
