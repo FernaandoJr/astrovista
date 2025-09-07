@@ -1,20 +1,20 @@
-import type { Pictures } from "prisma/generated/client";
+import { Pictures } from "../../prisma/generated/client.js"
 
 interface SearchResponse {
-	apods: Pictures[];
-	totalRecords: number;
-	totalPages: number;
-	page: number;
-	perPage: number;
-	sort: string;
-	hasNextPage?: boolean;
-	hasPreviousPage?: boolean;
+	apods: Pictures[]
+	totalRecords: number
+	totalPages: number
+	page: number
+	perPage: number
+	sort: string
+	hasNextPage?: boolean
+	hasPreviousPage?: boolean
 	links: {
-		next: string | null;
-		previous: string | null;
-		first: string | null;
-		last: string | null;
-	};
+		next: string | null
+		previous: string | null
+		first: string | null
+		last: string | null
+	}
 }
 
 export function searchResponse({
@@ -38,5 +38,5 @@ export function searchResponse({
 		hasPreviousPage,
 		links,
 		apods: apods,
-	};
+	}
 }

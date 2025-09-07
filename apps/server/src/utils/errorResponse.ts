@@ -4,5 +4,5 @@ export function errorResponse(message: string, cause: string, code: number) {
 		cause,
 		code,
 		timestamp: new Date().toISOString(),
-	};
+	}
 }
