@@ -25,8 +25,6 @@ _Explore the cosmos through NASA's eyes_
 
 This project showcases a complete enterprise-grade architecture with automated data synchronization, advanced search capabilities, and a beautiful, responsive user interface designed for astronomy enthusiasts and space lovers worldwide.
 
-> **Note**: This project welcomes contributions and improvements from the community. While it's no longer fully open-source, developers are encouraged to contribute, suggest features, and help make AstroVista even better!
-
 ---
 
 ## 🎯 Key Features
