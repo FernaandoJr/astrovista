@@ -21,7 +21,7 @@ _Explore the cosmos through NASA's eyes_
 
 ## ✨ About AstroVista
 
-**AstroVista** is a modern, full-stack web application that brings the wonders of space directly to your screen. Built with cutting-edge technologies, it leverages NASA's Astronomy Picture of the Day (APOD) API to deliver a comprehensive archive of astronomical imagery and scientific content dating back to 1995.
+**AstroVista** is a modern, full-stack web application that brings the wonders of space directly to your screen. Built with cutting-edge technologies, it leverages NASA's Astronomy Picture of the Day (APOD) API to deliver a complete archive of astronomical imagery and scientific content dating back to 1995.
 
 This project showcases a complete enterprise-grade architecture with automated data synchronization, advanced search capabilities, and a beautiful, responsive user interface designed for astronomy enthusiasts and space lovers worldwide.
 
