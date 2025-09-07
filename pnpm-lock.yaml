@@ -18,7 +18,7 @@ importers:
         specifier: 5.9.2
         version: 5.9.2
 
-  apps/server:
+  apps/api:
     dependencies:
       '@hono/node-server':
         specifier: ^1.14.4
@@ -250,37 +250,6 @@ importers:
         version: 5.9.2
 
   packages/typescript-config: {}
-
-  packages/ui:
-    dependencies:
-      react:
-        specifier: ^19.1.0
-        version: 19.1.0
-      react-dom:
-        specifier: ^19.1.0
-        version: 19.1.0(react@19.1.0)
-    devDependencies:
-      '@repo/eslint-config':
-        specifier: workspace:*
-        version: link:../eslint-config
-      '@repo/typescript-config':
-        specifier: workspace:*
-        version: link:../typescript-config
-      '@types/node':
-        specifier: ^22.15.3
-        version: 22.15.3
-      '@types/react':
-        specifier: 19.1.0
-        version: 19.1.0
-      '@types/react-dom':
-        specifier: 19.1.1
-        version: 19.1.1(@types/react@19.1.0)
-      eslint:
-        specifier: ^9.33.0
-        version: 9.34.0(jiti@2.5.1)
-      typescript:
-        specifier: 5.9.2
-        version: 5.9.2
 
 packages:
 
