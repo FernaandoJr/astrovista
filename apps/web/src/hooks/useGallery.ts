@@ -7,7 +7,7 @@ export const useGallery = () => {
   const { query, mediaType, perPage, sort, startDate, endDate, page } = useGalleryParams()
   const [mounted, setMounted] = useState(false)
 
-  const { search, isLoading, refetch, isRefetching, isFetching, isFetched } = useApodSearch({
+  const { search, isLoading, error, refetch, isRefetching, isFetching, isFetched } = useApodSearch({
     query,
     mediaType,
     perPage: parseInt(perPage),
@@ -26,6 +26,7 @@ export const useGallery = () => {
   return {
     search,
     isLoading: mounted ? isLoading : false,
+    error,
     refetch,
     isRefetching,
     isFetching,

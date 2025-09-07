@@ -34,7 +34,7 @@ export default function GalleryInputs() {
 
   const [mounted, setMounted] = useState(false)
 
-  const { refetch, isLoading } = useApodSearch({
+  const { refetch, isLoading, isRefetching } = useApodSearch({
     query,
     mediaType,
     perPage: parseInt(perPage),
@@ -55,7 +55,7 @@ export default function GalleryInputs() {
   }
 
   // Previne problemas de hidratação
-  const safeIsLoading = mounted ? isLoading : false
+  const safeIsLoading = mounted ? isLoading || isRefetching : false
 
   return (
     <form
