@@ -1,0 +1,24 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated"
+  moduleFormat = "esm"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+
+model Pictures {
+  id              String @id @default(auto()) @map("_id") @db.ObjectId
+  date            String
+  explanation     String
+  hdurl           String?
+  media_type      String
+  service_version String
+  title           String
+  url             String?
+	copyright 			String?
+  @@map("pictures")
+}

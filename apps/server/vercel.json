@@ -1,8 +1,0 @@
-{
-  "crons": [
-    {
-      "path": "/apods/cron",
-      "schedule": "0 5 * * *"
-    }
-  ]
-}
