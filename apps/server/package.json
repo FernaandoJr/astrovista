@@ -1,7 +1,8 @@
 {
-	"name": "hono",
+	"name": "api",
 	"type": "module",
 	"scripts": {
+		"dev": "vc dev --listen 5555",
 		"db:push": "prisma db push",
 		"db:studio": "prisma studio",
 		"db:generate": "prisma generate",
