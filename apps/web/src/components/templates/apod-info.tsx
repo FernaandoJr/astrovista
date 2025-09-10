@@ -19,8 +19,10 @@ export default function ApodInfo({ data, hasController = false }: Readonly<APodI
   }
 
   return (
-    <>
-      <h1 className="mb-4 text-3xl font-bold select-none">Astronomy Picture of the Day</h1>
+    <div className="container mx-auto flex flex-col items-center px-4">
+      <h1 className="mb-4 text-3xl font-bold select-none sm:text-4xl lg:text-5xl">
+        Astronomy Picture of the Day
+      </h1>
 
       {data.url && (
         <Image
@@ -46,6 +48,6 @@ export default function ApodInfo({ data, hasController = false }: Readonly<APodI
           <button className="btn">Next</button>
         </div>
       )}
-    </>
+    </div>
   )
 }
