@@ -11,7 +11,7 @@ export default function GalleryDateLayout({
   params: Promise<{ date: string }>
 }) {
   const { date } = use(params)
-  const { data, isLoading } = useApodByDate(date)
+  const { data } = useApodByDate(date)
 
   return (
     <div className="container mx-auto flex flex-col items-center pt-24">
