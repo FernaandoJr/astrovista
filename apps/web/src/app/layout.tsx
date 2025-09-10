@@ -6,7 +6,6 @@ import { QueryProvider } from '@/providers/query-provider'
 import type { Metadata } from 'next'
 import { Merriweather, Outfit } from 'next/font/google'
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
-import { Suspense } from 'react'
 import './globals.css'
 
 const outfitSans = Outfit({
@@ -106,12 +105,10 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange>
             <QueryProvider>
-              <Suspense fallback={<div>Loading...</div>}>
-                <GalleryParamsProvider>
-                  <HeroHeader />
-                  {children}
-                </GalleryParamsProvider>
-              </Suspense>
+              <GalleryParamsProvider>
+                <HeroHeader />
+                {children}
+              </GalleryParamsProvider>
               <Footer />
             </QueryProvider>
           </ThemeProvider>
