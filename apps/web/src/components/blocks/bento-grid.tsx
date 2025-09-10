@@ -112,8 +112,8 @@ function BentoGrid({ items }: BentoGridProps) {
                 </p>
               </div>
 
-              <div className="mt-2 flex items-center justify-between">
-                <div className="text-accent-foreground flex items-center space-x-2 text-xs">
+              <div className="mt-2 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                <div className="text-accent-foreground flex flex-wrap items-center gap-2 text-xs">
                   {item.tags?.map((tag, i) => (
                     <span
                       key={i}
