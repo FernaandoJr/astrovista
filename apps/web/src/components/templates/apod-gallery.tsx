@@ -6,7 +6,7 @@ export default function ApodGallery({ data }: { data: PaginatedAPODResponse }) {
   return (
     <div className="flex flex-col gap-4">
       <PaginationGallery gallery={data} />
-      <div className="container flex flex-wrap justify-center gap-4">
+      <div className="container flex flex-wrap justify-center gap-4 px-4">
         {data.apods.map((item) => (
           <GalleryCard
             key={item.id}

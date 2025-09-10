@@ -8,19 +8,30 @@ export default function ApodGallerySkeleton() {
   return (
     <div className="flex flex-col gap-4">
       {/* Pagination skeleton - top */}
-      <div className="my-5 flex justify-center">
-        <div className="flex items-center gap-2">
-          <Skeleton className="h-9 w-9" />
-          <Skeleton className="h-9 w-9" />
-          <Skeleton className="h-9 w-9" />
-          <Skeleton className="h-9 w-9" />
-          <Skeleton className="h-9 w-9" />
-          <Skeleton className="h-9 w-9" />
+      <div className="my-5 flex justify-center px-4">
+        <div className="flex items-center gap-1">
+          {/* Mobile pagination skeleton */}
+          <div className="flex items-center gap-1 sm:hidden">
+            <Skeleton className="h-7 w-7" />
+            <Skeleton className="h-7 w-7" />
+            <Skeleton className="h-7 w-16" />
+            <Skeleton className="h-7 w-7" />
+            <Skeleton className="h-7 w-7" />
+          </div>
+          {/* Desktop pagination skeleton */}
+          <div className="hidden items-center gap-1 sm:flex">
+            <Skeleton className="h-9 w-9" />
+            <Skeleton className="h-9 w-9" />
+            <Skeleton className="h-9 w-9" />
+            <Skeleton className="h-9 w-9" />
+            <Skeleton className="h-9 w-9" />
+            <Skeleton className="h-9 w-9" />
+          </div>
         </div>
       </div>
 
       {/* Gallery cards skeleton */}
-      <div className="container flex flex-wrap justify-center gap-4">
+      <div className="container flex flex-wrap justify-center gap-4 px-4">
         {Array.from({ length: count }).map((_, index) => (
           <div key={index} className="w-full max-w-[18rem] min-w-[15rem]">
             <div className="overflow-hidden rounded-md">
@@ -43,14 +54,25 @@ export default function ApodGallerySkeleton() {
       </div>
 
       {/* Pagination skeleton - bottom */}
-      <div className="my-5 flex justify-center">
-        <div className="flex items-center gap-2">
-          <Skeleton className="h-9 w-9" />
-          <Skeleton className="h-9 w-9" />
-          <Skeleton className="h-9 w-9" />
-          <Skeleton className="h-9 w-9" />
-          <Skeleton className="h-9 w-9" />
-          <Skeleton className="h-9 w-9" />
+      <div className="my-5 flex justify-center px-4">
+        <div className="flex items-center gap-1">
+          {/* Mobile pagination skeleton */}
+          <div className="flex items-center gap-1 sm:hidden">
+            <Skeleton className="h-7 w-7" />
+            <Skeleton className="h-7 w-7" />
+            <Skeleton className="h-7 w-16" />
+            <Skeleton className="h-7 w-7" />
+            <Skeleton className="h-7 w-7" />
+          </div>
+          {/* Desktop pagination skeleton */}
+          <div className="hidden items-center gap-1 sm:flex">
+            <Skeleton className="h-9 w-9" />
+            <Skeleton className="h-9 w-9" />
+            <Skeleton className="h-9 w-9" />
+            <Skeleton className="h-9 w-9" />
+            <Skeleton className="h-9 w-9" />
+            <Skeleton className="h-9 w-9" />
+          </div>
         </div>
       </div>
     </div>

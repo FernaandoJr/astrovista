@@ -7,18 +7,16 @@ import { Search } from 'lucide-react'
 import { Suspense } from 'react'
 
 export default function GalleryPage() {
-  const { search, isLoading, error, isFetched } = useGallery()
+  const { search, error, isFetched } = useGallery()
 
   return (
     <Suspense>
-      <div className="container mx-auto flex flex-col items-center pt-24 pb-8">
+      <div className="container mx-auto flex flex-col items-center pt-24 pb-4">
         <h1 className="text-3xl font-bold select-none">Gallery</h1>
         <GalleryInputs />
       </div>
-      <div className="container mx-auto flex w-full flex-wrap justify-center gap-3">
-        {isLoading ? (
-          <ApodGallerySkeleton />
-        ) : error ? (
+      <div className="container mx-auto flex w-full flex-wrap justify-center gap-3 px-4">
+        {error ? (
           <div className="flex flex-col items-center justify-center py-12 text-center select-none">
             <Search className="text-primary mb-2 h-10 w-10" />
 
@@ -37,7 +35,9 @@ export default function GalleryPage() {
               No images exist with the applied filters. Try adjusting your search parameters.
             </p>
           </div>
-        ) : null}
+        ) : (
+          <ApodGallerySkeleton />
+        )}
       </div>
     </Suspense>
   )

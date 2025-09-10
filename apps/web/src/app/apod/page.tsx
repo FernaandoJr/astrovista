@@ -8,7 +8,7 @@ export default function ApodPage() {
 
   return (
     <div className="container mx-auto flex flex-col items-center pt-24">
-      {isLoading ? <ApodInfoSkeleton /> : <ApodInfo data={latest} />}
+      {latest ? <ApodInfo data={latest} /> : <ApodInfoSkeleton />}
     </div>
   )
 }

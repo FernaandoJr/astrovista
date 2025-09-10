@@ -20,10 +20,31 @@ export function PaginationGallery({ gallery }: PaginationGalleryProps) {
   const { query, mediaType, perPage, sort, startDate, endDate } = useGalleryParams()
 
   return (
-    <div className="my-5 select-none">
+    <div className="my-3 px-3 select-none">
       {gallery ? (
         <Pagination>
           <PaginationContent>
+            {/* Botão para primeira página - visível apenas em mobile */}
+            <PaginationItem className="block sm:hidden">
+              {gallery.page === 1 ? (
+                <div className="h-7 w-7"></div>
+              ) : (
+                <PaginationLink
+                  href={`/gallery?${galeryParamsBuilder({
+                    query,
+                    mediaType,
+                    perPage: parseInt(perPage),
+                    sort,
+                    startDate,
+                    endDate,
+                    page: 1,
+                  })}`}
+                  className="h-7 w-7 text-xs">
+                  1
+                </PaginationLink>
+              )}
+            </PaginationItem>
+
             <PaginationItem>
               {gallery.page === 1 ? (
                 <div className=""></div>
@@ -36,11 +57,11 @@ export function PaginationGallery({ gallery }: PaginationGalleryProps) {
             </PaginationItem>
             {getPaginationRange(gallery.page, gallery.totalPages).map((item) =>
               item.isEllipsis ? (
-                <PaginationItem key={item.key}>
+                <PaginationItem key={item.key} className="hidden sm:block">
                   <PaginationEllipsis />
                 </PaginationItem>
               ) : (
-                <PaginationItem key={item.key}>
+                <PaginationItem key={item.key} className="hidden sm:block">
                   <PaginationLink
                     isActive={item.page === gallery.page}
                     href={`/gallery?${galeryParamsBuilder({
@@ -58,6 +79,12 @@ export function PaginationGallery({ gallery }: PaginationGalleryProps) {
                 </PaginationItem>
               ),
             )}
+            {/* Indicador de página atual - visível apenas em mobile */}
+            <PaginationItem className="block sm:hidden">
+              <span className="bg-primary text-primary-foreground flex h-7 w-auto items-center justify-center rounded-md px-2 text-xs">
+                {gallery.page} / {gallery.totalPages}
+              </span>
+            </PaginationItem>
             <PaginationItem>
               {gallery.page === gallery.totalPages ? (
                 <div className="cursor-not-allowed"></div>
@@ -74,6 +101,27 @@ export function PaginationGallery({ gallery }: PaginationGalleryProps) {
                   })}`}
                   className={gallery.page === gallery.totalPages ? 'cursor-not-allowed' : ''}
                 />
+              )}
+            </PaginationItem>
+
+            {/* Botão para última página - visível apenas em mobile */}
+            <PaginationItem className="block sm:hidden">
+              {gallery.page === gallery.totalPages ? (
+                <div className="h-7 w-7"></div>
+              ) : (
+                <PaginationLink
+                  href={`/gallery?${galeryParamsBuilder({
+                    query,
+                    mediaType,
+                    perPage: parseInt(perPage),
+                    sort,
+                    startDate,
+                    endDate,
+                    page: gallery.totalPages,
+                  })}`}
+                  className="h-7 w-7 text-xs">
+                  {gallery.totalPages}
+                </PaginationLink>
               )}
             </PaginationItem>
           </PaginationContent>

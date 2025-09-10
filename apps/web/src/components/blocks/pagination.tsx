@@ -38,6 +38,7 @@ const PaginationLink = ({ className, isActive, size = 'icon', ...props }: Pagina
         variant: isActive ? 'outline' : 'ghost',
         size,
       }),
+      'h-7 w-7 text-xs sm:h-9 sm:w-9 sm:text-base',
       className,
     )}
     {...props}
@@ -67,9 +68,9 @@ const PaginationPreviousMobile = ({
   <PaginationLink
     aria-label="Go to previous page"
     size="default"
-    className={cn('', className)}
+    className={cn('h-7 w-7 sm:h-9 sm:w-9', className)}
     {...props}>
-    <ChevronLeftIcon className="h-4 w-4" />
+    <ChevronLeftIcon className="h-3 w-3 sm:h-4 sm:w-4" />
   </PaginationLink>
 )
 PaginationPrevious.displayName = 'PaginationPreviousMobile'
@@ -93,9 +94,9 @@ const PaginationNextMobile = ({
   <PaginationLink
     aria-label="Go to next page"
     size="default"
-    className={cn('', className)}
+    className={cn('h-7 w-7 sm:h-9 sm:w-9', className)}
     {...props}>
-    <ChevronRightIcon className="h-4 w-4" />
+    <ChevronRightIcon className="h-3 w-3 sm:h-4 sm:w-4" />
   </PaginationLink>
 )
 PaginationNext.displayName = 'PaginationNextMobile'
@@ -103,9 +104,9 @@ PaginationNext.displayName = 'PaginationNextMobile'
 const PaginationEllipsis = ({ className, ...props }: React.ComponentProps<'span'>) => (
   <span
     aria-hidden
-    className={cn('flex h-9 w-9 items-center justify-center', className)}
+    className={cn('flex h-7 w-7 items-center justify-center sm:h-9 sm:w-9', className)}
     {...props}>
-    <DotsHorizontalIcon className="h-4 w-4" />
+    <DotsHorizontalIcon className="h-3 w-3 sm:h-4 sm:w-4" />
     <span className="sr-only">More pages</span>
   </span>
 )

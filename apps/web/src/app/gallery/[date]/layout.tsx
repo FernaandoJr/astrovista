@@ -15,7 +15,7 @@ export default function GalleryDateLayout({
 
   return (
     <div className="container mx-auto flex flex-col items-center pt-24">
-      {isLoading ? <ApodInfoSkeleton /> : <ApodInfo data={data} />}
+      {data ? <ApodInfo data={data} /> : <ApodInfoSkeleton />}
     </div>
   )
 }

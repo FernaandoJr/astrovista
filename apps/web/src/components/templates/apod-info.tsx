@@ -37,7 +37,7 @@ export default function ApodInfo({ data, hasController = false }: Readonly<APodI
 
       {data.copyright && <p className="text-muted-foreground mt-4">{`© ${data.copyright}`}</p>}
 
-      <div className="container mx-auto mt-8 flex flex-col lg:max-w-[900px]">
+      <div className="container mx-auto mt-8 flex flex-col md:px-8 lg:max-w-[900px]">
         <h1 className="mb-4 text-2xl font-bold">{data.title}</h1>
         <p className="text-muted-foreground">{data.explanation}</p>
       </div>

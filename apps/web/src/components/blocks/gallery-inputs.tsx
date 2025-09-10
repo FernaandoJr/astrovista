@@ -56,15 +56,16 @@ export default function GalleryInputs() {
 
   // Previne problemas de hidratação
   const safeIsLoading = mounted ? isLoading || isRefetching : false
+  const isSearching = mounted ? isRefetching : false // Apenas pesquisas manuais
 
   return (
     <form
       onSubmit={handleSearch}
-      className="flex flex-wrap items-center justify-center gap-2 px-4 pt-10 select-none sm:pt-8">
-      <div className="relative">
+      className="flex flex-col gap-2 px-4 pt-10 select-none sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:pt-8">
+      <div className="relative flex-1 sm:flex-none">
         <Input
           placeholder="Search..."
-          className="w-full md:w-fit"
+          className="w-full sm:min-w-[300px]"
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
@@ -83,42 +84,44 @@ export default function GalleryInputs() {
           </Button>
         )}
       </div>
-      {/* SELECT MEDIATYPE */}
-      <Select defaultValue={mediaType} onValueChange={(e) => setMediaType(e)}>
-        <SelectTrigger className="h-max w-min cursor-pointer gap-2">
-          <SelectValue placeholder="Media Type" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectGroup className="[&>*:first-child]:cursor-default [&>*:not(:first-child)]:cursor-pointer">
-            <SelectLabel>Media Type</SelectLabel>
-            <SelectItem value="image">Image</SelectItem>
-            <SelectItem value="video">Video</SelectItem>
-            <SelectItem value="any">Any</SelectItem>
-          </SelectGroup>
-        </SelectContent>
-      </Select>
+      <div className="flex w-full gap-2 sm:w-auto">
+        {/* SELECT MEDIATYPE */}
+        <Select defaultValue={mediaType} onValueChange={(e) => setMediaType(e)}>
+          <SelectTrigger className="h-max w-full cursor-pointer gap-2 sm:w-min">
+            <SelectValue placeholder="Media Type" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup className="[&>*:first-child]:cursor-default [&>*:not(:first-child)]:cursor-pointer">
+              <SelectLabel>Media Type</SelectLabel>
+              <SelectItem value="image">Image</SelectItem>
+              <SelectItem value="video">Video</SelectItem>
+              <SelectItem value="any">Any</SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
 
-      {/* PER PAGE */}
-      <Select defaultValue={perPage} onValueChange={(e) => setPerPage(e)}>
-        <SelectTrigger className="h-max w-min cursor-pointer gap-2">
-          <SelectValue placeholder="Per page" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectGroup className="[&>*:first-child]:cursor-default [&>*:not(:first-child)]:cursor-pointer">
-            <SelectLabel>Per page</SelectLabel>
-            <SelectItem value="10">10</SelectItem>
-            <SelectItem value="20">20</SelectItem>
-            <SelectItem value="30">30</SelectItem>
-            <SelectItem value="40">40</SelectItem>
-            <SelectItem value="50">50</SelectItem>
-            <SelectItem value="100">100</SelectItem>
-          </SelectGroup>
-        </SelectContent>
-      </Select>
+        {/* PER PAGE */}
+        <Select defaultValue={perPage} onValueChange={(e) => setPerPage(e)}>
+          <SelectTrigger className="h-max w-full cursor-pointer gap-2 sm:w-min">
+            <SelectValue placeholder="Per page" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup className="[&>*:first-child]:cursor-default [&>*:not(:first-child)]:cursor-pointer">
+              <SelectLabel>Per page</SelectLabel>
+              <SelectItem value="10">10</SelectItem>
+              <SelectItem value="20">20</SelectItem>
+              <SelectItem value="30">30</SelectItem>
+              <SelectItem value="40">40</SelectItem>
+              <SelectItem value="50">50</SelectItem>
+              <SelectItem value="100">100</SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      </div>
       <Button
         onClick={() => setSort(sort === 'asc' ? 'desc' : 'asc')}
         variant={'outline'}
-        className="flex flex-grow cursor-pointer shadow-sm select-none sm:w-fit sm:flex-none">
+        className="flex w-full cursor-pointer shadow-sm select-none sm:w-fit">
         {sort === 'asc' ? (
           <ArrowDownNarrowWide className="h-4" />
         ) : (
@@ -129,9 +132,9 @@ export default function GalleryInputs() {
       <Button
         type="submit"
         disabled={safeIsLoading}
-        className="flex flex-grow cursor-pointer gap-2 shadow-sm select-none sm:w-fit sm:flex-none">
+        className="flex w-full cursor-pointer gap-2 shadow-sm select-none sm:w-fit">
         <Search className="h-5" />
-        {safeIsLoading ? 'Searching...' : 'Search'}
+        {isSearching ? 'Searching...' : 'Search'}
       </Button>
     </form>
   )
