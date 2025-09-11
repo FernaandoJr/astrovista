@@ -7,7 +7,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from './dropdown-menu'
+} from './dropdownMenu'
 
 export default function LoginButton() {
   return (

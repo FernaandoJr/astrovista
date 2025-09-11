@@ -4,7 +4,7 @@ import type { ComponentProps, ReactNode } from 'react'
 import React from 'react'
 
 import { SiGithub, SiInstagram, SiX } from '@icons-pack/react-simple-icons'
-import PlanetLogo from '../ui/planet-logo'
+import PlanetLogo from '../ui/planetLogo'
 
 interface FooterLink {
   title: string

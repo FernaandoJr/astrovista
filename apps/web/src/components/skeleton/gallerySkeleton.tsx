@@ -1,7 +1,7 @@
 import { Skeleton } from '@/components/ui/skeleton'
 import { useGalleryParams } from '@/contexts'
 
-export default function ApodGallerySkeleton() {
+export default function GallerySkeleton() {
   const { perPage } = useGalleryParams()
   const count = Number.parseInt(perPage || '10') || 10
 

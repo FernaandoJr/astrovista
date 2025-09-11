@@ -1,6 +1,6 @@
 import { BarChart2, Database, Library, Star } from 'lucide-react'
-import { BentoGrid, BentoItem } from '../blocks/bento-grid'
-import { AnimatedGroup } from '../ui/animated-group'
+import { BentoGrid, BentoItem } from '../blocks/bentoGrid'
+import { AnimatedGroup } from '../ui/animatedGroup'
 
 export default function FeaturesSection() {
   const itemsSample: BentoItem[] = [

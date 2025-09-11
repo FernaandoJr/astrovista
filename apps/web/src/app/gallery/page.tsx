@@ -1,7 +1,7 @@
 'use client'
-import GalleryInputs from '@/components/blocks/gallery-inputs'
-import ApodGallerySkeleton from '@/components/skeleton/apod-gallery'
-import ApodGallery from '@/components/templates/apod-gallery'
+import GalleryInputs from '@/components/blocks/galleryInputs'
+import GallerySkeleton from '@/components/skeleton/gallerySkeleton'
+import ApodGallery from '@/components/templates/gallery'
 import { useGallery } from '@/hooks'
 import { Search } from 'lucide-react'
 import { Suspense } from 'react'
@@ -36,7 +36,7 @@ export default function GalleryPage() {
             </p>
           </div>
         ) : (
-          <ApodGallerySkeleton />
+          <GallerySkeleton />
         )}
       </div>
     </Suspense>

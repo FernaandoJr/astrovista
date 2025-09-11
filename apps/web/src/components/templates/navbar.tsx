@@ -3,8 +3,8 @@ import { cn } from '@/utils/cn'
 import { Menu, X } from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'
-import LoginButton from '../ui/login-button'
-import PlanetLogo from '../ui/planet-logo'
+import LoginButton from '../ui/loginButton'
+import PlanetLogo from '../ui/planetLogo'
 
 export const HeroHeader = () => {
   const [menuState, setMenuState] = useState(false)

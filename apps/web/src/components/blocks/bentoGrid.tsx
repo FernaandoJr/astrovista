@@ -2,7 +2,7 @@
 
 import { cn } from '@/utils/cn'
 import * as React from 'react'
-import { AnimatedGroup } from '../ui/animated-group'
+import { AnimatedGroup } from '../ui/animatedGroup'
 
 export interface BentoItem {
   title: string

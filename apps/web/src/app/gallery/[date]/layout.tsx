@@ -1,6 +1,6 @@
 'use client'
-import ApodInfoSkeleton from '@/components/skeleton/apod-info'
-import ApodInfo from '@/components/templates/apod-info'
+import ApodInfoSkeleton from '@/components/skeleton/apodInfoSkeleton'
+import ApodInfo from '@/components/templates/apodInfo'
 import { useApodByDate } from '@/hooks/useApod'
 import { use } from 'react'
 

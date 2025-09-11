@@ -1,7 +1,7 @@
 import { ArrowRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { AnimatedGroup } from '../ui/animated-group'
+import { AnimatedGroup } from '../ui/animatedGroup'
 import { Button } from '../ui/button'
 
 export default function HomeHeroSection() {

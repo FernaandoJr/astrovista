@@ -6,7 +6,7 @@ import {
   PaginationLink,
   PaginationNextMobile,
   PaginationPreviousMobile,
-} from '@/components/blocks/pagination'
+} from '@/components/ui/pagination'
 import { useGalleryParams } from '@/contexts'
 import { galeryParamsBuilder } from '@/utils/galeryParamsBuilder'
 import { getPaginationRange } from '@/utils/paginationHelper'
@@ -16,7 +16,7 @@ interface PaginationGalleryProps {
   gallery: PaginatedAPODResponse
 }
 
-export function PaginationGallery({ gallery }: PaginationGalleryProps) {
+export function GalleryPagination({ gallery }: PaginationGalleryProps) {
   const { query, mediaType, perPage, sort, startDate, endDate } = useGalleryParams()
 
   return (
