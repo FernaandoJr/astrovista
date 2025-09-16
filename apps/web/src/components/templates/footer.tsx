@@ -24,7 +24,6 @@ const footerLinks: FooterSection[] = [
       { title: 'Apod', href: '/apod' },
       { title: 'Gallery', href: '/gallery' },
       { title: 'Favorites', href: '/favorites' },
-      { title: 'About', href: '/about' },
     ],
   },
 

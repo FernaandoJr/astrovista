@@ -29,7 +29,7 @@ export default function GalleryCard({
   url: string
   title?: string
   media_type: string
-  toggleFavorite?: (date: string) => Promise<boolean>
+  toggleFavorite: (date: string) => void
 }) {
   const truncatedExplanation = truncateText(explanation, 150)
   const [isFavorite, setIsFavorite] = useState(false)
@@ -37,6 +37,12 @@ export default function GalleryCard({
 
   const handleImageLoad = () => {
     setImageLoaded(true)
+  }
+
+  const checkFavorite = (date: string) => {
+    const favorites = localStorage.getItem('favoritesApod') ?? '[]'
+    const favoritesArray = JSON.parse(favorites) as string[]
+    return favoritesArray.includes(date)
   }
 
   useEffect(() => {
@@ -54,8 +60,7 @@ export default function GalleryCard({
     : ''
 
   useEffect(() => {
-    const existingFavorites = JSON.parse(localStorage.getItem('favorites') ?? '[]') as string[]
-    setIsFavorite(existingFavorites.includes(date))
+    setIsFavorite(checkFavorite(date))
   }, [date])
 
   return (
@@ -126,9 +131,8 @@ export default function GalleryCard({
             size="icon"
             aria-label="Save to favorites"
             onClick={() => {
-              toggleFavorite?.(date)
+              toggleFavorite(date)
               setIsFavorite(!isFavorite)
-              console.log('Clicked', isFavorite)
             }}>
             {isFavorite ? (
               <Heart className="text-primary aspect-square fill-current" />
