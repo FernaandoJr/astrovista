@@ -103,7 +103,6 @@ export default function GalleryCard({
           )}
         </div>
         <div className="flex flex-col p-4">
-          {/* 56.25% is the aspect ratio of 16:9 */}
           <div className="text-pretty">
             <h2 className="mb-2 text-2xl font-semibold">{truncatedTitle}</h2>
             <p className="text-muted-foreground flex-grow text-sm">{formattedDate}</p>
@@ -112,7 +111,7 @@ export default function GalleryCard({
         </div>
       </CardContent>
       <CardFooter className="flex w-full justify-between p-4">
-        <Button className="" variant="outline">
+        <Button className="cursor-pointer" variant="outline">
           <Link href={`/gallery/${date}`} passHref className="select-none">
             View Details
           </Link>
