@@ -1,7 +1,7 @@
-import { HeroHeader } from '@/components/blocks/navbar'
-import { Footer } from '@/components/templates/footer-section'
-import { ThemeProvider } from '@/components/ui/theme-provider'
+import { Footer } from '@/components/templates/footer'
+import { HeroHeader } from '@/components/templates/navbar'
 import { GalleryParamsProvider } from '@/contexts'
+import { ThemeProvider } from '@/contexts/theme'
 import { QueryProvider } from '@/providers/query-provider'
 import type { Metadata } from 'next'
 import { Merriweather, Outfit } from 'next/font/google'
@@ -106,7 +106,10 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange>
             <QueryProvider>
-              <Suspense fallback={<div>Loading...</div>}>
+              <Suspense
+                fallback={
+                  <div className="flex min-h-screen items-center justify-center">Loading...</div>
+                }>
                 <GalleryParamsProvider>
                   <HeroHeader />
                   {children}

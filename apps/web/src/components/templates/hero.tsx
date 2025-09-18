@@ -1,7 +1,7 @@
 import { ArrowRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { AnimatedGroup } from '../ui/animated-group'
+import { AnimatedGroup } from '../ui/animatedGroup'
 import { Button } from '../ui/button'
 
 export default function HomeHeroSection() {
@@ -47,7 +47,7 @@ export default function HomeHeroSection() {
                 <Link
                   href="/apod"
                   className="hover:bg-background dark:hover:border-t-border bg-muted group mx-auto flex w-fit items-center gap-4 rounded-full border p-1 pl-4 shadow-md shadow-black/5 transition-all duration-300 dark:border-t-white/5 dark:shadow-zinc-950">
-                  <span className="text-foreground text-sm">
+                  <span className="text-foreground text-xs sm:text-sm">
                     {"Discover Today's Astronomy Picture"}
                   </span>
                   <span className="dark:border-background block h-4 w-0.5 border-l bg-white dark:bg-zinc-700"></span>
@@ -64,10 +64,10 @@ export default function HomeHeroSection() {
                   </div>
                 </Link>
 
-                <h1 className="mx-auto mt-8 max-w-4xl text-6xl text-balance md:text-7xl lg:mt-16 xl:text-[5.25rem]">
+                <h1 className="mx-auto mt-8 max-w-4xl text-4xl text-balance sm:text-5xl md:text-6xl lg:mt-16 lg:text-7xl xl:text-[5.25rem]">
                   The Beauty of Space, Simplified.
                 </h1>
-                <p className="mx-auto mt-8 max-w-2xl text-lg text-balance">
+                <p className="mx-auto mt-6 max-w-2xl text-base text-balance sm:mt-8 sm:text-lg">
                   {
                     "A modern and fast interface to explore NASA's Astronomy Picture of the Day. Built for space enthusiasts and the curious."
                   }
@@ -120,19 +120,22 @@ export default function HomeHeroSection() {
               },
               ...transitionVariants,
             }}>
-            <div className="relative mt-8 -mr-56 overflow-hidden px-2 sm:mt-12 sm:mr-0 md:mt-20">
+            <div className="relative mt-8 overflow-hidden px-4 sm:mt-12 md:mt-20 lg:px-0">
               <div
                 aria-hidden
                 className="to-background absolute inset-0 z-10 bg-gradient-to-b from-transparent from-35%"
               />
-              <div className="ring-background bg-background relative mx-auto max-w-6xl overflow-hidden rounded-2xl border p-4 shadow-lg ring-1 inset-shadow-2xs shadow-zinc-950/15 dark:inset-shadow-white/20">
-                <Image
-                  className="bg-background relative aspect-15/8 rounded-2xl"
-                  src="https://www.nasa.gov/wp-content/uploads/2023/03/main_image_star-forming_region_carina_nircam_final-5mb.jpg"
-                  alt="app screen"
-                  width="2700"
-                  height="1440"
-                />
+              <div className="ring-background bg-background relative mx-auto max-w-6xl overflow-hidden rounded-2xl border p-2 shadow-lg ring-1 inset-shadow-2xs shadow-zinc-950/15 sm:p-4 dark:inset-shadow-white/20">
+                <div className="relative aspect-video w-full md:aspect-[3/2] lg:aspect-[15/8]">
+                  <Image
+                    className="bg-background rounded-2xl object-cover"
+                    src="https://www.nasa.gov/wp-content/uploads/2023/03/main_image_star-forming_region_carina_nircam_final-5mb.jpg"
+                    alt="app screen"
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+                    priority
+                  />
+                </div>
               </div>
             </div>
           </AnimatedGroup>

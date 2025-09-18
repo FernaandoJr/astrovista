@@ -1,14 +1,14 @@
 'use client'
-import ApodInfoSkeleton from '@/components/skeleton/apod-info'
-import ApodInfo from '@/components/templates/apod-info'
+import ApodInfoSkeleton from '@/components/skeleton/apodInfoSkeleton'
+import ApodInfo from '@/components/templates/apodInfo'
 import { useApodLatest } from '@/hooks/useApod'
 
 export default function ApodPage() {
-  const { latest, isLoading } = useApodLatest()
+  const { latest } = useApodLatest()
 
   return (
     <div className="container mx-auto flex flex-col items-center pt-24">
-      {isLoading ? <ApodInfoSkeleton /> : <ApodInfo data={latest} />}
+      {latest ? <ApodInfo data={latest} /> : <ApodInfoSkeleton />}
     </div>
   )
 }

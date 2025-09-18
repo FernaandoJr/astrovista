@@ -1,5 +1,5 @@
-import FeaturesSection from '@/components/templates/features-sections'
-import HomeHeroSection from '@/components/templates/home-hero'
+import FeaturesSection from '@/components/templates/features'
+import HomeHeroSection from '@/components/templates/hero'
 
 export default function Home() {
   return (

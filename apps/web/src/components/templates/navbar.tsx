@@ -3,8 +3,8 @@ import { cn } from '@/utils/cn'
 import { Menu, X } from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'
-import LoginButton from '../ui/login-button'
-import PlanetLogo from '../ui/planet-logo'
+import { ModeToggle } from '../ui/darkTheme'
+import PlanetLogo from '../ui/planetLogo'
 
 export const HeroHeader = () => {
   const [menuState, setMenuState] = useState(false)
@@ -13,7 +13,6 @@ export const HeroHeader = () => {
     { name: 'Apod', href: '/apod' },
     { name: 'Gallery', href: '/gallery' },
     { name: 'Favorites', href: '/favorites' },
-    { name: 'About', href: '/about' },
   ]
 
   return (
@@ -68,7 +67,7 @@ export const HeroHeader = () => {
                 </ul>
               </div>
               <div className="flex w-full flex-col items-center space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 md:w-fit">
-                <LoginButton />
+                <ModeToggle rounded />
               </div>
             </div>
           </div>
