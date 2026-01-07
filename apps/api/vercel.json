@@ -2,7 +2,7 @@
   "crons": [
     {
       "path": "/apods/cron",
-      "schedule": "0 5 * * *"
+      "schedule": "0 */2 * * *"
     }
   ]
 }
